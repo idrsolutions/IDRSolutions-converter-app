@@ -1,6 +1,4 @@
-import 'package:converter/screens/sandbox.dart';
-import 'package:converter/themes/colors.dart';
-import 'package:converter/themes/converter_theme.dart';
+import 'package:converter/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,9 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ConverterTheme(color: AppColors.IDRBlue).converterTheme,
-      home: const Sandbox(),
+      home: const HomeScreen(),
     );
   }
 }

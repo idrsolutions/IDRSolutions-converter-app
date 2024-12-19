@@ -36,7 +36,7 @@ class StyledTitle extends StatelessWidget {
       text,
       style: TextStyle(
         fontFamily: 'Montserrat',
-        fontSize: 17,
+        fontSize: 16,
         fontWeight: FontWeight.w600,
         color: Theme.of(context).primaryColor,
       ),
