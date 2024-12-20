@@ -1,4 +1,6 @@
 import 'package:converter/models/conversion_formats.dart';
+import 'package:converter/themes/buttons.dart';
+import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/dropdown_theme.dart';
 import 'package:converter/themes/texts.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,10 @@ class _BuildVuFormatSelectionState extends State<BuildVuFormatSelection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const StyledTitle(text: 'PDF/ Word/ PowerPoint/ Excel to HTML/ SVG'),
+        StyledTitle(text: 'PDF/ Word/ PowerPoint/ Excel to HTML/ SVG', color: AppColors.BuildVuPrimary,),
+        
+        const SizedBox(height: 20,),
+
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -31,7 +36,7 @@ class _BuildVuFormatSelectionState extends State<BuildVuFormatSelection> {
               dropdownMenuEntries: BuildVuOriginalFormats.entries,
             ),
 
-            const StyledTitle(text: 'To'),
+            StyledTitle(text: 'To', color: AppColors.BuildVuPrimary,),
 
             // converted format dropdown
             StyledDropdown<BuildVuConvertedFormats>(
@@ -42,10 +47,18 @@ class _BuildVuFormatSelectionState extends State<BuildVuFormatSelection> {
             ),
           ],
         ),
+
+        const SizedBox(height: 20,),
+
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Image.asset('assets/images/poweredbybuildvu.png'),
-            const Text('Go'),
+            ColorfulBgBtn(
+              color: AppColors.BuildVuPrimary,
+              onPressed: (){},
+              child: StyledTitleWhite(text: 'GO',),
+            ),
           ],
         ),
       ],

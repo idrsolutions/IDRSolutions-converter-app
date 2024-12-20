@@ -21,12 +21,7 @@ class StyledDropdown<T> extends StatelessWidget {
       label: label,
       // dropdown items bg color
       menuStyle: MenuStyle(
-        backgroundColor: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.hovered)) {
-            return Colors.white;
-          }
-          return Colors.white;
-        }),
+        backgroundColor: WidgetStateProperty.resolveWith((states) => Colors.white),
       ),
       initialSelection: initialSelection,
       controller: controller,

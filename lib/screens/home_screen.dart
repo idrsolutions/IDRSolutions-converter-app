@@ -23,11 +23,13 @@ class HomeScreen extends StatelessWidget {
         ),
         
         body: Container(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              BuildVuFormatSelection(),
-            ],
+          padding: const EdgeInsets.symmetric(vertical: 23, horizontal: 16),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                BuildVuFormatSelection(),
+              ],
+            ),
           ),
         ),
       ),
