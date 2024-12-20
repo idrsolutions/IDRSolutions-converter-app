@@ -1,5 +1,5 @@
 import 'package:converter/models/conversion_formats.dart';
-import 'package:converter/themes/colors.dart';
+import 'package:converter/themes/dropdown_theme.dart';
 import 'package:converter/themes/texts.dart';
 import 'package:flutter/material.dart';
 
@@ -24,22 +24,20 @@ class _BuildVuFormatSelectionState extends State<BuildVuFormatSelection> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             // original format dropdown
-            DropdownMenu<BuildVuOriginalFormats>(
-              label: const Text('Original Format'),
-              initialSelection: BuildVuOriginalFormats.pdf,
-              controller: buildvuOriginalFormatController,
-              requestFocusOnTap: true,
+            StyledDropdown<BuildVuOriginalFormats>(
+              label: const Text('Original Format'), 
+              initialSelection: BuildVuOriginalFormats.pdf, 
+              controller: buildvuOriginalFormatController, 
               dropdownMenuEntries: BuildVuOriginalFormats.entries,
             ),
 
             const StyledTitle(text: 'To'),
 
             // converted format dropdown
-            DropdownMenu<BuildVuConvertedFormats>(
-              label: const Text('Converted Format'),
-              initialSelection: BuildVuConvertedFormats.html,
-              controller: buildvuConvertedFormatController,
-              requestFocusOnTap: true,
+            StyledDropdown<BuildVuConvertedFormats>(
+              label: const Text('Converted Format'), 
+              initialSelection: BuildVuConvertedFormats.html, 
+              controller: buildvuConvertedFormatController, 
               dropdownMenuEntries: BuildVuConvertedFormats.entries,
             ),
           ],
