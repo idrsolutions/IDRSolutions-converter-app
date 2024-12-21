@@ -50,9 +50,10 @@ class WhiteBgBtn extends StatelessWidget {
           color: color?? Theme.of(context).primaryColor,
         ),
         backgroundColor: Colors.white,
+        foregroundColor: color?? Theme.of(context).primaryColor,
         shape: RoundedRectangleBorder(
           borderRadius: const BorderRadius.all(Radius.circular(20)),
-        )
+        ),
       ),
       child: child,
     );
