@@ -29,7 +29,9 @@ class StyledDropdown<T> extends StatelessWidget {
       dropdownMenuEntries: dropdownMenuEntries,
       // dropdown border color
       inputDecorationTheme: InputDecorationTheme(
+        labelStyle: TextStyle(color: Colors.black54,),
         enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black45,),),
+        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black45,),),
       ),
     );
   }

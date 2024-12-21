@@ -1,4 +1,6 @@
+import 'package:converter/components/JPedal_format_selection.dart';
 import 'package:converter/components/buildvu_format_selection.dart';
+import 'package:converter/components/formvu_format_selection.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/converter_theme.dart';
 import 'package:flutter/material.dart';
@@ -23,13 +25,20 @@ class HomeScreen extends StatelessWidget {
         ),
         
         body: Container(
-          padding: const EdgeInsets.symmetric(vertical: 23, horizontal: 16),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                BuildVuFormatSelection(),
-              ],
-            ),
+          padding: const EdgeInsets.only(left: 16, top: 30, right: 16, bottom: 100),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              BuildVuFormatSelection(),
+
+              const Spacer(),
+
+              JPedalFormatSelection(),
+
+              const Spacer(),
+
+              FormVuFormatSelection(),
+            ],
           ),
         ),
       ),

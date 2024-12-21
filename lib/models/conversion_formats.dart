@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 
+// BuildVu formates
 typedef BuildVuOriginalFormatsEntry = DropdownMenuEntry<BuildVuOriginalFormats>;
 
 enum BuildVuOriginalFormats {
@@ -67,6 +68,152 @@ enum BuildVuConvertedFormats {
   static final List<BuildVuConvertedFormatsEntry> entries = UnmodifiableListView<BuildVuConvertedFormatsEntry>(
     values.map<BuildVuConvertedFormatsEntry>(
       (BuildVuConvertedFormats format) => BuildVuConvertedFormatsEntry(
+        value: format,
+        label: format.label,
+      ),
+    ),
+  );
+}
+
+// JPedal formats
+typedef JPedalOriginalFormatsEntry = DropdownMenuEntry<JPedalOriginalFormats>;
+
+enum JPedalOriginalFormats {
+  pdf(
+    value: 'PDF',
+    label: 'PDF',
+  ),
+  word(
+    value: 'Word',
+    label: 'Word',
+  ),
+  powerpoint(
+    value: 'PowerPoint',
+    label: 'PowerPoint',
+  ),
+  excel(
+    value: 'Excel',
+    label: 'Excel',
+  );
+  
+  const JPedalOriginalFormats({
+    required this.value,
+    required this.label,
+  });
+
+  final String value;
+  final String label;
+
+  static final List<JPedalOriginalFormatsEntry> entries = UnmodifiableListView<JPedalOriginalFormatsEntry>(
+    values.map<JPedalOriginalFormatsEntry>(
+      (JPedalOriginalFormats format) => JPedalOriginalFormatsEntry(
+        value: format,
+        label: format.label,
+      ),
+    ),
+  );
+}
+
+typedef JPedalConvertedFormatsEntry = DropdownMenuEntry<JPedalConvertedFormats>;
+
+enum JPedalConvertedFormats {
+  bmp(
+    value: 'BMP',
+    label: 'BMP',
+  ),
+  heic(
+    value: 'HEIC',
+    label: 'HEIC',
+  ),
+  jpeg2000(
+    value: 'JPEG2000',
+    label: 'JPEG2000',
+  ),
+  jpg(
+    value: 'JPG',
+    label: 'JPG',
+  ),
+  png(
+    value: 'PNG',
+    label: 'PNG',
+  ),
+  tiff(
+    value: 'TIFF',
+    label: 'TIFF',
+  ),
+  webp(
+    value: 'WEBP',
+    label: 'WEBP',
+  );
+  
+  const JPedalConvertedFormats({
+    required this.value,
+    required this.label,
+  });
+
+  final String value;
+  final String label;
+
+  static final List<JPedalConvertedFormatsEntry> entries = UnmodifiableListView<JPedalConvertedFormatsEntry>(
+    values.map<JPedalConvertedFormatsEntry>(
+      (JPedalConvertedFormats format) => JPedalConvertedFormatsEntry(
+        value: format,
+        label: format.label,
+      ),
+    ),
+  );
+}
+
+// FormVu formats
+typedef FormVuOriginalFormatsEntry = DropdownMenuEntry<FormVuOriginalFormats>;
+
+enum FormVuOriginalFormats {
+  pdf(
+    value: 'PDF',
+    label: 'PDF',
+  );
+  
+  const FormVuOriginalFormats({
+    required this.value,
+    required this.label,
+  });
+
+  final String value;
+  final String label;
+
+  static final List<FormVuOriginalFormatsEntry> entries = UnmodifiableListView<FormVuOriginalFormatsEntry>(
+    values.map<FormVuOriginalFormatsEntry>(
+      (FormVuOriginalFormats format) => FormVuOriginalFormatsEntry(
+        value: format,
+        label: format.label,
+      ),
+    ),
+  );
+}
+
+typedef FormVuConvertedFormatsEntry = DropdownMenuEntry<FormVuConvertedFormats>;
+
+enum FormVuConvertedFormats {
+  html(
+    value: 'HTML',
+    label: 'HTML',
+  ),
+  html5(
+    value: 'HTML5',
+    label: 'HTML5',
+  );
+  
+  const FormVuConvertedFormats({
+    required this.value,
+    required this.label,
+  });
+
+  final String value;
+  final String label;
+
+  static final List<FormVuConvertedFormatsEntry> entries = UnmodifiableListView<FormVuConvertedFormatsEntry>(
+    values.map<FormVuConvertedFormatsEntry>(
+      (FormVuConvertedFormats format) => FormVuConvertedFormatsEntry(
         value: format,
         label: format.label,
       ),
