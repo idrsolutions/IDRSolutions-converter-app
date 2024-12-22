@@ -18,20 +18,24 @@ class _SingleFilePickerState extends State<SingleFilePicker> {
   getFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
+    // if user picked a file
     if (result != null) {
       final file = File(result.files.single.path!);
       final fileName = file.path.split("/").last;
       final fileFormat = fileName.split(".").last;
 
+      // if user-picked file format is the original file format, set the file name
       if (fileFormat == "jpg") {
         setState(() {
           _fileName = fileName;
         });
+      // otherwise tell user picked the wrong file
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Wrong file type')),
         );
       }
+    // if user did not pick a file, ask user to pick a file
     } else {
       if(_fileName.isEmpty){
         ScaffoldMessenger.of(context).showSnackBar(
@@ -49,6 +53,7 @@ class _SingleFilePickerState extends State<SingleFilePicker> {
           onPressed: getFile,
           child: const StyledTitle(text: 'Select Original File'),
         ),
+        
         StyledText(text: _fileName.isEmpty ? "" : _fileName),
       ],
     );
