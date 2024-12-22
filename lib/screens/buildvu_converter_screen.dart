@@ -60,9 +60,86 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                       ),
                     ],
                   ),
+                  
+                  // select file and advanced options
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 20,),
+                      const StyledTitle(text: 'Select Original File'),
+                  
+                      const SizedBox(height: 5,),
+                      // file picker
+                      SingleFilePicker(originalFormat: originalFormat), 
+                      
+                      const SizedBox(height: 20,),
+                      const StyledTitle(text: 'Advanced Options (Optional)'),
 
-                  const StyledTitle(text: 'Select Original File'),
-                  SingleFilePicker(originalFormat: originalFormat), 
+                      const SizedBox(height: 5,),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            children: [
+                              const StyledTitleSmall(text: 'PDF Password'),
+                              const StyledTitleSmall(text: 'placeholder textbox'),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              const StyledTitleSmall(text: 'Image Scale'),
+                              const StyledTitleSmall(text: 'placeholder textbox'),
+                            ],
+                          ),
+                          
+                        ],
+                      ),
+
+                      const SizedBox(height: 5,),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            children: [
+                              const StyledTitleSmall(text: 'IDRViewer UI'),
+                              const StyledTitleSmall(text: 'placeholder textbox'),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              const StyledTitleSmall(text: 'Text Mode'),
+                              const StyledTitleSmall(text: 'placeholder textbox'),
+                            ],
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(height: 20,),
+                      Row(
+                        children: [
+                          const StyledTitleSmall(text: 'placeholder tickbox'),
+                          const StyledTitleSmall(text: 'Embed Images as Base64'),
+                        ],
+                      ),
+
+                      const SizedBox(height: 20,),
+                      Row(
+                        children: [
+                          const StyledTitleSmall(text: 'placeholder tickbox'),
+                          const StyledTitleSmall(text: 'Inline SVGs'),
+                        ],
+                      ),
+
+                      const SizedBox(height: 20,),
+                      const StyledTitleSmall(text: '*Q&A'),
+                    ],
+                  ),
+                  
+                  const SizedBox(height: 20,),
+                  ColorfulBgBtn(
+                    onPressed: (){}, 
+                    child: StyledTitleWhite(text: 'CONVERT'),
+                  ),
                 ],
               ),
             ),

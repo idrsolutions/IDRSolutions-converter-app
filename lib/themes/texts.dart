@@ -50,6 +50,33 @@ class StyledTitle extends StatelessWidget {
   }
 }
 
+class StyledTitleSmall extends StatelessWidget {
+  const StyledTitleSmall({
+    super.key,
+    required this.text,
+    this.color,
+  });
+
+  final String text;
+  final Color? color;
+
+  @override
+  Widget build(BuildContext context) {
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      child: Text(
+        text,
+        style: TextStyle(
+          fontFamily: 'Montserrat',
+          fontSize: 13,
+          fontWeight: FontWeight.w600,
+          color: color ?? Theme.of(context).primaryColor,
+        ),
+      ),
+    );
+  }
+}
+
 class StyledTitleWhite extends StatelessWidget {
   const StyledTitleWhite({
     super.key,
