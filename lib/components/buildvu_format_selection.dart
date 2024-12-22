@@ -21,7 +21,7 @@ class _BuildVuFormatSelectionState extends State<BuildVuFormatSelection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        StyledTitle(text: 'PDF/ Word/ PowerPoint/ Excel to HTML/ SVG', color: AppColors.BuildVuPrimary,),
+        StyledTitle(text: 'PDF/ Word/ PowerPoint/ Excel to HTML/ SVG', color: AppColors.buildvuPrimary,),
         
         const SizedBox(height: 20,),
 
@@ -29,21 +29,25 @@ class _BuildVuFormatSelectionState extends State<BuildVuFormatSelection> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             // original format dropdown
-            StyledDropdown<BuildVuOriginalFormats>(
-              label: const Text('Original Format'), 
-              initialSelection: BuildVuOriginalFormats.pdf, 
-              controller: buildvuOriginalFormatController, 
-              dropdownMenuEntries: BuildVuOriginalFormats.entries,
+            Flexible(
+              child: StyledDropdown<BuildVuOriginalFormats>(
+                label: const Text('Original Format'), 
+                initialSelection: BuildVuOriginalFormats.pdf, 
+                controller: buildvuOriginalFormatController, 
+                dropdownMenuEntries: BuildVuOriginalFormats.entries,
+              ),
             ),
 
-            StyledTitle(text: 'To', color: AppColors.BuildVuPrimary,),
+            Flexible(child: StyledTitle(text: 'To', color: AppColors.buildvuPrimary,)),
 
             // converted format dropdown
-            StyledDropdown<BuildVuConvertedFormats>(
-              label: const Text('Converted Format'), 
-              initialSelection: BuildVuConvertedFormats.html, 
-              controller: buildvuConvertedFormatController, 
-              dropdownMenuEntries: BuildVuConvertedFormats.entries,
+            Flexible(
+              child: StyledDropdown<BuildVuConvertedFormats>(
+                label: const Text('Converted Format'), 
+                initialSelection: BuildVuConvertedFormats.html, 
+                controller: buildvuConvertedFormatController, 
+                dropdownMenuEntries: BuildVuConvertedFormats.entries,
+              ),
             ),
           ],
         ),
@@ -55,7 +59,7 @@ class _BuildVuFormatSelectionState extends State<BuildVuFormatSelection> {
           children: [
             Image.asset('assets/images/poweredbybuildvu.png'),
             ColorfulBgBtn(
-              color: AppColors.BuildVuPrimary,
+              color: AppColors.buildvuPrimary,
               onPressed: (){},
               child: StyledTitleWhite(text: 'GO',),
             ),

@@ -1,4 +1,3 @@
-import 'package:converter/themes/colors.dart';
 import 'package:flutter/material.dart';
 
 class StyledDropdown<T> extends StatelessWidget {

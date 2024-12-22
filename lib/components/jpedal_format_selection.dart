@@ -21,7 +21,7 @@ class _JPedalFormatSelectionState extends State<JPedalFormatSelection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        StyledTitle(text: 'PDF/ Word/ PowerPoint/ Excel to Image', color: AppColors.JPedalPrimary,),
+        StyledTitle(text: 'PDF/ Word/ PowerPoint/ Excel to Image', color: AppColors.jpedalPrimary,),
         
         const SizedBox(height: 20,),
 
@@ -29,21 +29,25 @@ class _JPedalFormatSelectionState extends State<JPedalFormatSelection> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             // original format dropdown
-            StyledDropdown<JPedalOriginalFormats>(
-              label: const Text('Original Format'), 
-              initialSelection: JPedalOriginalFormats.pdf, 
-              controller: jpedalOriginalFormatController, 
-              dropdownMenuEntries: JPedalOriginalFormats.entries,
+            Flexible(
+              child: StyledDropdown<JPedalOriginalFormats>(
+                label: const Text('Original Format'), 
+                initialSelection: JPedalOriginalFormats.pdf, 
+                controller: jpedalOriginalFormatController, 
+                dropdownMenuEntries: JPedalOriginalFormats.entries,
+              ),
             ),
 
-            StyledTitle(text: 'To', color: AppColors.JPedalPrimary,),
+            Flexible(child: StyledTitle(text: 'To', color: AppColors.jpedalPrimary,)),
 
             // converted format dropdown
-            StyledDropdown<JPedalConvertedFormats>(
-              label: const Text('Converted Format'), 
-              initialSelection: JPedalConvertedFormats.jpg, 
-              controller: jpedalConvertedFormatController, 
-              dropdownMenuEntries: JPedalConvertedFormats.entries,
+            Flexible(
+              child: StyledDropdown<JPedalConvertedFormats>(
+                label: const Text('Converted Format'), 
+                initialSelection: JPedalConvertedFormats.jpg, 
+                controller: jpedalConvertedFormatController, 
+                dropdownMenuEntries: JPedalConvertedFormats.entries,
+              ),
             ),
           ],
         ),
@@ -55,7 +59,7 @@ class _JPedalFormatSelectionState extends State<JPedalFormatSelection> {
           children: [
             Image.asset('assets/images/poweredbyjpedal.png'),
             ColorfulBgBtn(
-              color: AppColors.JPedalPrimary,
+              color: AppColors.jpedalPrimary,
               onPressed: (){},
               child: StyledTitleWhite(text: 'GO',),
             ),

@@ -11,13 +11,13 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: ConverterTheme(color: AppColors.IDRBlue).converterTheme,
+      data: ConverterTheme(color: AppColors.idrBlue).converterTheme,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('IDRSolutions Converter'),
           shape: Border(
             bottom: BorderSide(
-              color: AppColors.IDRBlue,
+              color: AppColors.idrBlue,
               width: 10,
             )
           ),
@@ -25,20 +25,21 @@ class HomeScreen extends StatelessWidget {
         ),
         
         body: Container(
-          padding: const EdgeInsets.only(left: 16, top: 30, right: 16, bottom: 100),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              BuildVuFormatSelection(),
-
-              const Spacer(),
-
-              JPedalFormatSelection(),
-
-              const Spacer(),
-
-              FormVuFormatSelection(),
-            ],
+          padding: const EdgeInsets.only(left: 16, top: 20, right: 16, bottom: 20),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                BuildVuFormatSelection(),
+            
+                const SizedBox(height: 50,),
+            
+                JPedalFormatSelection(),
+            
+                const SizedBox(height: 50,),
+            
+                FormVuFormatSelection(),
+              ],
+            ),
           ),
         ),
       ),

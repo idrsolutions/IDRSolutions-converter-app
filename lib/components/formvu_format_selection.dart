@@ -21,7 +21,7 @@ class _FormVuFormatSelectionState extends State<FormVuFormatSelection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        StyledTitle(text: 'Fillable PDF to HTML/ HTML5', color: AppColors.FormVuPrimary,),
+        StyledTitle(text: 'Fillable PDF to HTML/ HTML5', color: AppColors.formvuPrimary,),
         
         const SizedBox(height: 20,),
 
@@ -29,21 +29,25 @@ class _FormVuFormatSelectionState extends State<FormVuFormatSelection> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             // original format dropdown
-            StyledDropdown<FormVuOriginalFormats>(
-              label: const Text('Original Format'), 
-              initialSelection: FormVuOriginalFormats.pdf, 
-              controller: formvuOriginalFormatController, 
-              dropdownMenuEntries: FormVuOriginalFormats.entries,
+            Flexible(
+              child: StyledDropdown<FormVuOriginalFormats>(
+                label: const Text('Original Format'), 
+                initialSelection: FormVuOriginalFormats.pdf, 
+                controller: formvuOriginalFormatController, 
+                dropdownMenuEntries: FormVuOriginalFormats.entries,
+              ),
             ),
 
-            StyledTitle(text: 'To', color: AppColors.FormVuPrimary,),
+            Flexible(child: StyledTitle(text: 'To', color: AppColors.formvuPrimary,)),
 
             // converted format dropdown
-            StyledDropdown<FormVuConvertedFormats>(
-              label: const Text('Converted Format'), 
-              initialSelection: FormVuConvertedFormats.html, 
-              controller: formvuConvertedFormatController, 
-              dropdownMenuEntries: FormVuConvertedFormats.entries,
+            Flexible(
+              child: StyledDropdown<FormVuConvertedFormats>(
+                label: const Text('Converted Format'), 
+                initialSelection: FormVuConvertedFormats.html, 
+                controller: formvuConvertedFormatController, 
+                dropdownMenuEntries: FormVuConvertedFormats.entries,
+              ),
             ),
           ],
         ),
@@ -55,7 +59,7 @@ class _FormVuFormatSelectionState extends State<FormVuFormatSelection> {
           children: [
             Image.asset('assets/images/poweredbyformvu.png'),
             ColorfulBgBtn(
-              color: AppColors.FormVuPrimary,
+              color: AppColors.formvuPrimary,
               onPressed: (){},
               child: StyledTitleWhite(text: 'GO',),
             ),

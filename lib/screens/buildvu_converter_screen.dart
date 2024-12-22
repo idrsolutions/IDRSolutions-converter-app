@@ -1,4 +1,3 @@
-import 'package:converter/components/buildvu_format_selection.dart';
 import 'package:converter/components/single_file_picker.dart';
 import 'package:converter/themes/buttons.dart';
 import 'package:converter/themes/colors.dart';
@@ -17,7 +16,7 @@ class _BuildVuConverterScreenState extends State<BuildVuConverterScreen> {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: ConverterTheme(color: AppColors.BuildVuPrimary).converterTheme, 
+      data: ConverterTheme(color: AppColors.buildvuPrimary).converterTheme, 
       child: Scaffold(
         appBar: AppBar(
           title: Row(
@@ -30,7 +29,7 @@ class _BuildVuConverterScreenState extends State<BuildVuConverterScreen> {
           ),
           shape: Border(
             bottom: BorderSide(
-              color: AppColors.BuildVuPrimary,
+              color: AppColors.buildvuPrimary,
               width: 10
             )
           ),
@@ -39,22 +38,27 @@ class _BuildVuConverterScreenState extends State<BuildVuConverterScreen> {
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.only(left: 16, top: 30, right: 16),
-            child: Column(
-              children: [
-                // buildvu logo and btn
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Image.asset('assets/images/poweredbybuildvu.png'),
-                    WhiteBgBtn(
-                      onPressed: (){},
-                      child: const StyledTitle(text: 'Why BuildVu?'),
-                    ),
-                  ],
-                ),
-
-                SingleFilePicker(),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  // buildvu logo and btn
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Flexible(child: Image.asset('assets/images/poweredbybuildvu.png'),),
+                      
+                      Flexible(
+                        child: WhiteBgBtn(
+                          onPressed: (){},
+                          child: const StyledTitle(text: 'Why BuildVu?'),
+                        ),
+                      ),
+                    ],
+                  ),
+              
+                  SingleFilePicker(),
+                ],
+              ),
             ),
           ),
         ),

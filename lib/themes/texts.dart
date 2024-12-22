@@ -85,7 +85,7 @@ class StyledTitleBuildVu extends StatelessWidget {
         fontFamily: 'Montserrat',
         fontSize: 16,
         fontWeight: FontWeight.w600,
-        color: AppColors.BuildVuPrimary,
+        color: AppColors.buildvuPrimary,
       ),
     );
   }
@@ -107,7 +107,7 @@ class StyledTitleFormVu extends StatelessWidget {
         fontFamily: 'Montserrat',
         fontSize: 16,
         fontWeight: FontWeight.w600,
-        color: AppColors.FormVuPrimary,
+        color: AppColors.formvuPrimary,
       ),
     );
   }
@@ -129,7 +129,7 @@ class StyledTitleJPedal extends StatelessWidget {
         fontFamily: 'Montserrat',
         fontSize: 16,
         fontWeight: FontWeight.w600,
-        color: AppColors.JPedalPrimary,
+        color: AppColors.jpedalPrimary,
       ),
     );
   }
