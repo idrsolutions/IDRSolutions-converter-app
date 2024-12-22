@@ -26,9 +26,7 @@ class _SingleFilePickerState extends State<SingleFilePicker> {
         final fileFormat = fileName.split(".").last;
 
         // if user-picked file format is the original file format, set the file name
-        
         if (fileFormat == "jpg") {
-          
           setState(() {
             _fileName = fileName;
           });

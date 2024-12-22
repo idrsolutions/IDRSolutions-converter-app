@@ -35,13 +35,17 @@ class StyledTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontFamily: 'Montserrat',
-        fontSize: 16,
-        fontWeight: FontWeight.w600,
-        color: color ?? Theme.of(context).primaryColor,
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      child: Text(
+        text,
+        style: TextStyle(
+          fontFamily: 'Montserrat',
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+          color: color ?? Theme.of(context).primaryColor,
+        ),
+        // textScaler: TextScaler.linear(1),
       ),
     );
   }
