@@ -37,13 +37,19 @@ class _SingleFilePickerState extends State<SingleFilePicker> {
           });
         } else { // otherwise tell user picked the wrong file
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Wrong file type')),
+            const SnackBar(
+              content: Text('Wrong file type'),
+              duration: Duration(seconds: 1),
+            ),
           );
         }
       } else { // if user did not pick a file, ask user to pick a file
         if (_fileName.isEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Please select a file')),
+            const SnackBar(
+              content: Text('Please select a file'),
+              duration: Duration(seconds: 1),
+            ),
           );
         }
       }
