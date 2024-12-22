@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:converter/themes/buttons.dart';
+import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/texts.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -53,10 +54,11 @@ class _SingleFilePickerState extends State<SingleFilePicker> {
       children: [
         WhiteBgBtn(
           onPressed: getFile,
-          child: const StyledTitle(text: 'Select Original File'),
+          color: AppColors.dimmedBlack,
+          child: StyledTitle(text: 'Select Original File', color: AppColors.dimmedBlack,),
         ),
         
-        StyledText(text: _fileName.isEmpty ? "" : _fileName),
+        StyledText(text: _fileName.isEmpty ? "" : _fileName,),
       ],
     );
   }

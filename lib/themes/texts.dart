@@ -154,7 +154,7 @@ class StyledText extends StatelessWidget {
         fontFamily: 'Montserrat',
         fontSize: 17,
         fontWeight: FontWeight.w500,
-        color: Colors.black54,
+        color: AppColors.dimmedBlack,
       ),
     );
   }

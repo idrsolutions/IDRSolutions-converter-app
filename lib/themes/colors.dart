@@ -8,4 +8,5 @@ class AppColors {
   static Color jpedalSecondary = const Color.fromRGBO(5, 127, 141, 60);
   static Color formvuPrimary = const Color.fromARGB(156, 228, 0, 80);
   static Color formvuSecondary = const Color.fromARGB(156, 238, 59, 100);
+  static Color dimmedBlack = Colors.black45;
 }
