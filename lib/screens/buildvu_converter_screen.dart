@@ -1,4 +1,5 @@
 import 'package:converter/components/buildvu_format_selection.dart';
+import 'package:converter/components/single_file_picker.dart';
 import 'package:converter/themes/buttons.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/converter_theme.dart';
@@ -52,8 +53,7 @@ class _BuildVuConverterScreenState extends State<BuildVuConverterScreen> {
                   ],
                 ),
 
-                const StyledTitleBuildVu(text: 'Select File'),
-                
+                SingleFilePicker(),
               ],
             ),
           ),
