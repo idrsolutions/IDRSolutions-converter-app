@@ -1,23 +1,23 @@
 import 'package:converter/models/conversion_formats.dart';
+import 'package:converter/providers/file_formats_provider.dart';
 import 'package:converter/screens/buildvu_converter_screen.dart';
 import 'package:converter/themes/buttons.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/dropdown_theme.dart';
 import 'package:converter/themes/texts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BuildVuFormatSelection extends StatefulWidget {
+class BuildVuFormatSelection extends ConsumerStatefulWidget {
   const BuildVuFormatSelection({super.key});
 
   @override
-  State<BuildVuFormatSelection> createState() => _BuildVuFormatSelectionState();
+  ConsumerState<BuildVuFormatSelection> createState() => _BuildVuFormatSelectionState();
 }
 
-class _BuildVuFormatSelectionState extends State<BuildVuFormatSelection> {
+class _BuildVuFormatSelectionState extends ConsumerState<BuildVuFormatSelection> {
   final TextEditingController buildvuOriginalFormatController = TextEditingController();
   final TextEditingController buildvuConvertedFormatController = TextEditingController();
-  String? _originalFormat;
-  String? _convertedFormat;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +38,11 @@ class _BuildVuFormatSelectionState extends State<BuildVuFormatSelection> {
                 initialSelection: BuildVuOriginalFormats.pdf, 
                 controller: buildvuOriginalFormatController, 
                 dropdownMenuEntries: BuildVuOriginalFormats.entries,
+                onChanged: (newValue){
+                  if(newValue != null) {
+                    ref.read(originalBuildVuFileFormatProvider.notifier).state = newValue.name;
+                  }
+                },
               ),
             ),
 
@@ -50,6 +55,11 @@ class _BuildVuFormatSelectionState extends State<BuildVuFormatSelection> {
                 initialSelection: BuildVuConvertedFormats.html, 
                 controller: buildvuConvertedFormatController, 
                 dropdownMenuEntries: BuildVuConvertedFormats.entries,
+                onChanged: (newValue){
+                  if(newValue != null) {
+                    ref.read(convertedBuildVuFileFormatProvider.notifier).state = newValue.name;
+                  }
+                },
               ),
             ),
           ],
@@ -65,8 +75,6 @@ class _BuildVuFormatSelectionState extends State<BuildVuFormatSelection> {
             ColorfulBgBtn(
               color: AppColors.buildvuPrimary,
               onPressed: (){
-                _originalFormat = buildvuOriginalFormatController.text;
-                _convertedFormat = buildvuConvertedFormatController.text;
                 Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildVuConverterScreen()));
               },
               child: StyledTitleWhite(text: 'GO',),

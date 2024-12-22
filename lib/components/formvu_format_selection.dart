@@ -25,32 +25,32 @@ class _FormVuFormatSelectionState extends State<FormVuFormatSelection> {
         
         const SizedBox(height: 20,),
 
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            // original format dropdown
-            Flexible(
-              child: StyledDropdown<FormVuOriginalFormats>(
-                label: const Text('Original Format'), 
-                initialSelection: FormVuOriginalFormats.pdf, 
-                controller: formvuOriginalFormatController, 
-                dropdownMenuEntries: FormVuOriginalFormats.entries,
-              ),
-            ),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //   children: [
+        //     // original format dropdown
+        //     Flexible(
+        //       child: StyledDropdown<FormVuOriginalFormats>(
+        //         label: const Text('Original Format'), 
+        //         initialSelection: FormVuOriginalFormats.pdf, 
+        //         controller: formvuOriginalFormatController, 
+        //         dropdownMenuEntries: FormVuOriginalFormats.entries,
+        //       ),
+        //     ),
 
-            Flexible(child: StyledTitle(text: 'To', color: AppColors.formvuPrimary,)),
+        //     Flexible(child: StyledTitle(text: 'To', color: AppColors.formvuPrimary,)),
 
-            // converted format dropdown
-            Flexible(
-              child: StyledDropdown<FormVuConvertedFormats>(
-                label: const Text('Converted Format'), 
-                initialSelection: FormVuConvertedFormats.html, 
-                controller: formvuConvertedFormatController, 
-                dropdownMenuEntries: FormVuConvertedFormats.entries,
-              ),
-            ),
-          ],
-        ),
+        //     // converted format dropdown
+        //     Flexible(
+        //       child: StyledDropdown<FormVuConvertedFormats>(
+        //         label: const Text('Converted Format'), 
+        //         initialSelection: FormVuConvertedFormats.html, 
+        //         controller: formvuConvertedFormatController, 
+        //         dropdownMenuEntries: FormVuConvertedFormats.entries,
+        //       ),
+        //     ),
+        //   ],
+        // ),
 
         const SizedBox(height: 20,),
 

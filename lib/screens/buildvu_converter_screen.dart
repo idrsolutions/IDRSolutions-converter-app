@@ -1,20 +1,25 @@
 import 'package:converter/components/single_file_picker.dart';
+import 'package:converter/providers/file_formats_provider.dart';
 import 'package:converter/themes/buttons.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/converter_theme.dart';
 import 'package:converter/themes/texts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BuildVuConverterScreen extends StatefulWidget {
+class BuildVuConverterScreen extends ConsumerStatefulWidget {
   const BuildVuConverterScreen({super.key});
 
   @override
-  State<BuildVuConverterScreen> createState() => _BuildVuConverterScreenState();
+  ConsumerState<BuildVuConverterScreen> createState() => _BuildVuConverterScreenState();
 }
 
-class _BuildVuConverterScreenState extends State<BuildVuConverterScreen> {
+class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen> {
   @override
   Widget build(BuildContext context) {
+    final originalFormat = ref.watch(originalBuildVuFileFormatProvider);
+    final convertedFormat = ref.watch(convertedBuildVuFileFormatProvider);
+
     return Theme(
       data: ConverterTheme(color: AppColors.buildvuPrimary).converterTheme, 
       child: Scaffold(
@@ -22,9 +27,9 @@ class _BuildVuConverterScreenState extends State<BuildVuConverterScreen> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const Text('xx'),
+              Text(originalFormat),
               const Text('to'),
-              const Text('xx'),
+              Text(convertedFormat),
             ],
           ),
           shape: Border(

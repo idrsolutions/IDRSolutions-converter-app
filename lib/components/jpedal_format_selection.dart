@@ -25,32 +25,32 @@ class _JPedalFormatSelectionState extends State<JPedalFormatSelection> {
         
         const SizedBox(height: 20,),
 
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            // original format dropdown
-            Flexible(
-              child: StyledDropdown<JPedalOriginalFormats>(
-                label: const Text('Original Format'), 
-                initialSelection: JPedalOriginalFormats.pdf, 
-                controller: jpedalOriginalFormatController, 
-                dropdownMenuEntries: JPedalOriginalFormats.entries,
-              ),
-            ),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //   children: [
+        //     // original format dropdown
+        //     Flexible(
+        //       child: StyledDropdown<JPedalOriginalFormats>(
+        //         label: const Text('Original Format'), 
+        //         initialSelection: JPedalOriginalFormats.pdf, 
+        //         controller: jpedalOriginalFormatController, 
+        //         dropdownMenuEntries: JPedalOriginalFormats.entries,
+        //       ),
+        //     ),
 
-            Flexible(child: StyledTitle(text: 'To', color: AppColors.jpedalPrimary,)),
+        //     Flexible(child: StyledTitle(text: 'To', color: AppColors.jpedalPrimary,)),
 
-            // converted format dropdown
-            Flexible(
-              child: StyledDropdown<JPedalConvertedFormats>(
-                label: const Text('Converted Format'), 
-                initialSelection: JPedalConvertedFormats.jpg, 
-                controller: jpedalConvertedFormatController, 
-                dropdownMenuEntries: JPedalConvertedFormats.entries,
-              ),
-            ),
-          ],
-        ),
+        //     // converted format dropdown
+        //     Flexible(
+        //       child: StyledDropdown<JPedalConvertedFormats>(
+        //         label: const Text('Converted Format'), 
+        //         initialSelection: JPedalConvertedFormats.jpg, 
+        //         controller: jpedalConvertedFormatController, 
+        //         dropdownMenuEntries: JPedalConvertedFormats.entries,
+        //       ),
+        //     ),
+        //   ],
+        // ),
 
         const SizedBox(height: 20,),
 
