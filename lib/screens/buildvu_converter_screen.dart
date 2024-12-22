@@ -62,7 +62,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                   ),
 
                   const StyledTitle(text: 'Select Original File'),
-                  SingleFilePicker(),
+                  SingleFilePicker(originalFormat: originalFormat), 
                 ],
               ),
             ),

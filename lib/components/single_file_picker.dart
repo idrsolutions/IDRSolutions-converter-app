@@ -7,7 +7,12 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 class SingleFilePicker extends StatefulWidget {
-  const SingleFilePicker({super.key});
+  const SingleFilePicker({
+    super.key,
+    required this.originalFormat, 
+  });
+
+  final String originalFormat;
 
   @override
   State<SingleFilePicker> createState() => _SingleFilePickerState();
@@ -19,14 +24,14 @@ class _SingleFilePickerState extends State<SingleFilePicker> {
   getFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
-    if(mounted){
+    if (mounted) {
       if (result != null) { // if user picked a file
         final file = File(result.files.single.path!);
         final fileName = file.path.split("/").last;
         final fileFormat = fileName.split(".").last;
 
         // if user-picked file format is the original file format, set the file name
-        if (fileFormat == "jpg") {
+        if (fileFormat == widget.originalFormat) {  
           setState(() {
             _fileName = fileName;
           });
@@ -36,13 +41,13 @@ class _SingleFilePickerState extends State<SingleFilePicker> {
           );
         }
       } else { // if user did not pick a file, ask user to pick a file
-        if(_fileName.isEmpty){
+        if (_fileName.isEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Please select a file')),
           );
         }
       }
-    } 
+    }
   }
 
   @override
@@ -52,10 +57,10 @@ class _SingleFilePickerState extends State<SingleFilePicker> {
         WhiteBgBtn(
           onPressed: getFile,
           color: AppColors.dimmedBlack,
-          child: StyledTitle(text: 'Select Original File', color: AppColors.dimmedBlack,),
+          child: StyledTitle(text: 'Select Original File', color: AppColors.dimmedBlack),
         ),
         
-        StyledText(text: _fileName.isEmpty ? "" : _fileName,),
+        StyledText(text: _fileName.isEmpty ? "" : _fileName),
       ],
     );
   }
