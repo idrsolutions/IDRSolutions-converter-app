@@ -20,8 +20,7 @@ class _SingleFilePickerState extends State<SingleFilePicker> {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
     if(mounted){
-      // if user picked a file
-      if (result != null) {
+      if (result != null) { // if user picked a file
         final file = File(result.files.single.path!);
         final fileName = file.path.split("/").last;
         final fileFormat = fileName.split(".").last;
@@ -31,14 +30,12 @@ class _SingleFilePickerState extends State<SingleFilePicker> {
           setState(() {
             _fileName = fileName;
           });
-        // otherwise tell user picked the wrong file
-        } else {
+        } else { // otherwise tell user picked the wrong file
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Wrong file type')),
           );
         }
-      // if user did not pick a file, ask user to pick a file
-      } else {
+      } else { // if user did not pick a file, ask user to pick a file
         if(_fileName.isEmpty){
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Please select a file')),

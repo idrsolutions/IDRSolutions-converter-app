@@ -16,6 +16,8 @@ class BuildVuFormatSelection extends StatefulWidget {
 class _BuildVuFormatSelectionState extends State<BuildVuFormatSelection> {
   final TextEditingController buildvuOriginalFormatController = TextEditingController();
   final TextEditingController buildvuConvertedFormatController = TextEditingController();
+  String? _originalFormat;
+  String? _convertedFormat;
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +57,7 @@ class _BuildVuFormatSelectionState extends State<BuildVuFormatSelection> {
 
         const SizedBox(height: 20,),
 
+        // GO btn
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -62,6 +65,8 @@ class _BuildVuFormatSelectionState extends State<BuildVuFormatSelection> {
             ColorfulBgBtn(
               color: AppColors.buildvuPrimary,
               onPressed: (){
+                _originalFormat = buildvuOriginalFormatController.text;
+                _convertedFormat = buildvuConvertedFormatController.text;
                 Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildVuConverterScreen()));
               },
               child: StyledTitleWhite(text: 'GO',),
