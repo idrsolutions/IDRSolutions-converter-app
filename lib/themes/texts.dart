@@ -45,7 +45,6 @@ class StyledTitle extends StatelessWidget {
           fontWeight: FontWeight.w600,
           color: color ?? Theme.of(context).primaryColor,
         ),
-        // textScaler: TextScaler.linear(1),
       ),
     );
   }
