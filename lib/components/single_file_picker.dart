@@ -29,6 +29,7 @@ class _SingleFilePickerState extends State<SingleFilePicker> {
         final file = File(result.files.single.path!);
         final fileName = file.path.split("/").last;
         final fileFormat = fileName.split(".").last;
+        print(file.path);
 
         // if user-picked file format is the original file format, set the file name
         if (fileFormat == widget.originalFormat) {  

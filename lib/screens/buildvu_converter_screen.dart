@@ -4,6 +4,7 @@ import 'package:converter/themes/buttons.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/converter_theme.dart';
 import 'package:converter/themes/texts.dart';
+import 'package:converter/utils/connect_buildvu_cloud.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -66,11 +67,23 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 20,),
-                      const StyledTitle(text: 'Select Original File'),
-                  
-                      const SizedBox(height: 5,),
-                      // file picker
-                      SingleFilePicker(originalFormat: originalFormat), 
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            children: [
+                            const StyledTitle(text: 'Select Original File'),
+                            SingleFilePicker(originalFormat: originalFormat), 
+                            ],
+                          ),
+                          Column(
+                            children: [
+                            const StyledTitle(text: 'Your Token'),
+                            const StyledTitle(text: 'placeholder'),
+                            ],
+                          )
+                        ],
+                      ),
                       
                       const SizedBox(height: 20,),
                       const StyledTitle(text: 'Advanced Options (Optional)'),
@@ -138,7 +151,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                   
                   const SizedBox(height: 20,),
                   ColorfulBgBtn(
-                    onPressed: (){}, 
+                    onPressed: () => connectBuildVuCloud(), 
                     child: StyledTitleWhite(text: 'CONVERT'),
                   ),
                 ],
