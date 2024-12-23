@@ -1,23 +1,22 @@
+import 'package:converter/providers/file_formats_provider.dart';
+import 'package:converter/screens/buildvu_converter_screen.dart';
 import 'package:converter/themes/buttons.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/converter_theme.dart';
 import 'package:converter/themes/texts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class Sandbox extends StatelessWidget {
-  const Sandbox({super.key});
-
-  _launchURL() async {
-   final Uri url = Uri.parse('https://www.idrsolutions.com/buildvu/trial-download');
-   if (!await launchUrl(url)) {
-      print('Could not launch $url');
-      throw Exception('Could not launch $url');
-    }
-}
+class BuildvuTokenScreen extends ConsumerWidget {
+  const BuildvuTokenScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final originalFormat = ref.watch(originalBuildVuFileFormatProvider);
+    final convertedFormat = ref.watch(convertedBuildVuFileFormatProvider);
+    
     return Theme(
       data: ConverterTheme(color: AppColors.buildvuPrimary).converterTheme, 
       child: Scaffold(
@@ -25,7 +24,9 @@ class Sandbox extends StatelessWidget {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text('sandbox'),
+              Text(originalFormat),
+              const Text('to'),
+              Text(convertedFormat),
             ],
           ),
           shape: Border(
@@ -43,12 +44,12 @@ class Sandbox extends StatelessWidget {
               children: [
                 StyledTitleBuildVu(text: 'Token'),
                 StyledTitleBuildVu(text: 'placeholder text'),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    StyledText(text: "Don't have a token? Get it ", color: AppColors.dimmedBlack,),
-                    StyledTitle(text: "here", color: AppColors.idrBlue, onTap: _launchURL,),
-                  ],
+                // StyledTitleBuildVu(text: "Don't have a token? Get it here", onTap: () => launchUrlString('https://www.example.com'),),
+                ColorfulBgBtn(
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildVuConverterScreen()));
+                  }, 
+                  child: StyledTitleWhite(text: 'CONTINUE')
                 ),
               ],
             ),

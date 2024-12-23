@@ -1,6 +1,7 @@
 import 'package:converter/models/conversion_formats.dart';
 import 'package:converter/providers/file_formats_provider.dart';
 import 'package:converter/screens/buildvu_converter_screen.dart';
+import 'package:converter/screens/token/buildvu_token_screen.dart';
 import 'package:converter/themes/buttons.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/dropdown_theme.dart';
@@ -75,7 +76,7 @@ class _BuildVuFormatSelectionState extends ConsumerState<BuildVuFormatSelection>
             ColorfulBgBtn(
               color: AppColors.buildvuPrimary,
               onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildVuConverterScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildvuTokenScreen()));
               },
               child: StyledTitleWhite(text: 'GO',),
             ),

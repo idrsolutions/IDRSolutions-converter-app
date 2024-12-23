@@ -67,24 +67,11 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 20,),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            children: [
-                            const StyledTitle(text: 'Select Original File'),
-                            SingleFilePicker(originalFormat: originalFormat), 
-                            ],
-                          ),
-                          Column(
-                            children: [
-                            const StyledTitle(text: 'Your Token'),
-                            const StyledTitle(text: 'placeholder'),
-                            ],
-                          )
-                        ],
-                      ),
-                      
+                      const StyledTitle(text: 'Select Original File'),
+
+                      const SizedBox(height: 5,),
+                      SingleFilePicker(originalFormat: originalFormat), 
+
                       const SizedBox(height: 20,),
                       const StyledTitle(text: 'Advanced Options (Optional)'),
 

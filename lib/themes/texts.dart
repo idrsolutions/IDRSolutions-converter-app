@@ -28,22 +28,27 @@ class StyledTitle extends StatelessWidget {
     super.key,
     required this.text,
     this.color,
+    this.onTap,
   });
 
   final String text;
   final Color? color;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return FittedBox(
       fit: BoxFit.scaleDown,
-      child: Text(
-        text,
-        style: TextStyle(
-          fontFamily: 'Montserrat',
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-          color: color ?? Theme.of(context).primaryColor,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Text(
+          text,
+          style: TextStyle(
+            fontFamily: 'Montserrat',
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            color: color ?? Theme.of(context).primaryColor,
+          ),
         ),
       ),
     );
@@ -169,9 +174,11 @@ class StyledText extends StatelessWidget {
   const StyledText({
     super.key,
     required this.text,
+    this.color,
   });
 
   final String text;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
