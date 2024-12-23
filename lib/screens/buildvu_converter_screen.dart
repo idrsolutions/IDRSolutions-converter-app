@@ -79,12 +79,13 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Column(
-                            children: [
-                              const StyledTitleSmall(text: 'PDF Password'),
-                              const StyledTitleSmall(text: 'placeholder textbox'),
-                            ],
-                          ),
+                          if(originalFormat == 'pdf')
+                            Column(
+                              children: [
+                                const StyledTitleSmall(text: 'PDF Password'),
+                                const StyledTitleSmall(text: 'placeholder textbox'),
+                              ],
+                            ),
                           Column(
                             children: [
                               const StyledTitleSmall(text: 'Image Scale'),
