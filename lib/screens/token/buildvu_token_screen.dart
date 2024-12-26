@@ -17,7 +17,6 @@ class BuildvuTokenScreen extends ConsumerWidget {
   _launchURL() async {
    final Uri url = Uri.parse('https://www.idrsolutions.com/buildvu/trial-download');
    if (!await launchUrl(url)) {
-      // TODO：prompt user
       throw Exception('Could not launch $url');
     }
   }
@@ -27,6 +26,7 @@ class BuildvuTokenScreen extends ConsumerWidget {
     final originalFormat = ref.watch(originalBuildVuFileFormatProvider);
     final convertedFormat = ref.watch(convertedBuildVuFileFormatProvider);
     final tokenNotifier = ref.read(buildvuTokenProvider.notifier);
+    final tokenProvider = ref.watch(buildvuTokenProvider);
     
     return Theme(
       data: ConverterTheme(color: AppColors.buildvuPrimary).converterTheme, 
@@ -54,12 +54,16 @@ class BuildvuTokenScreen extends ConsumerWidget {
             child: Column(
               children: [
                 StyledTitleBuildVu(text: 'Token'),
+
                 StyledText(text: "*The token is at the end of your received trial link", color: AppColors.dimmedBlack,),
+                
+                // token text field
                 StyledTextField(
                   onChanged: (newVal) {
                     tokenNotifier.updateToken(newVal);
                   },
                 ),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -67,10 +71,20 @@ class BuildvuTokenScreen extends ConsumerWidget {
                     StyledTitle(text: "here", color: AppColors.idrBlue, onTap: _launchURL,),
                   ],
                 ),
+
+                // continue btn
                 ColorfulBgBtn(
-                  // TODO: only continue when token is keyed in
                   onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (ctx) => BuildVuConverterScreen()));
+                    if(tokenProvider.isEmpty){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please put in your token'),
+                          duration: Duration(seconds: 1),
+                        ),
+                      );
+                    }else{
+                      Navigator.push(context, MaterialPageRoute(builder: (ctx) => BuildVuConverterScreen()));
+                    }
                   },
                   child: StyledTitleWhite(text: 'CONTINUE')
                 ),
