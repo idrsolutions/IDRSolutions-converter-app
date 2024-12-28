@@ -6,19 +6,12 @@ import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/converter_theme.dart';
 import 'package:converter/themes/text_fields.dart';
 import 'package:converter/themes/texts.dart';
+import 'package:converter/utils/launch_url.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class BuildvuTokenScreen extends ConsumerWidget {
   const BuildvuTokenScreen({super.key});
-
-  _launchURL() async {
-   final Uri url = Uri.parse('https://www.idrsolutions.com/buildvu/trial-download');
-   if (!await launchUrl(url)) {
-      throw Exception('Could not launch $url');
-    }
-  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -66,8 +59,15 @@ class BuildvuTokenScreen extends ConsumerWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    StyledText(text: "Don't have a token? Get it ", color: AppColors.dimmedBlack,),
-                    StyledTitle(text: "here", color: AppColors.idrBlue, onTap: _launchURL,),
+                    StyledText(
+                      text: "Don't have a token? Get it ", 
+                      color: AppColors.dimmedBlack,
+                    ),
+                    StyledTitle(
+                      text: "here", 
+                      color: AppColors.idrBlue, 
+                      onTap: (){launchURL('https://www.idrsolutions.com/buildvu/trial-download');},
+                    ),
                   ],
                 ),
 

@@ -4,24 +4,12 @@ import 'package:converter/themes/buttons.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/converter_theme.dart';
 import 'package:converter/themes/texts.dart';
+import 'package:converter/utils/launch_url.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class BuildvuSuccessScreen extends ConsumerWidget {
   const BuildvuSuccessScreen({super.key});
-
-  _launchURL(String? convertedFileURL) async {
-    if(convertedFileURL == null || convertedFileURL.isEmpty){
-      print('preview url is null or empty');
-      return;
-    }
-
-    final Uri url = Uri.parse(convertedFileURL);
-    if (!await launchUrl(url)) {
-      throw Exception('Could not launch $url');
-    }
-  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -69,7 +57,7 @@ class BuildvuSuccessScreen extends ConsumerWidget {
                         children: [
                           WhiteBgBtn(
                             onPressed: (){
-                              _launchURL(convertedFilePreviewURL);
+                              launchURL(convertedFilePreviewURL);
                             }, 
                             child: StyledTitleBuildVu(text: 'Preview Online'),
                           ),
@@ -77,7 +65,7 @@ class BuildvuSuccessScreen extends ConsumerWidget {
 
                           WhiteBgBtn(
                             onPressed: (){
-                              _launchURL(convertedFileDownloadURL);
+                              launchURL(convertedFileDownloadURL);
                             }, 
                             child: StyledTitleBuildVu(text: 'Download Zip'),
                           ),
@@ -101,7 +89,9 @@ class BuildvuSuccessScreen extends ConsumerWidget {
                   ),
                   const SizedBox(height: 20,),
                   ColorfulBgBtn(
-                    onPressed: (){}, 
+                    onPressed: (){
+                      launchURL('https://www.idrsolutions.com/buildvu/');
+                    }, 
                     child: StyledTitleWhite(text: 'LEARN MORE')
                   ),
                 ],
