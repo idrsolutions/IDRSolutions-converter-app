@@ -6,7 +6,6 @@ import 'package:converter/themes/buttons.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/dropdowns.dart';
 import 'package:converter/themes/texts.dart';
-import 'package:converter/utils/launch_url.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -43,6 +42,7 @@ class _BuildVuFormatSelectionState extends ConsumerState<BuildVuFormatSelection>
                 onChanged: (newValue){
                   if(newValue != null) {
                     ref.read(originalBuildVuFileFormatProvider.notifier).state = newValue.name;
+                    print(ref.read(originalBuildVuFileFormatProvider.notifier).state);
                   }
                 },
               ),

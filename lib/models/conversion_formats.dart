@@ -10,17 +10,29 @@ enum BuildVuOriginalFormats {
     value: 'PDF',
     label: 'PDF',
   ),
-  word(
-    value: 'Word',
-    label: 'Word',
+  doc(
+    value: 'Word (.doc)',
+    label: 'Word (.doc)',
   ),
-  powerpoint(
-    value: 'PowerPoint',
-    label: 'PowerPoint',
+  docx(
+    value: 'Word (.docx)',
+    label: 'Word (.docx)',
   ),
-  excel(
-    value: 'Excel',
-    label: 'Excel',
+  ppt(
+    value: 'PowerPoint (.ppt)',
+    label: 'PowerPoint (.ppt)',
+  ),
+  pptx(
+    value: 'PowerPoint (.pptx)',
+    label: 'PowerPoint (.pptx)',
+  ),
+  xls(
+    value: 'Excel (.xls)',
+    label: 'Excel (.xls)',
+  ),
+  xlsx(
+    value: 'Excel (.xlsx)',
+    label: 'Excel (.xlsx)',
   );
   
   const BuildVuOriginalFormats({
@@ -83,17 +95,29 @@ enum JPedalOriginalFormats {
     value: 'PDF',
     label: 'PDF',
   ),
-  word(
-    value: 'Word',
-    label: 'Word',
+  doc(
+    value: 'Word (.doc)',
+    label: 'Word (.doc)',
   ),
-  powerpoint(
-    value: 'PowerPoint',
-    label: 'PowerPoint',
+  docx(
+    value: 'Word (.docx)',
+    label: 'Word (.docx)',
   ),
-  excel(
-    value: 'Excel',
-    label: 'Excel',
+  ppt(
+    value: 'PowerPoint (.ppt)',
+    label: 'PowerPoint (.ppt)',
+  ),
+  pptx(
+    value: 'PowerPoint (.pptx)',
+    label: 'PowerPoint (.pptx)',
+  ),
+  xls(
+    value: 'Excel (.xls)',
+    label: 'Excel (.xls)',
+  ),
+  xlsx(
+    value: 'Excel (.xlsx)',
+    label: 'Excel (.xlsx)',
   );
   
   const JPedalOriginalFormats({
