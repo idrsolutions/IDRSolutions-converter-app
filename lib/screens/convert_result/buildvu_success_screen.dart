@@ -84,7 +84,9 @@ class BuildvuSuccessScreen extends ConsumerWidget {
                           const SizedBox(width: 10,),
 
                           WhiteBgBtn(
-                            onPressed: (){}, 
+                            onPressed: (){
+                              Navigator.pop(context);
+                            }, 
                             child: StyledTitleBuildVu(text: 'Convert Another File'),
                           ),
                         ],
