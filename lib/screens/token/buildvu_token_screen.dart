@@ -8,7 +8,6 @@ import 'package:converter/themes/text_fields.dart';
 import 'package:converter/themes/texts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class BuildvuTokenScreen extends ConsumerWidget {

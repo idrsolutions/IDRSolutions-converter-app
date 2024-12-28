@@ -1,4 +1,5 @@
-import 'package:converter/screens/buildvu_converter_screen.dart';
+
+import 'package:converter/screens/convert_result/buildvu_success_screen.dart';
 import 'package:converter/screens/home_screen.dart';
 import 'package:converter/screens/sandbox.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +16,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const HomeScreen(), 
-      // home: const BuildVuConverterScreen(),
+      // home: const HomeScreen(), 
+      home: BuildvuSuccessScreen()
       // home: const Sandbox(),
     );
   }
