@@ -1,19 +1,25 @@
 import 'dart:io';
+import 'package:converter/providers/files_provider.dart';
+import 'package:converter/providers/tokens_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:path/path.dart';
 import 'dart:convert' as convert;
 
-void connectBuildVuCloud() async {
+void connectBuildVuCloud(WidgetRef ref) async {
   print('connectBuildVuCloud()!');
 
   final apiUrl = 'https://cloud.idrsolutions.com/cloud/buildvu';
-  final filePath = 'file_path';
+  final filePath = ref.read(originalFileProvider).path;
+  print('filePath: $filePath');
+
   final file = File(filePath);
 
   // Prepare the request headers and form data
   final request = http.MultipartRequest('POST', Uri.parse(apiUrl));
-  request.fields['token'] = 'your_token'; 
+  request.fields['token'] = ref.read(buildvuTokenProvider); 
+  print('token: ${ref.read(buildvuTokenProvider)}');
   request.fields['input'] = 'upload';
 
   // Add the file to the form data

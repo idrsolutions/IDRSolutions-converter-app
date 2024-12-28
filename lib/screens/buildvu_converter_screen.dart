@@ -138,7 +138,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                   
                   const SizedBox(height: 20,),
                   ColorfulBgBtn(
-                    onPressed: () => connectBuildVuCloud(), 
+                    onPressed: () => connectBuildVuCloud(ref), 
                     child: StyledTitleWhite(text: 'CONVERT'),
                   ),
                 ],
