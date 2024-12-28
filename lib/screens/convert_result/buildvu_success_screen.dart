@@ -1,18 +1,33 @@
 import 'package:converter/providers/file_formats_provider.dart';
+import 'package:converter/providers/files_provider.dart';
 import 'package:converter/themes/buttons.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/converter_theme.dart';
 import 'package:converter/themes/texts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BuildvuSuccessScreen extends ConsumerWidget {
   const BuildvuSuccessScreen({super.key});
+
+  _launchURL(String? convertedFilePreviewURL) async {
+    if(convertedFilePreviewURL == null || convertedFilePreviewURL.isEmpty){
+      print('preview url is null or empty');
+      return;
+    }
+
+    final Uri url = Uri.parse(convertedFilePreviewURL);
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final originalFormat = ref.watch(originalBuildVuFileFormatProvider);
     final convertedFormat = ref.watch(convertedBuildVuFileFormatProvider);
+    final convertedFilePreviewURL = ref.watch(convertedFileProvider).previewURL;
     
     return Theme(
       data: ConverterTheme(color: AppColors.buildvuPrimary).converterTheme, 
@@ -52,7 +67,9 @@ class BuildvuSuccessScreen extends ConsumerWidget {
                       Wrap(
                         children: [
                           WhiteBgBtn(
-                            onPressed: (){}, 
+                            onPressed: (){
+                              _launchURL(convertedFilePreviewURL);
+                            }, 
                             child: StyledTitleBuildVu(text: 'Preview Online'),
                           ),
                           const SizedBox(width: 10,),

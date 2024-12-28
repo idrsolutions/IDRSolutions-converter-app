@@ -1,5 +1,6 @@
 import 'package:converter/components/single_file_picker.dart';
 import 'package:converter/providers/file_formats_provider.dart';
+import 'package:converter/screens/convert_result/buildvu_success_screen.dart';
 import 'package:converter/themes/buttons.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/converter_theme.dart';
@@ -138,7 +139,10 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                   
                   const SizedBox(height: 20,),
                   ColorfulBgBtn(
-                    onPressed: () => connectBuildVuCloud(ref), 
+                    onPressed: () {
+                      connectBuildVuCloud(ref);
+                      Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildvuSuccessScreen()));
+                    }, 
                     child: StyledTitleWhite(text: 'CONVERT'),
                   ),
                 ],

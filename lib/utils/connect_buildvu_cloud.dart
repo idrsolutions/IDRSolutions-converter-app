@@ -65,8 +65,10 @@ void connectBuildVuCloud(WidgetRef ref) async {
       }
       final Map<String, dynamic> pollData = convert.jsonDecode(await pollResponse.stream.bytesToString());
       if (pollData['state'] == "processed") {
-        print("Preview URL: ${pollData['previewUrl']}");
-        print("Download URL: ${pollData['downloadUrl']}");
+        ref.read(convertedFileProvider.notifier).updateFile(previewURL: pollData['previewUrl'],);
+        print("Preview URL: ${ref.watch(convertedFileProvider).previewURL}");
+        ref.read(convertedFileProvider.notifier).updateFile(downloadURL: pollData['downloadUrl'],);
+        print("Download URL: ${ref.watch(convertedFileProvider).downloadURL}");
         break;
       } else {
         print("Polling: ${pollData['state']}");
