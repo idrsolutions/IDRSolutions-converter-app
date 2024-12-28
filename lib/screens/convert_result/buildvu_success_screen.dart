@@ -11,13 +11,13 @@ import 'package:url_launcher/url_launcher.dart';
 class BuildvuSuccessScreen extends ConsumerWidget {
   const BuildvuSuccessScreen({super.key});
 
-  _launchURL(String? convertedFilePreviewURL) async {
-    if(convertedFilePreviewURL == null || convertedFilePreviewURL.isEmpty){
+  _launchURL(String? convertedFileURL) async {
+    if(convertedFileURL == null || convertedFileURL.isEmpty){
       print('preview url is null or empty');
       return;
     }
 
-    final Uri url = Uri.parse(convertedFilePreviewURL);
+    final Uri url = Uri.parse(convertedFileURL);
     if (!await launchUrl(url)) {
       throw Exception('Could not launch $url');
     }
@@ -28,6 +28,7 @@ class BuildvuSuccessScreen extends ConsumerWidget {
     final originalFormat = ref.watch(originalBuildVuFileFormatProvider);
     final convertedFormat = ref.watch(convertedBuildVuFileFormatProvider);
     final convertedFilePreviewURL = ref.watch(convertedFileProvider).previewURL;
+    final convertedFileDownloadURL = ref.watch(convertedFileProvider).downloadURL;
     
     return Theme(
       data: ConverterTheme(color: AppColors.buildvuPrimary).converterTheme, 
@@ -75,7 +76,9 @@ class BuildvuSuccessScreen extends ConsumerWidget {
                           const SizedBox(width: 10,),
 
                           WhiteBgBtn(
-                            onPressed: (){}, 
+                            onPressed: (){
+                              _launchURL(convertedFileDownloadURL);
+                            }, 
                             child: StyledTitleBuildVu(text: 'Download Zip'),
                           ),
                           const SizedBox(width: 10,),
