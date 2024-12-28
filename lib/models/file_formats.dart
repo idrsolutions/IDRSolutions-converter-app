@@ -18,7 +18,8 @@ class OriginalFile{
   final String? textMode; 
 
   // copy constructor to create a new instance with updated values
-  OriginalFile copyWith({String? path, 
+  OriginalFile copyWith({
+    String? path, 
     String? password, 
     double? scale, 
     bool? isToEmbed, 
@@ -33,6 +34,26 @@ class OriginalFile{
         isInlineSVG: isInlineSVG ?? this.isInlineSVG,
         ui: ui ?? this.ui,
         textMode: textMode ?? this.textMode,
+      );
+    }
+}
+
+class ConvertedFile{
+  const ConvertedFile({
+    this.previewURL,
+    this.downloadURL,
+  });
+  
+  final String? previewURL;
+  final String? downloadURL; 
+
+  // copy constructor to create a new instance with updated values
+  ConvertedFile copyWith({
+    String? previewURL,
+    String? downloadURL}){
+      return ConvertedFile(
+        previewURL: previewURL ?? this.previewURL,
+        downloadURL: downloadURL ?? this.downloadURL,
       );
     }
 }

@@ -1,4 +1,4 @@
-import 'package:converter/models/file_format.dart';
+import 'package:converter/models/file_formats.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class OriginalFileNotifier extends Notifier<OriginalFile>{
@@ -31,4 +31,27 @@ class OriginalFileNotifier extends Notifier<OriginalFile>{
 // default path
 final originalFileProvider = NotifierProvider<OriginalFileNotifier, OriginalFile>((){
   return OriginalFileNotifier();
+});
+
+
+class ConvertedFileNotifier extends Notifier<ConvertedFile>{
+  @override
+  ConvertedFile build() {
+    return const ConvertedFile();
+  }
+
+  void updateFile({
+    String? previewURL,
+    String? downloadURL}){
+      // update the file
+      state = state.copyWith(
+        previewURL: previewURL ?? state.previewURL,
+        downloadURL: downloadURL ?? state.downloadURL,
+      );
+    }
+}
+
+// default path
+final convertedFileProvider = NotifierProvider<ConvertedFileNotifier, ConvertedFile>((){
+  return ConvertedFileNotifier();
 });
