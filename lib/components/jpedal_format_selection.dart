@@ -1,3 +1,4 @@
+import 'package:converter/components/clickable_logo.dart';
 import 'package:converter/models/conversion_formats.dart';
 import 'package:converter/themes/buttons.dart';
 import 'package:converter/themes/colors.dart';
@@ -57,7 +58,7 @@ class _JPedalFormatSelectionState extends State<JPedalFormatSelection> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Image.asset('assets/images/poweredbyjpedal.png'),
+            ClickableLogo(logoPath: 'assets/images/poweredbyjpedal.png', myURL: 'https://www.idrsolutions.com/jpedal/'),
             ColorfulBgBtn(
               color: AppColors.jpedalPrimary,
               onPressed: (){},

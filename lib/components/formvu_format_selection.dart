@@ -1,3 +1,4 @@
+import 'package:converter/components/clickable_logo.dart';
 import 'package:converter/models/conversion_formats.dart';
 import 'package:converter/themes/buttons.dart';
 import 'package:converter/themes/colors.dart';
@@ -57,7 +58,7 @@ class _FormVuFormatSelectionState extends State<FormVuFormatSelection> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Image.asset('assets/images/poweredbyformvu.png'),
+            ClickableLogo(logoPath: 'assets/images/poweredbyformvu.png', myURL: 'https://www.idrsolutions.com/formvu/'),
             ColorfulBgBtn(
               color: AppColors.formvuPrimary,
               onPressed: (){},

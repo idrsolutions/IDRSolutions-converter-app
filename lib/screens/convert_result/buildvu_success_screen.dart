@@ -1,3 +1,4 @@
+import 'package:converter/components/clickable_logo.dart';
 import 'package:converter/providers/file_formats_provider.dart';
 import 'package:converter/providers/files_provider.dart';
 import 'package:converter/themes/buttons.dart';
@@ -47,7 +48,7 @@ class BuildvuSuccessScreen extends ConsumerWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image.asset('assets/images/poweredbybuildvu.png'),
+                      ClickableLogo(logoPath: 'assets/images/poweredbybuildvu.png', myURL: 'https://www.idrsolutions.com/buildvu/'),
 
                       const SizedBox(height: 20,),
                       StyledHeading(text: 'Your file is sucessfully converted!'),

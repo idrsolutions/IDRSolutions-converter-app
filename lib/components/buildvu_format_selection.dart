@@ -1,3 +1,4 @@
+import 'package:converter/components/clickable_logo.dart';
 import 'package:converter/models/conversion_formats.dart';
 import 'package:converter/providers/file_formats_provider.dart';
 import 'package:converter/screens/token/buildvu_token_screen.dart';
@@ -5,6 +6,7 @@ import 'package:converter/themes/buttons.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/dropdowns.dart';
 import 'package:converter/themes/texts.dart';
+import 'package:converter/utils/launch_url.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -71,7 +73,7 @@ class _BuildVuFormatSelectionState extends ConsumerState<BuildVuFormatSelection>
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Image.asset('assets/images/poweredbybuildvu.png'),
+            ClickableLogo(logoPath: 'assets/images/poweredbybuildvu.png', myURL: 'https://www.idrsolutions.com/buildvu/'),
             ColorfulBgBtn(
               color: AppColors.buildvuPrimary,
               onPressed: (){
