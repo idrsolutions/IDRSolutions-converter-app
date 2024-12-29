@@ -1,5 +1,6 @@
 import 'package:converter/components/single_file_picker.dart';
 import 'package:converter/providers/file_formats_provider.dart';
+import 'package:converter/providers/files_provider.dart';
 import 'package:converter/screens/convert_result/buildvu_success_screen.dart';
 import 'package:converter/themes/buttons.dart';
 import 'package:converter/themes/colors.dart';
@@ -21,6 +22,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
   Widget build(BuildContext context) {
     final originalFormat = ref.watch(originalBuildVuFileFormatProvider);
     final convertedFormat = ref.watch(convertedBuildVuFileFormatProvider);
+    final originalFile = ref.watch(originalFileProvider);
 
     return Theme(
       data: ConverterTheme(color: AppColors.buildvuPrimary).converterTheme, 
@@ -140,8 +142,18 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                   const SizedBox(height: 20,),
                   ColorfulBgBtn(
                     onPressed: () {
-                      connectBuildVuCloud(ref);
-                      Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildvuSuccessScreen()));
+                      // check if no file
+                      if(originalFile.path.isEmpty){
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Please select a file'),
+                            duration: Duration(seconds: 1),
+                          ),
+                        );
+                      }else{
+                        connectBuildVuCloud(ref);
+                        Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildvuSuccessScreen()));
+                      }
                     }, 
                     child: StyledTitleWhite(text: 'CONVERT'),
                   ),
