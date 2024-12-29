@@ -19,6 +19,8 @@ class BuildVuConverterScreen extends ConsumerStatefulWidget {
 }
 
 class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen> {
+  bool _isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     final originalFormat = ref.watch(originalBuildVuFileFormatProvider);
@@ -152,13 +154,23 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                           ),
                         );
                       }else{
+                        setState(() {
+                          _isLoading = true;
+                        });
+                        
                         await connectBuildVuCloud(ref);
                         final updatedResponse = ref.read(requestResponseProvider);
                         switch(updatedResponse.code){
                           case 200:
+                            setState(() {
+                              _isLoading = false;
+                            });
                             Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildvuSuccessScreen()));
                             break;
                           case 403:
+                            setState(() {
+                              _isLoading = false;
+                            });
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Text("Access denied. Please check if you put in the correct token."),
@@ -167,6 +179,9 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                             );
                             break;
                           default:
+                            setState(() {
+                              _isLoading = false;
+                            });
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(updatedResponse.content!),
@@ -179,6 +194,10 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                     }, 
                     child: StyledTitleWhite(text: 'CONVERT'),
                   ),
+                  if(_isLoading)
+                    CircularProgressIndicator(
+                      color: AppColors.dimmedBlack,
+                    ),
                 ],
               ),
             ),
