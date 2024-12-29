@@ -1,6 +1,7 @@
 import 'package:converter/components/single_file_picker.dart';
 import 'package:converter/providers/file_formats_provider.dart';
 import 'package:converter/providers/files_provider.dart';
+import 'package:converter/providers/response_provider.dart';
 import 'package:converter/screens/convert_result/buildvu_success_screen.dart';
 import 'package:converter/themes/buttons.dart';
 import 'package:converter/themes/colors.dart';
@@ -23,6 +24,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
     final originalFormat = ref.watch(originalBuildVuFileFormatProvider);
     final convertedFormat = ref.watch(convertedBuildVuFileFormatProvider);
     final originalFile = ref.watch(originalFileProvider);
+    final requestResponse = ref.watch(requestResponseProvider);
 
     return Theme(
       data: ConverterTheme(color: AppColors.buildvuPrimary).converterTheme, 
@@ -152,7 +154,19 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                         );
                       }else{
                         connectBuildVuCloud(ref);
-                        Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildvuSuccessScreen()));
+                        switch(requestResponse.code){
+                          case 200:
+                            Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildvuSuccessScreen()));
+                            break;
+                          case 403:
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Access denied. Please check if you put in the correct token."),
+                                duration: Duration(seconds: 1),
+                              ),
+                            );
+                            break;
+                        }
                       }
                     }, 
                     child: StyledTitleWhite(text: 'CONVERT'),

@@ -40,15 +40,14 @@ void connectBuildVuCloud(WidgetRef ref) async {
   try {
     final response = await request.send();
     requestResponse.updateRequestResponse(code: response.statusCode);
+    final responseBody = await response.stream.bytesToString();
+    requestResponse.updateRequestResponse(content: responseBody);
 
     if (response.statusCode != 200) {
       print('Error uploading file: ${response.statusCode}');
       // exit(1);
     }
     
-    final responseBody = await response.stream.bytesToString();
-    requestResponse.updateRequestResponse(content: responseBody);
-
     final Map<String, dynamic> responseData = convert.jsonDecode(responseBody);
     uuid = responseData['uuid'];
     print('File uploaded successfully!');
