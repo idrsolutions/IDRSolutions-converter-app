@@ -1,3 +1,4 @@
+import 'package:converter/components/overlay_progress_circle.dart';
 import 'package:converter/components/single_file_picker.dart';
 import 'package:converter/providers/file_formats_provider.dart';
 import 'package:converter/providers/files_provider.dart';
@@ -19,7 +20,7 @@ class BuildVuConverterScreen extends ConsumerStatefulWidget {
 }
 
 class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen> {
-  bool _isLoading = false;
+  OverlayEntry? _overlayProgressCircle;
 
   @override
   Widget build(BuildContext context) {
@@ -154,50 +155,41 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                           ),
                         );
                       }else{
-                        setState(() {
-                          _isLoading = true;
-                        });
+                        _overlayProgressCircle = OverlayProgressCircle.createOverlayProgressCircle();
+                        Overlay.of(context).insert(_overlayProgressCircle!);
                         
-                        await connectBuildVuCloud(ref);
-                        final updatedResponse = ref.read(requestResponseProvider);
-                        switch(updatedResponse.code){
-                          case 200:
-                            setState(() {
-                              _isLoading = false;
-                            });
-                            Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildvuSuccessScreen()));
-                            break;
-                          case 403:
-                            setState(() {
-                              _isLoading = false;
-                            });
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Access denied. Please check if you put in the correct token."),
-                                duration: Duration(seconds: 2),
-                              ),
-                            );
-                            break;
-                          default:
-                            setState(() {
-                              _isLoading = false;
-                            });
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(updatedResponse.content!),
-                                duration: Duration(seconds: 2),
-                              ),
-                            );
-                            break;
+                        try{
+                          await connectBuildVuCloud(ref);
+                          final updatedResponse = ref.read(requestResponseProvider);
+                          switch(updatedResponse.code){
+                            case 200:
+                              Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildvuSuccessScreen()));
+                              break;
+                            case 403:
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text("Access denied. Please check if you put in the correct token."),
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+                              break;
+                            default:
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(updatedResponse.content!),
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+                              break;
+                          }
+                        }finally{
+                          _overlayProgressCircle?.remove();
+                          _overlayProgressCircle = null;
                         }
-                      }
+                      } 
                     }, 
                     child: StyledTitleWhite(text: 'CONVERT'),
                   ),
-                  if(_isLoading)
-                    CircularProgressIndicator(
-                      color: AppColors.dimmedBlack,
-                    ),
                 ],
               ),
             ),
