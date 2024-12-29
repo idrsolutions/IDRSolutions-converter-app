@@ -7,8 +7,8 @@ class OriginalFileNotifier extends Notifier<OriginalFile>{
     return const OriginalFile(path: '');
   }
 
-  void updateFile(
-    {String? path, 
+  void updateFile({
+    String? path, 
     String? password, 
     double? scale, 
     bool? isToEmbed, 
@@ -28,7 +28,7 @@ class OriginalFileNotifier extends Notifier<OriginalFile>{
     }
 }
 
-// default path
+// default file
 final originalFileProvider = NotifierProvider<OriginalFileNotifier, OriginalFile>((){
   return OriginalFileNotifier();
 });
@@ -51,7 +51,7 @@ class ConvertedFileNotifier extends Notifier<ConvertedFile>{
     }
 }
 
-// default path
+// default file
 final convertedFileProvider = NotifierProvider<ConvertedFileNotifier, ConvertedFile>((){
   return ConvertedFileNotifier();
 });
