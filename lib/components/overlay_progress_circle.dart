@@ -7,14 +7,15 @@ class OverlayProgressCircle {
   static OverlayEntry createOverlayProgressCircle(){
     return OverlayEntry(
       builder: (BuildContext context){
-        return Positioned(
-          top: 100,
+        return Center(
           child: Material(
             elevation: 4.0,
+            color: Colors.transparent,
+            shadowColor: Colors.transparent,
             child: CircularProgressIndicator(
               color: AppColors.dimmedBlack,
             ),
-          )
+          ),
         );
       }
     );
