@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:converter/providers/files_provider.dart';
+import 'package:converter/providers/response_provider.dart';
 import 'package:converter/providers/tokens_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -9,17 +10,15 @@ import 'dart:convert' as convert;
 
 void connectBuildVuCloud(WidgetRef ref) async {
   print('connectBuildVuCloud()!');
-
+  
+  final requestResponse = ref.read(requestResponseProvider.notifier);
   final apiUrl = 'https://cloud.idrsolutions.com/cloud/buildvu';
   final filePath = ref.read(originalFileProvider).path;
-  print('filePath: $filePath');
-
   final file = File(filePath);
 
   // Prepare the request headers and form data
   final request = http.MultipartRequest('POST', Uri.parse(apiUrl));
   request.fields['token'] = ref.read(buildvuTokenProvider); 
-  print('token: ${ref.read(buildvuTokenProvider)}');
   request.fields['input'] = 'upload';
 
   // Add the file to the form data
@@ -40,19 +39,22 @@ void connectBuildVuCloud(WidgetRef ref) async {
   // Send the request to upload the file
   try {
     final response = await request.send();
+    requestResponse.updateRequestResponse(code: response.statusCode);
 
     if (response.statusCode != 200) {
       print('Error uploading file: ${response.statusCode}');
-      exit(1);
+      // exit(1);
     }
     
     final responseBody = await response.stream.bytesToString();
+    requestResponse.updateRequestResponse(content: responseBody);
+
     final Map<String, dynamic> responseData = convert.jsonDecode(responseBody);
     uuid = responseData['uuid'];
     print('File uploaded successfully!');
   } catch (e) {
     print('Error uploading file: $e');
-    exit(1);
+    // exit(1);
   }
 
   // Poll until done
@@ -61,7 +63,7 @@ void connectBuildVuCloud(WidgetRef ref) async {
       final pollResponse = await http.Request('GET', Uri.parse('$apiUrl?uuid=$uuid')).send();
       if (pollResponse.statusCode != 200) {
         print('Error Polling: ${pollResponse.statusCode}');
-        exit(1);
+        // exit(1);
       }
       final Map<String, dynamic> pollData = convert.jsonDecode(await pollResponse.stream.bytesToString());
       if (pollData['state'] == "processed") {
@@ -79,6 +81,6 @@ void connectBuildVuCloud(WidgetRef ref) async {
     }
   } catch (e) {
     print('Error polling file: $e');
-    exit(1);
+    // exit(1);
   }
 }
