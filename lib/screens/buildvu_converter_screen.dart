@@ -162,7 +162,15 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Text("Access denied. Please check if you put in the correct token."),
-                                duration: Duration(seconds: 1),
+                                duration: Duration(seconds: 2),
+                              ),
+                            );
+                            break;
+                          default:
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(updatedResponse.content!),
+                                duration: Duration(seconds: 2),
                               ),
                             );
                             break;
