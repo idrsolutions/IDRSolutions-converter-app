@@ -24,8 +24,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
     final originalFormat = ref.watch(originalBuildVuFileFormatProvider);
     final convertedFormat = ref.watch(convertedBuildVuFileFormatProvider);
     final originalFile = ref.watch(originalFileProvider);
-    final requestResponse = ref.watch(requestResponseProvider);
-
+  
     return Theme(
       data: ConverterTheme(color: AppColors.buildvuPrimary).converterTheme, 
       child: Scaffold(
@@ -143,7 +142,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                   
                   const SizedBox(height: 20,),
                   ColorfulBgBtn(
-                    onPressed: () {
+                    onPressed: () async {
                       // check if no file
                       if(originalFile.path.isEmpty){
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -153,8 +152,9 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                           ),
                         );
                       }else{
-                        connectBuildVuCloud(ref);
-                        switch(requestResponse.code){
+                        await connectBuildVuCloud(ref);
+                        final updatedResponse = ref.read(requestResponseProvider);
+                        switch(updatedResponse.code){
                           case 200:
                             Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildvuSuccessScreen()));
                             break;

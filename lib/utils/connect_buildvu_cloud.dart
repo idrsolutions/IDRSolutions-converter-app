@@ -8,9 +8,9 @@ import 'package:http_parser/http_parser.dart';
 import 'package:path/path.dart';
 import 'dart:convert' as convert;
 
-void connectBuildVuCloud(WidgetRef ref) async {
+Future<void> connectBuildVuCloud(WidgetRef ref) async {
   print('connectBuildVuCloud()!');
-  
+
   final requestResponse = ref.read(requestResponseProvider.notifier);
   final apiUrl = 'https://cloud.idrsolutions.com/cloud/buildvu';
   final filePath = ref.read(originalFileProvider).path;
@@ -18,7 +18,7 @@ void connectBuildVuCloud(WidgetRef ref) async {
 
   // Prepare the request headers and form data
   final request = http.MultipartRequest('POST', Uri.parse(apiUrl));
-  request.fields['token'] = ref.read(buildvuTokenProvider); 
+  request.fields['token'] = ref.read(buildvuTokenProvider);
   request.fields['input'] = 'upload';
 
   // Add the file to the form data
@@ -36,6 +36,7 @@ void connectBuildVuCloud(WidgetRef ref) async {
   ));
 
   late String uuid;
+
   // Send the request to upload the file
   try {
     final response = await request.send();
@@ -45,15 +46,15 @@ void connectBuildVuCloud(WidgetRef ref) async {
 
     if (response.statusCode != 200) {
       print('Error uploading file: ${response.statusCode}');
-      // exit(1);
+      return; // Exit if upload fails
     }
-    
+
     final Map<String, dynamic> responseData = convert.jsonDecode(responseBody);
     uuid = responseData['uuid'];
     print('File uploaded successfully!');
   } catch (e) {
     print('Error uploading file: $e');
-    // exit(1);
+    return; // Exit if upload fails
   }
 
   // Poll until done
@@ -62,7 +63,7 @@ void connectBuildVuCloud(WidgetRef ref) async {
       final pollResponse = await http.Request('GET', Uri.parse('$apiUrl?uuid=$uuid')).send();
       if (pollResponse.statusCode != 200) {
         print('Error Polling: ${pollResponse.statusCode}');
-        // exit(1);
+        return; // Exit if polling fails
       }
       final Map<String, dynamic> pollData = convert.jsonDecode(await pollResponse.stream.bytesToString());
       if (pollData['state'] == "processed") {
@@ -80,6 +81,6 @@ void connectBuildVuCloud(WidgetRef ref) async {
     }
   } catch (e) {
     print('Error polling file: $e');
-    // exit(1);
+    return; // Exit if polling fails
   }
 }
