@@ -41,8 +41,8 @@ class _BuildVuFormatSelectionState extends ConsumerState<BuildVuFormatSelection>
                 dropdownMenuEntries: BuildVuOriginalFormats.entries,
                 onChanged: (newValue){
                   if(newValue != null) {
-                    ref.read(originalBuildVuFileFormatProvider.notifier).state = newValue.name;
-                    print(ref.read(originalBuildVuFileFormatProvider.notifier).state);
+                    ref.read(buildvuOriginalFileFormatProvider.notifier).state = newValue.name;
+                    print(ref.read(buildvuOriginalFileFormatProvider.notifier).state);
                   }
                 },
               ),
@@ -59,7 +59,7 @@ class _BuildVuFormatSelectionState extends ConsumerState<BuildVuFormatSelection>
                 dropdownMenuEntries: BuildVuConvertedFormats.entries,
                 onChanged: (newValue){
                   if(newValue != null) {
-                    ref.read(convertedBuildVuFileFormatProvider.notifier).state = newValue.name;
+                    ref.read(buildvuConvertedFileFormatProvider.notifier).state = newValue.name;
                   }
                 },
               ),

@@ -14,8 +14,8 @@ class BuildvuSuccessScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final originalFormat = ref.watch(originalBuildVuFileFormatProvider);
-    final convertedFormat = ref.watch(convertedBuildVuFileFormatProvider);
+    final originalFormat = ref.watch(buildvuOriginalFileFormatProvider);
+    final convertedFormat = ref.watch(buildvuConvertedFileFormatProvider);
     final convertedFilePreviewURL = ref.watch(convertedFileProvider).previewURL;
     final convertedFileDownloadURL = ref.watch(convertedFileProvider).downloadURL;
     

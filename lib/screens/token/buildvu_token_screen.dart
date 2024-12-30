@@ -15,8 +15,8 @@ class BuildvuTokenScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final originalFormat = ref.watch(originalBuildVuFileFormatProvider);
-    final convertedFormat = ref.watch(convertedBuildVuFileFormatProvider);
+    final originalFormat = ref.watch(buildvuOriginalFileFormatProvider);
+    final convertedFormat = ref.watch(buildvuConvertedFileFormatProvider);
     final tokenNotifier = ref.read(buildvuTokenProvider.notifier);
     final tokenProvider = ref.watch(buildvuTokenProvider);
     
