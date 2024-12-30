@@ -1,4 +1,4 @@
-import 'package:converter/models/file_formats.dart';
+import 'package:converter/models/file_details.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class BuildVuOriginalFileNotifier extends Notifier<BuildVuOriginalFile>{

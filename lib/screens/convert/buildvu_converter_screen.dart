@@ -1,7 +1,7 @@
 import 'package:converter/components/overlay_progress_circle.dart';
 import 'package:converter/components/single_file_picker.dart';
 import 'package:converter/providers/file_formats_provider.dart';
-import 'package:converter/providers/files_provider.dart';
+import 'package:converter/providers/file_details_provider.dart';
 import 'package:converter/providers/response_provider.dart';
 import 'package:converter/screens/convert_result/buildvu_success_screen.dart';
 import 'package:converter/themes/buttons.dart';
@@ -166,7 +166,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                           // if the file is NOT the desired format, warn user
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              content: Text('Please check your file format'),
+                              content: Text('Wrong file type'),
                               duration: Duration(seconds: 1),
                             ),
                           );

@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:converter/providers/files_provider.dart';
+import 'package:converter/providers/file_details_provider.dart';
 import 'package:converter/providers/response_provider.dart';
 import 'package:converter/providers/tokens_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
