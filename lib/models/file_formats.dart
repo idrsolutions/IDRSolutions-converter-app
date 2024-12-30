@@ -1,6 +1,7 @@
 class OriginalFile{
   const OriginalFile({
     required this.path,
+    this.format,
     this.password,
     this.scale,
     this.isToEmbed,
@@ -10,6 +11,7 @@ class OriginalFile{
   });
   
   final String path;
+  final String? format;
   final String? password;
   final double? scale;
   final bool? isToEmbed;
@@ -19,7 +21,8 @@ class OriginalFile{
 
   // copy constructor to create a new instance with updated values
   OriginalFile copyWith({
-    String? path, 
+    String? path,
+    String? format,
     String? password, 
     double? scale, 
     bool? isToEmbed, 
@@ -28,6 +31,7 @@ class OriginalFile{
     String? textMode}){
       return OriginalFile(
         path: path ?? this.path,
+        format: format ?? this.format,
         password: password ?? this.password,
         scale: scale ?? this.scale,
         isToEmbed: isToEmbed ?? this.isToEmbed,

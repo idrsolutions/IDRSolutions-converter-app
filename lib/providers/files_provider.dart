@@ -9,6 +9,7 @@ class OriginalFileNotifier extends Notifier<OriginalFile>{
 
   void updateFile({
     String? path, 
+    String? format, 
     String? password, 
     double? scale, 
     bool? isToEmbed, 
@@ -18,6 +19,7 @@ class OriginalFileNotifier extends Notifier<OriginalFile>{
       // update the file
       state = state.copyWith(
         path: path ?? state.path,
+        format: format ?? state.format,
         password: password ?? state.password,
         scale: scale ?? state.scale,
         isToEmbed: isToEmbed ?? state.isToEmbed,

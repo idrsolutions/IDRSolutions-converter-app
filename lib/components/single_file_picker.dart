@@ -37,6 +37,7 @@ class _SingleFilePickerState extends ConsumerState<SingleFilePicker> {
             _filePath = file.path;
           });
           ref.read(originalFileProvider.notifier).updateFile(path: file.path,);
+          ref.read(originalFileProvider.notifier).updateFile(format: fileFormat,);
         } else { 
           // if user-picked file format is NOT the selected original file format
           // warn user & update provider file path to empty

@@ -149,6 +149,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                     onPressed: () async {
                       // check if no file
                       if(originalFile.path.isEmpty){
+                        // if user has NOT selected a file, warn user
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Please select a file'),
@@ -156,36 +157,54 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                           ),
                         );
                       }else{
-                        _overlayProgressCircle = OverlayProgressCircle.createOverlayProgressCircle();
-                        Overlay.of(context).insert(_overlayProgressCircle!);
-                        
-                        try{
-                          await connectBuildVuCloud(ref);
-                          final updatedResponse = ref.read(requestResponseProvider);
-                          switch(updatedResponse.code){
-                            case 200:
-                              Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildvuSuccessScreen()));
-                              break;
-                            case 403:
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text("Access denied. Please check if you put in the correct token."),
-                                  duration: Duration(seconds: 2),
-                                ),
-                              );
-                              break;
-                            default:
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(updatedResponse.content!),
-                                  duration: Duration(seconds: 2),
-                                ),
-                              );
-                              break;
+                        // if user has selected a file,
+                        // check if the file is the desired format
+                        var appBarFormat = ref.read(originalBuildVuFileFormatProvider.notifier).state;
+                        var selectedFormat = ref.read(originalFileProvider).format;
+
+                        if(appBarFormat != selectedFormat){
+                          // if the file is NOT the desired format, warn user
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Please check your file format'),
+                              duration: Duration(seconds: 1),
+                            ),
+                          );
+                        }else{
+                          // if the file is the desired format
+                          // progress animation
+                          _overlayProgressCircle = OverlayProgressCircle.createOverlayProgressCircle();
+                          Overlay.of(context).insert(_overlayProgressCircle!);
+                          
+                          // convert
+                          try{
+                            await connectBuildVuCloud(ref);
+                            final updatedResponse = ref.read(requestResponseProvider);
+                            switch(updatedResponse.code){
+                              case 200:
+                                Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildvuSuccessScreen()));
+                                break;
+                              case 403:
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text("Access denied. Please check if you put in the correct token."),
+                                    duration: Duration(seconds: 2),
+                                  ),
+                                );
+                                break;
+                              default:
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(updatedResponse.content!),
+                                    duration: Duration(seconds: 2),
+                                  ),
+                                );
+                                break;
+                            }
+                          }finally{
+                            _overlayProgressCircle?.remove();
+                            _overlayProgressCircle = null;
                           }
-                        }finally{
-                          _overlayProgressCircle?.remove();
-                          _overlayProgressCircle = null;
                         }
                       } 
                     }, 
