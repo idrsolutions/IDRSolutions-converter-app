@@ -13,7 +13,7 @@ Future<void> connectBuildVuCloud(WidgetRef ref) async {
 
   final requestResponse = ref.read(requestResponseProvider.notifier);
   final apiUrl = 'https://cloud.idrsolutions.com/cloud/buildvu';
-  final filePath = ref.read(originalFileProvider).path;
+  final filePath = ref.read(buildvuOriginalFileProvider).path;
   final file = File(filePath);
 
   // Prepare the request headers and form data

@@ -26,7 +26,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
   Widget build(BuildContext context) {
     final originalFormat = ref.watch(originalBuildVuFileFormatProvider);
     final convertedFormat = ref.watch(convertedBuildVuFileFormatProvider);
-    final originalFile = ref.watch(originalFileProvider);
+    final originalFile = ref.watch(buildvuOriginalFileProvider);
   
     return Theme(
       data: ConverterTheme(color: AppColors.buildvuPrimary).converterTheme, 
@@ -160,7 +160,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                         // if user has selected a file,
                         // check if the file is the desired format
                         var appBarFormat = ref.read(originalBuildVuFileFormatProvider.notifier).state;
-                        var selectedFormat = ref.read(originalFileProvider).format;
+                        var selectedFormat = ref.read(buildvuOriginalFileProvider).format;
 
                         if(appBarFormat != selectedFormat){
                           // if the file is NOT the desired format, warn user

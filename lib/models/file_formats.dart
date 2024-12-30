@@ -1,5 +1,5 @@
-class OriginalFile{
-  const OriginalFile({
+class BuildVuOriginalFile{
+  const BuildVuOriginalFile({
     required this.path,
     this.format,
     this.password,
@@ -20,7 +20,7 @@ class OriginalFile{
   final String? textMode; 
 
   // copy constructor to create a new instance with updated values
-  OriginalFile copyWith({
+  BuildVuOriginalFile copyWith({
     String? path,
     String? format,
     String? password, 
@@ -29,7 +29,7 @@ class OriginalFile{
     bool? isInlineSVG,
     String? ui,
     String? textMode}){
-      return OriginalFile(
+      return BuildVuOriginalFile(
         path: path ?? this.path,
         format: format ?? this.format,
         password: password ?? this.password,

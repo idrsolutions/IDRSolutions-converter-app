@@ -1,10 +1,10 @@
 import 'package:converter/models/file_formats.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class OriginalFileNotifier extends Notifier<OriginalFile>{
+class BuildVuOriginalFileNotifier extends Notifier<BuildVuOriginalFile>{
   @override
-  OriginalFile build() {
-    return const OriginalFile(path: '');
+  BuildVuOriginalFile build() {
+    return const BuildVuOriginalFile(path: '');
   }
 
   void updateFile({
@@ -31,8 +31,8 @@ class OriginalFileNotifier extends Notifier<OriginalFile>{
 }
 
 // default file
-final originalFileProvider = NotifierProvider<OriginalFileNotifier, OriginalFile>((){
-  return OriginalFileNotifier();
+final buildvuOriginalFileProvider = NotifierProvider<BuildVuOriginalFileNotifier, BuildVuOriginalFile>((){
+  return BuildVuOriginalFileNotifier();
 });
 
 

@@ -36,8 +36,8 @@ class _SingleFilePickerState extends ConsumerState<SingleFilePicker> {
           setState(() {
             _filePath = file.path;
           });
-          ref.read(originalFileProvider.notifier).updateFile(path: file.path,);
-          ref.read(originalFileProvider.notifier).updateFile(format: fileFormat,);
+          ref.read(buildvuOriginalFileProvider.notifier).updateFile(path: file.path,);
+          ref.read(buildvuOriginalFileProvider.notifier).updateFile(format: fileFormat,);
         } else { 
           // if user-picked file format is NOT the selected original file format
           // warn user & update provider file path to empty
@@ -47,7 +47,7 @@ class _SingleFilePickerState extends ConsumerState<SingleFilePicker> {
               duration: Duration(seconds: 1),
             ),
           );
-          ref.read(originalFileProvider.notifier).updateFile(path: null,);
+          ref.read(buildvuOriginalFileProvider.notifier).updateFile(path: null,);
         }
       } else { // if user did NOT pick a file, ask user to pick a file
         if (_filePath.isEmpty) {
@@ -64,7 +64,7 @@ class _SingleFilePickerState extends ConsumerState<SingleFilePicker> {
 
   @override
   Widget build(BuildContext context) {
-    final fileProvider = ref.watch(originalFileProvider);
+    final fileProvider = ref.watch(buildvuOriginalFileProvider);
 
     return Column(
       children: [
