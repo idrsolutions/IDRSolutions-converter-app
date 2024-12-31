@@ -134,12 +134,13 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                       ),
 
                       const SizedBox(height: 20,),
-                      Row(
-                        children: [
-                          const StyledTitleSmall(text: 'placeholder tickbox'),
-                          const StyledTitleSmall(text: 'Inline SVGs'),
-                        ],
-                      ),
+                      if(convertedFormat != 'svg')
+                        Row(
+                          children: [
+                            const StyledTitleSmall(text: 'placeholder tickbox'),
+                            const StyledTitleSmall(text: 'Inline SVGs'),
+                          ],
+                        ),
 
                       const SizedBox(height: 20,),
                       const StyledTitleSmall(text: '*Q&A'),
