@@ -184,14 +184,6 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                               case 200:
                                 Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildvuSuccessScreen()));
                                 break;
-                              case 403:
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text("Access denied. Please check if you put in the correct token."),
-                                    duration: Duration(seconds: 2),
-                                  ),
-                                );
-                                break;
                               default:
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
