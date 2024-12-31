@@ -1,8 +1,11 @@
 import 'package:converter/components/JPedal_format_selection.dart';
 import 'package:converter/components/buildvu_format_selection.dart';
 import 'package:converter/components/formvu_format_selection.dart';
+import 'package:converter/themes/buttons.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/converter_theme.dart';
+import 'package:converter/themes/texts.dart';
+import 'package:converter/utils/launch_url.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -38,6 +41,14 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 50,),
             
                 FormVuFormatSelection(),
+
+                const SizedBox(height: 50,),
+
+                ColorfulBgBtn(
+                  onPressed: (){
+                    launchURL("https://www.idrsolutions.com/contact-us");
+                  }, 
+                  child: StyledTitleWhite(text: 'CONTACT US'))
               ],
             ),
           ),
