@@ -4,6 +4,7 @@ import 'package:converter/providers/file_formats_provider.dart';
 import 'package:converter/providers/file_details_provider.dart';
 import 'package:converter/providers/response_provider.dart';
 import 'package:converter/screens/convert_result/buildvu_success_screen.dart';
+import 'package:converter/screens/others/why_buildvu_screen.dart';
 import 'package:converter/themes/buttons.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/converter_theme.dart';
@@ -62,7 +63,9 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                       
                       Flexible(
                         child: WhiteBgBtn(
-                          onPressed: (){},
+                          onPressed: (){
+                            Navigator.push(context,MaterialPageRoute(builder: (context) => const WhyBuildVuScreen()),);
+                          },
                           child: const StyledTitle(text: 'Why BuildVu?'),
                         ),
                       ),
