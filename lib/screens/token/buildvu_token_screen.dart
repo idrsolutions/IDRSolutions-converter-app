@@ -4,7 +4,7 @@ import 'package:converter/screens/convert/buildvu_converter_screen.dart';
 import 'package:converter/themes/buttons.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/converter_theme.dart';
-import 'package:converter/themes/text_fields.dart';
+import 'package:converter/components/text_fields.dart';
 import 'package:converter/themes/texts.dart';
 import 'package:converter/utils/launch_url.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +50,7 @@ class BuildvuTokenScreen extends ConsumerWidget {
                 StyledText(text: "*The token is at the end of your received trial link", color: AppColors.dimmedBlack,),
                 
                 // token text field
-                StyledTextField(
+                TokenTextField(
                   onChanged: (newVal) {
                     tokenNotifier.updateToken(newVal);
                   },

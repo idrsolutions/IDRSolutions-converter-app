@@ -1,5 +1,6 @@
 import 'package:converter/components/overlay_progress_circle.dart';
 import 'package:converter/components/single_file_picker.dart';
+import 'package:converter/components/text_fields.dart';
 import 'package:converter/providers/file_formats_provider.dart';
 import 'package:converter/providers/file_details_provider.dart';
 import 'package:converter/providers/response_provider.dart';
@@ -93,13 +94,13 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                             Column(
                               children: [
                                 const StyledTitleSmall(text: 'PDF Password'),
-                                const StyledTitleSmall(text: 'placeholder textbox'),
+                                RectangleTextField(isObscureText: true,),
                               ],
                             ),
+                          Spacer(),
                           Column(
                             children: [
                               const StyledTitleSmall(text: 'Image Scale'),
-                              const StyledTitleSmall(text: 'placeholder textbox'),
                             ],
                           ),
                           
