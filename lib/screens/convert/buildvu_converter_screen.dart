@@ -23,6 +23,8 @@ class BuildVuConverterScreen extends ConsumerStatefulWidget {
 
 class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen> {
   OverlayEntry? _overlayProgressCircle;
+  final _pdfPasswordController = TextEditingController();
+  final _imageScaleController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -94,13 +96,43 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                             Column(
                               children: [
                                 const StyledTitleSmall(text: 'PDF Password'),
-                                RectangleTextField(isObscureText: true,),
+                                RectangleTextField(
+                                  isObscureText: true,
+                                  controller: _pdfPasswordController,
+                                ),
                               ],
                             ),
                           Spacer(),
                           Column(
                             children: [
                               const StyledTitleSmall(text: 'Image Scale'),
+                              RectangleTextField(
+                                keyboardType: TextInputType.number,
+                                controller: _imageScaleController,
+                                onChanged:(val){
+                                  if (val.isNotEmpty) {
+                                    try{
+                                      // attempt to parse the value to a double
+                                      double parsedVal = double.parse(val);
+
+                                      // limit user input range
+                                      if(parsedVal>10.0) {
+                                        _imageScaleController.text = "10.0";
+                                      }else if(parsedVal<0){
+                                        _imageScaleController.text = "0";
+                                      }
+                                    }catch(e){
+                                      // if parse failed, warn user to put in double 
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(
+                                          content: Text('Invalid input. Please put in numbers between 1-10'),
+                                          duration: Duration(seconds: 2),
+                                        ),
+                                      );
+                                    }
+                                  }
+                                },
+                              ),
                             ],
                           ),
                           
