@@ -1,3 +1,4 @@
+import 'package:converter/components/checkbox.dart';
 import 'package:converter/components/dropdowns.dart';
 import 'package:converter/components/overlay_progress_circle.dart';
 import 'package:converter/components/single_file_picker.dart';
@@ -30,6 +31,8 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
   final _imageScaleController = TextEditingController();
   final _idrViewerUIController = TextEditingController();
   final _textModeController = TextEditingController();
+  bool isEmbedImgChecked = false;
+  bool isInlineSVGChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +183,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                       const SizedBox(height: 20,),
                       Row(
                         children: [
-                          const StyledTitleSmall(text: 'placeholder tickbox'),
+                          StyledCheckbox(isChecked: isEmbedImgChecked),
                           const StyledTitleSmall(text: 'Embed Images as Base64'),
                         ],
                       ),
@@ -189,13 +192,10 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                       if(convertedFormat != 'svg')
                         Row(
                           children: [
-                            const StyledTitleSmall(text: 'placeholder tickbox'),
+                            StyledCheckbox(isChecked: isInlineSVGChecked),
                             const StyledTitleSmall(text: 'Inline SVGs'),
                           ],
                         ),
-
-                      const SizedBox(height: 20,),
-                      const StyledTitleSmall(text: '*Q&A'),
                     ],
                   ),
                   
@@ -213,8 +213,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                           ),
                         );
                       }else{
-                        // if user has selected a file,
-                        // check if the file is the desired format
+                        // if user has selected a file, check if the file is the desired format
                         var appBarFormat = ref.read(buildvuOriginalFileFormatProvider.notifier).state;
                         var selectedFormat = ref.read(buildvuOriginalFileProvider).format;
 
@@ -227,8 +226,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                             ),
                           );
                         }else{
-                          // if the file is the desired format
-                          // progress animation
+                          // if the file is the desired format, progress animation
                           _overlayProgressCircle = OverlayProgressCircle.createOverlayProgressCircle();
                           Overlay.of(context).insert(_overlayProgressCircle!);
                           
