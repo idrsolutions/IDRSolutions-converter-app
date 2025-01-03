@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 class StyledDropdown<T> extends StatelessWidget {
   const StyledDropdown({
     super.key,
-    required this.label,
+    this.label,
     required this.initialSelection,
     required this.controller,
     required this.dropdownMenuEntries,
     required this.onChanged,
   });
 
-  final Widget label;
+  final Widget? label;
   final T initialSelection;
   final TextEditingController controller;
   final List<DropdownMenuEntry<T>> dropdownMenuEntries;

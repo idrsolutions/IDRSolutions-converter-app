@@ -1,6 +1,9 @@
+import 'package:converter/components/dropdowns.dart';
 import 'package:converter/components/overlay_progress_circle.dart';
 import 'package:converter/components/single_file_picker.dart';
 import 'package:converter/components/text_fields.dart';
+import 'package:converter/models/idrviewer_ui_formats.dart';
+import 'package:converter/models/text_mode_formats.dart';
 import 'package:converter/providers/file_formats_provider.dart';
 import 'package:converter/providers/file_details_provider.dart';
 import 'package:converter/providers/response_provider.dart';
@@ -25,6 +28,8 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
   OverlayEntry? _overlayProgressCircle;
   final _pdfPasswordController = TextEditingController();
   final _imageScaleController = TextEditingController();
+  final _idrViewerUIController = TextEditingController();
+  final _textModeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -146,13 +151,27 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                           Column(
                             children: [
                               const StyledTitleSmall(text: 'IDRViewer UI'),
-                              const StyledTitleSmall(text: 'placeholder textbox'),
+                              StyledDropdown(
+                                initialSelection: IDRViewerUIs.complete, 
+                                controller: _idrViewerUIController, 
+                                dropdownMenuEntries: IDRViewerUIs.entries, 
+                                onChanged: (newVal){
+                                  print(newVal);
+                                }
+                              ),
                             ],
                           ),
                           Column(
                             children: [
                               const StyledTitleSmall(text: 'Text Mode'),
-                              const StyledTitleSmall(text: 'placeholder textbox'),
+                              StyledDropdown(
+                                initialSelection: TextModes.real, 
+                                controller: _textModeController, 
+                                dropdownMenuEntries: TextModes.entries, 
+                                onChanged: (newVal){
+                                  print(newVal);
+                                }
+                              ),
                             ],
                           ),
                         ],
