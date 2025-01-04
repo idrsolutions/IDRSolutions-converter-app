@@ -20,6 +20,7 @@ class StyledDropdown<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownMenu(
+      width: 150,
       label: label,
       // dropdown items bg color
       menuStyle: MenuStyle(
@@ -34,6 +35,13 @@ class StyledDropdown<T> extends StatelessWidget {
         labelStyle: TextStyle(color: AppColors.dimmedBlack),
         enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColors.dimmedBlack,),),
         focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColors.dimmedBlack,),),
+        constraints: BoxConstraints.tight(const Size.fromHeight(30)),
+        contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+      ),
+      trailingIcon: Transform.translate(
+        offset: Offset(10, -9),
+        child: Icon(Icons.arrow_drop_down),
       ),
       onSelected: onChanged,
     );

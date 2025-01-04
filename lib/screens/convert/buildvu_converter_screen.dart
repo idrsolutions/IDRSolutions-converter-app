@@ -164,6 +164,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                               ),
                             ],
                           ),
+                          Spacer(),
                           Column(
                             children: [
                               const StyledTitleSmall(text: 'Text Mode'),
