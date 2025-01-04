@@ -7,6 +7,7 @@ import 'package:converter/models/idrviewer_ui_formats.dart';
 import 'package:converter/models/text_mode_formats.dart';
 import 'package:converter/providers/file_formats_provider.dart';
 import 'package:converter/providers/file_details_provider.dart';
+import 'package:converter/providers/polldata_state_provider.dart';
 import 'package:converter/providers/response_provider.dart';
 import 'package:converter/screens/convert_result/buildvu_success_screen.dart';
 import 'package:converter/screens/others/why_buildvu_screen.dart';
@@ -39,6 +40,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
     final originalFormat = ref.watch(buildvuOriginalFileFormatProvider);
     final convertedFormat = ref.watch(buildvuConvertedFileFormatProvider);
     final originalFile = ref.watch(buildvuOriginalFileProvider);
+    final pollDataNotifier = ref.watch(pollDataStateProvider.notifier);
   
     return Theme(
       data: ConverterTheme(color: AppColors.buildvuPrimary).converterTheme, 
@@ -233,20 +235,28 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                           
                           // convert
                           try{
-                            await connectBuildVuCloud(ref);
+                            await connectBuildVuCloud(ref, context);
                             final updatedResponse = ref.read(requestResponseProvider);
-                            switch(updatedResponse.code){
-                              case 200:
-                                Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildvuSuccessScreen()));
-                                break;
-                              default:
+                            if(updatedResponse.code != 200){
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(updatedResponse.content!),
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+                              return;
+                            }else{
+                              if(pollDataNotifier.state == "error"){
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                    content: Text(updatedResponse.content!),
+                                    content: Text("Can't convert. Please check your settings."),
                                     duration: Duration(seconds: 2),
                                   ),
                                 );
-                                break;
+                              return;
+                              }
+
+                              Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildvuSuccessScreen()));
                             }
                           }finally{
                             _overlayProgressCircle?.remove();
