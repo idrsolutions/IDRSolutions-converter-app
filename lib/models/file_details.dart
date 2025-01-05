@@ -4,7 +4,7 @@ class BuildVuOriginalFile{
     this.format,
     this.password,
     this.scale,
-    this.isToEmbed,
+    this.isEmbedImage,
     this.isInlineSVG,
     this.ui,
     this.textMode,
@@ -14,7 +14,7 @@ class BuildVuOriginalFile{
   final String? format;
   final String? password;
   final double? scale;
-  final bool? isToEmbed;
+  final bool? isEmbedImage;
   final bool? isInlineSVG;
   final String? ui;
   final String? textMode; 
@@ -25,7 +25,7 @@ class BuildVuOriginalFile{
     String? format,
     String? password, 
     double? scale, 
-    bool? isToEmbed, 
+    bool? isEmbedImage, 
     bool? isInlineSVG,
     String? ui,
     String? textMode}){
@@ -34,7 +34,7 @@ class BuildVuOriginalFile{
         format: format ?? this.format,
         password: password ?? this.password,
         scale: scale ?? this.scale,
-        isToEmbed: isToEmbed ?? this.isToEmbed,
+        isEmbedImage: isEmbedImage ?? this.isEmbedImage,
         isInlineSVG: isInlineSVG ?? this.isInlineSVG,
         ui: ui ?? this.ui,
         textMode: textMode ?? this.textMode,

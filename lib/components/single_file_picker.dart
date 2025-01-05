@@ -21,7 +21,7 @@ class SingleFilePicker extends ConsumerStatefulWidget {
 
 class _SingleFilePickerState extends ConsumerState<SingleFilePicker> {
   late String _filePath = ""; 
-
+  
   getFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 

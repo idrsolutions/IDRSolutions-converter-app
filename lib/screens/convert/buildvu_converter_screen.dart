@@ -40,6 +40,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
     final originalFormat = ref.watch(buildvuOriginalFileFormatProvider);
     final convertedFormat = ref.watch(buildvuConvertedFileFormatProvider);
     final originalFile = ref.watch(buildvuOriginalFileProvider);
+    final originalFileNotifier = ref.watch(buildvuOriginalFileProvider.notifier);
     final pollDataNotifier = ref.watch(pollDataStateProvider.notifier);
   
     return Theme(
@@ -98,6 +99,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                       const SizedBox(height: 20,),
                       const StyledTitle(text: 'Advanced Options (Optional)'),
 
+                      // password & image scale
                       const SizedBox(height: 5,),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,6 +111,9 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                                 RectangleTextField(
                                   isObscureText: true,
                                   controller: _pdfPasswordController,
+                                  onChanged: (_){
+                                    originalFileNotifier.updateFile(password: _pdfPasswordController.text);
+                                  },
                                 ),
                               ],
                             ),
@@ -145,10 +150,10 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                               ),
                             ],
                           ),
-                          
                         ],
                       ),
 
+                      // ui & text mode
                       const SizedBox(height: 5,),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -183,6 +188,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                         ],
                       ),
 
+                      // embed img
                       const SizedBox(height: 20,),
                       Row(
                         children: [
@@ -191,6 +197,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                         ],
                       ),
 
+                      // inline svg
                       const SizedBox(height: 20,),
                       if(convertedFormat != 'svg')
                         Row(
@@ -232,6 +239,16 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                           // if the file is the desired format, progress animation
                           _overlayProgressCircle = OverlayProgressCircle.createOverlayProgressCircle();
                           Overlay.of(context).insert(_overlayProgressCircle!);
+
+                          // // update advanced options
+                          // originalFileNotifier.updateFile(
+                          //   password: _pdfPasswordController.text,
+                          //   scale: double.parse(_imageScaleController.text),
+                          //   ui: _idrViewerUIController.text,
+                          //   textMode: _textModeController.text,
+                          //   isEmbedImage: isEmbedImgChecked,
+                          //   isInlineSVG: isInlineSVGChecked,
+                          // );
                           
                           // convert
                           try{
@@ -253,14 +270,23 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                                     duration: Duration(seconds: 2),
                                   ),
                                 );
-                              return;
+                                return;
                               }
-
                               Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildvuSuccessScreen()));
                             }
                           }finally{
                             _overlayProgressCircle?.remove();
                             _overlayProgressCircle = null;
+                            _pdfPasswordController.clear();
+                            // update advanced options
+                            originalFileNotifier.updateFile(
+                              password: "",
+                              scale:0,
+                              ui: "",
+                              textMode: "",
+                              isEmbedImage: false,
+                              isInlineSVG: false
+                            );
                           }
                         }
                       } 

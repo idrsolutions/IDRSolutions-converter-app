@@ -17,16 +17,17 @@ Future<void> connectBuildVuCloud(WidgetRef ref, BuildContext context) async {
   final apiUrl = 'https://cloud.idrsolutions.com/cloud/buildvu';
   final filePath = ref.read(buildvuOriginalFileProvider).path;
   final file = File(filePath);
-  // final settings = {
-  //   "org.jpedal.pdf2html.password": "123123"
-  // };
+  // final originalFile = ref.read(buildvuOriginalFileProvider.notifier);
+  final settings = {
+    "org.jpedal.pdf2html.password": ref.watch(buildvuOriginalFileProvider).password
+  };
 
   // Prepare the request headers and form data
-  // final settingsJson = convert.jsonEncode(settings);
+  final settingsJson = convert.jsonEncode(settings);
   final request = http.MultipartRequest('POST', Uri.parse(apiUrl));
   request.fields['token'] = ref.read(buildvuTokenProvider);
   request.fields['input'] = 'upload';
-  // request.fields['settings'] = settingsJson;
+  request.fields['settings'] = settingsJson;
 
   // Add the file to the form data
   final fileBytes = await file.readAsBytes();

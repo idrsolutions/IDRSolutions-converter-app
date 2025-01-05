@@ -12,7 +12,7 @@ class BuildVuOriginalFileNotifier extends Notifier<BuildVuOriginalFile>{
     String? format, 
     String? password, 
     double? scale, 
-    bool? isToEmbed, 
+    bool? isEmbedImage, 
     bool? isInlineSVG,
     String? ui,
     String? textMode}){
@@ -22,7 +22,7 @@ class BuildVuOriginalFileNotifier extends Notifier<BuildVuOriginalFile>{
         format: format ?? state.format,
         password: password ?? state.password,
         scale: scale ?? state.scale,
-        isToEmbed: isToEmbed ?? state.isToEmbed,
+        isEmbedImage: isEmbedImage ?? state.isEmbedImage,
         isInlineSVG: isInlineSVG ?? state.isInlineSVG,
         ui: ui ?? state.ui,
         textMode: textMode ?? state.textMode,
