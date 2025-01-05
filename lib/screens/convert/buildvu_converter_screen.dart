@@ -220,7 +220,15 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                       if(convertedFormat != 'svg')
                         Row(
                           children: [
-                            // StyledCheckbox(isChecked: isInlineSVGChecked),
+                            StyledCheckbox(
+                              isChecked: isInlineSVGChecked,
+                              onChanged: (newVal) {
+                                setState(() {
+                                  isInlineSVGChecked = newVal;
+                                });
+                                originalFileNotifier.updateFile(isInlineSVG:newVal);
+                              },
+                            ),
                             const StyledTitleSmall(text: 'Inline SVGs'),
                           ],
                         ),
@@ -283,11 +291,11 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                               Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildvuSuccessScreen()));
                             }
                           }finally{
+                            // clear animation
                             _overlayProgressCircle?.remove();
                             _overlayProgressCircle = null;
-                            _pdfPasswordController.clear();
-                            
                             // reset password
+                            _pdfPasswordController.clear();
                             originalFileNotifier.updateFile(password: "");
                           }
                         }

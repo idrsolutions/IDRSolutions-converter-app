@@ -23,6 +23,7 @@ Future<void> connectBuildVuCloud(WidgetRef ref, BuildContext context) async {
     "org.jpedal.pdf2html.viewerUI": ref.watch(buildvuOriginalFileProvider).ui,
     "org.jpedal.pdf2html.textMode": ref.watch(buildvuOriginalFileProvider).textMode,
     "org.jpedal.pdf2html.embedImagesAsBase64Stream": ref.watch(buildvuOriginalFileProvider).isEmbedImage,
+    "org.jpedal.pdf2html.inlineSVG": ref.watch(buildvuOriginalFileProvider).isInlineSVG,
   };
 
   // Prepare the request headers and form data
