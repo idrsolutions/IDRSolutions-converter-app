@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 typedef TextModesEntry = DropdownMenuEntry<TextModes>;
 
 enum TextModes {
-  real(
+  svgRealText(
     value: 'Real Text',
     label: 'Real Text'
   ),
-  shape(
+  svgShapeTextSelectable(
     value: 'Shape Text',
     label: 'Shape Text'
   );

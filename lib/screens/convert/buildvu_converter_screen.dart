@@ -29,7 +29,7 @@ class BuildVuConverterScreen extends ConsumerStatefulWidget {
 class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen> {
   OverlayEntry? _overlayProgressCircle;
   final _pdfPasswordController = TextEditingController();
-  final _imageScaleController = TextEditingController();
+  final _imageScaleController = TextEditingController(text: "1.0");
   final _idrViewerUIController = TextEditingController();
   final _textModeController = TextEditingController();
   bool isEmbedImgChecked = false;
@@ -182,11 +182,15 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                             children: [
                               const StyledTitleSmall(text: 'Text Mode'),
                               StyledDropdown(
-                                initialSelection: TextModes.real, 
+                                initialSelection: TextModes.svgRealText, 
                                 controller: _textModeController, 
                                 dropdownMenuEntries: TextModes.entries, 
                                 onChanged: (newVal){
-                                  print(newVal);
+                                  if(newVal.toString().split(".").last == "svgRealText"){
+                                    originalFileNotifier.updateFile(textMode: "svg_realtext");
+                                  }else{
+                                    originalFileNotifier.updateFile(textMode: "svg_shapetext_selectable");
+                                  }
                                 }
                               ),
                             ],
@@ -274,16 +278,9 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                             _overlayProgressCircle?.remove();
                             _overlayProgressCircle = null;
                             _pdfPasswordController.clear();
-                            _imageScaleController.clear();
                             
-                            // update advanced options
-                            originalFileNotifier.updateFile(
-                              password: "",
-                              scale:1,
-                              textMode: "",
-                              isEmbedImage: false,
-                              isInlineSVG: false
-                            );
+                            // reset password
+                            originalFileNotifier.updateFile(password: "");
                           }
                         }
                       } 
