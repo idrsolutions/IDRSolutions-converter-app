@@ -57,16 +57,25 @@ Future<void> connectBuildVuCloud(WidgetRef ref, BuildContext context) async {
     requestResponse.updateRequestResponse(content: responseBody);
 
     if (response.statusCode != 200) {
-      print('Error uploading file: ${response.statusCode}');
-      return; // Exit if upload fails
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error uploading file: ${response.statusCode}'),
+          duration: Duration(seconds: 1),
+        ),
+      );
+      return; 
     }
 
     final Map<String, dynamic> responseData = convert.jsonDecode(responseBody);
     uuid = responseData['uuid'];
-    print('File uploaded successfully!');
   } catch (e) {
-    print('Error uploading file: $e');
-    return; // Exit if upload fails
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Error uploading file: $e'),
+        duration: Duration(seconds: 1),
+      ),
+    );
+    return;
   }
 
   // Poll until done
@@ -76,8 +85,13 @@ Future<void> connectBuildVuCloud(WidgetRef ref, BuildContext context) async {
     while (true) {
       final pollResponse = await http.Request('GET', Uri.parse('$apiUrl?uuid=$uuid')).send();
       if (pollResponse.statusCode != 200) {
-        print('Error Polling: ${pollResponse.statusCode}');
-        return; // TODO: Gracefully prompt instead of exit if polling fails
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error Polling: ${pollResponse.statusCode}'),
+            duration: Duration(seconds: 1),
+          ),
+        );
+        return; 
       }
       final Map<String, dynamic> pollData = convert.jsonDecode(await pollResponse.stream.bytesToString());
       
@@ -86,21 +100,22 @@ Future<void> connectBuildVuCloud(WidgetRef ref, BuildContext context) async {
       
       if (pollData['state'] == "processed") {
         ref.read(convertedFileProvider.notifier).updateFile(previewURL: pollData['previewUrl'],);
-        print("Preview URL: ${ref.watch(convertedFileProvider).previewURL}");
         ref.read(convertedFileProvider.notifier).updateFile(downloadURL: pollData['downloadUrl'],);
-        print("Download URL: ${ref.watch(convertedFileProvider).downloadURL}");
         break;
       } else if (pollData['state'] == "error") {
-        return;// TODO: Gracefully prompt instead of exit if polling fails
-      } else {
-        print("Polling: ${pollData['state']}");
-      }
+        return;
+      } 
 
       // Wait for next poll
       await Future.delayed(Duration(seconds: 1));
     }
   } catch (e) {
-    print('Error polling file: $e');
-    return;// TODO: Gracefully prompt instead of exit if polling fails
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Error polling file: $e'),
+        duration: Duration(seconds: 1),
+      ),
+    );
+    return;
   }
 }
