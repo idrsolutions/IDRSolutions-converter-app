@@ -22,8 +22,8 @@ enum IDRViewerUIs {
     label: 'Slideshow'
   ),
   custom(
-    value: 'Custom (None)',
-    label: 'Custom (None)'
+    value: 'Custom (No index.html)',
+    label: 'Custom (No index.html)'
   );
 
   const IDRViewerUIs({

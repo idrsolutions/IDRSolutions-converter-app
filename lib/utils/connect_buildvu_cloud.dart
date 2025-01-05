@@ -17,10 +17,10 @@ Future<void> connectBuildVuCloud(WidgetRef ref, BuildContext context) async {
   final apiUrl = 'https://cloud.idrsolutions.com/cloud/buildvu';
   final filePath = ref.read(buildvuOriginalFileProvider).path;
   final file = File(filePath);
-  // final originalFile = ref.read(buildvuOriginalFileProvider.notifier);
   final settings = {
     "org.jpedal.pdf2html.password": ref.watch(buildvuOriginalFileProvider).password,
     "org.jpedal.pdf2html.imageScale": ref.watch(buildvuOriginalFileProvider).scale,
+    "org.jpedal.pdf2html.viewerUI": ref.watch(buildvuOriginalFileProvider).ui,
   };
 
   // Prepare the request headers and form data

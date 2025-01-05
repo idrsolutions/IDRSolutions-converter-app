@@ -172,7 +172,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                                 controller: _idrViewerUIController, 
                                 dropdownMenuEntries: IDRViewerUIs.entries, 
                                 onChanged: (newVal){
-                                  print(newVal);
+                                  originalFileNotifier.updateFile(ui: newVal.toString().split(".").last);
                                 }
                               ),
                             ],
@@ -275,11 +275,11 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                             _overlayProgressCircle = null;
                             _pdfPasswordController.clear();
                             _imageScaleController.clear();
+                            
                             // update advanced options
                             originalFileNotifier.updateFile(
                               password: "",
                               scale:1,
-                              ui: "",
                               textMode: "",
                               isEmbedImage: false,
                               isInlineSVG: false
