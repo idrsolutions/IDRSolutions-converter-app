@@ -19,7 +19,8 @@ Future<void> connectBuildVuCloud(WidgetRef ref, BuildContext context) async {
   final file = File(filePath);
   // final originalFile = ref.read(buildvuOriginalFileProvider.notifier);
   final settings = {
-    "org.jpedal.pdf2html.password": ref.watch(buildvuOriginalFileProvider).password
+    "org.jpedal.pdf2html.password": ref.watch(buildvuOriginalFileProvider).password,
+    "org.jpedal.pdf2html.imageScale": ref.watch(buildvuOriginalFileProvider).scale,
   };
 
   // Prepare the request headers and form data

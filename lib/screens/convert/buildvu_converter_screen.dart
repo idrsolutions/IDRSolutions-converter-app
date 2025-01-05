@@ -133,11 +133,17 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                                       // limit user input range
                                       if(parsedVal>10.0) {
                                         _imageScaleController.text = "10.0";
-                                      }else if(parsedVal<0){
-                                        _imageScaleController.text = "0";
+                                        parsedVal = 10.0;
+                                      }else if(parsedVal<1){
+                                        _imageScaleController.text = "1";
+                                        parsedVal = 1;
                                       }
+
+                                      // update file detail
+                                      originalFileNotifier.updateFile(scale: parsedVal);
                                     }catch(e){
-                                      // if parse failed, warn user to put in double 
+                                      // if parse failed, clear the text and warn user to put in double 
+                                      _imageScaleController.text = "";
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         const SnackBar(
                                           content: Text('Invalid input. Please put in numbers between 1-10'),
@@ -239,16 +245,6 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                           // if the file is the desired format, progress animation
                           _overlayProgressCircle = OverlayProgressCircle.createOverlayProgressCircle();
                           Overlay.of(context).insert(_overlayProgressCircle!);
-
-                          // // update advanced options
-                          // originalFileNotifier.updateFile(
-                          //   password: _pdfPasswordController.text,
-                          //   scale: double.parse(_imageScaleController.text),
-                          //   ui: _idrViewerUIController.text,
-                          //   textMode: _textModeController.text,
-                          //   isEmbedImage: isEmbedImgChecked,
-                          //   isInlineSVG: isInlineSVGChecked,
-                          // );
                           
                           // convert
                           try{
@@ -278,10 +274,11 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                             _overlayProgressCircle?.remove();
                             _overlayProgressCircle = null;
                             _pdfPasswordController.clear();
+                            _imageScaleController.clear();
                             // update advanced options
                             originalFileNotifier.updateFile(
                               password: "",
-                              scale:0,
+                              scale:1,
                               ui: "",
                               textMode: "",
                               isEmbedImage: false,
