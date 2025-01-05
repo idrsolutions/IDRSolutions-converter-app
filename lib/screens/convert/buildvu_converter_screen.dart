@@ -202,7 +202,15 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                       const SizedBox(height: 20,),
                       Row(
                         children: [
-                          StyledCheckbox(isChecked: isEmbedImgChecked),
+                          StyledCheckbox(
+                            isChecked: isEmbedImgChecked,
+                            onChanged: (newVal) {
+                              setState(() {
+                                isEmbedImgChecked = newVal;
+                              });
+                              originalFileNotifier.updateFile(isEmbedImage:newVal);
+                            },
+                          ),
                           const StyledTitleSmall(text: 'Embed Images as Base64'),
                         ],
                       ),
@@ -212,7 +220,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                       if(convertedFormat != 'svg')
                         Row(
                           children: [
-                            StyledCheckbox(isChecked: isInlineSVGChecked),
+                            // StyledCheckbox(isChecked: isInlineSVGChecked),
                             const StyledTitleSmall(text: 'Inline SVGs'),
                           ],
                         ),
