@@ -11,8 +11,6 @@ import 'package:path/path.dart';
 import 'dart:convert' as convert;
 
 Future<void> connectBuildVuCloud(WidgetRef ref, BuildContext context) async {
-  print('connectBuildVuCloud()!');
-
   final requestResponse = ref.read(requestResponseProvider.notifier);
   final apiUrl = 'https://cloud.idrsolutions.com/cloud/buildvu';
   final filePath = ref.read(buildvuOriginalFileProvider).path;
@@ -57,6 +55,9 @@ Future<void> connectBuildVuCloud(WidgetRef ref, BuildContext context) async {
     requestResponse.updateRequestResponse(content: responseBody);
 
     if (response.statusCode != 200) {
+      // Check if context is still valid
+      if(!context.mounted) return; 
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Error uploading file: ${response.statusCode}'),
@@ -69,6 +70,9 @@ Future<void> connectBuildVuCloud(WidgetRef ref, BuildContext context) async {
     final Map<String, dynamic> responseData = convert.jsonDecode(responseBody);
     uuid = responseData['uuid'];
   } catch (e) {
+    // Check if context is still valid
+    if(!context.mounted) return;
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Error uploading file: $e'),
@@ -85,6 +89,9 @@ Future<void> connectBuildVuCloud(WidgetRef ref, BuildContext context) async {
     while (true) {
       final pollResponse = await http.Request('GET', Uri.parse('$apiUrl?uuid=$uuid')).send();
       if (pollResponse.statusCode != 200) {
+        // Check if context is still valid
+        if(!context.mounted) return;
+
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Error Polling: ${pollResponse.statusCode}'),
@@ -110,6 +117,9 @@ Future<void> connectBuildVuCloud(WidgetRef ref, BuildContext context) async {
       await Future.delayed(Duration(seconds: 1));
     }
   } catch (e) {
+    // Check if context is still valid
+    if(!context.mounted) return;
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Error polling file: $e'),
