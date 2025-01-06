@@ -1,4 +1,5 @@
 import 'package:converter/components/checkbox.dart';
+import 'package:converter/components/clickable_logo.dart';
 import 'package:converter/components/dropdowns.dart';
 import 'package:converter/components/overlay_progress_circle.dart';
 import 'package:converter/components/single_file_picker.dart';
@@ -73,7 +74,9 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Flexible(child: Image.asset('assets/images/poweredbybuildvu.png'),),
+                      Flexible(
+                        child: ClickableLogo(logoPath: 'assets/images/poweredbybuildvu.png', myURL: 'https://www.idrsolutions.com/buildvu/'),
+                      ),
                       
                       Flexible(
                         child: WhiteBgBtn(
