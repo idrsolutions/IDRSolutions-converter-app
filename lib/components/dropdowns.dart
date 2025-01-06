@@ -39,10 +39,6 @@ class StyledDropdown<T> extends StatelessWidget {
         contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       ),
-      trailingIcon: Transform.translate(
-        offset: Offset(10, -9),
-        child: Icon(Icons.arrow_drop_down),
-      ),
       onSelected: onChanged,
     );
   }
