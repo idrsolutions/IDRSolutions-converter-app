@@ -117,7 +117,8 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                                 ),
                               ],
                             ),
-                          Spacer(),
+                          if (originalFormat == 'pdf') 
+                            Spacer(),
                           Column(
                             children: [
                               const StyledTitleSmall(text: 'Image Scale'),
@@ -216,7 +217,8 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                       ),
 
                       // inline svg
-                      const SizedBox(height: 20,),
+                      if(convertedFormat != 'svg')
+                        const SizedBox(height: 20,),
                       if(convertedFormat != 'svg')
                         Row(
                           children: [
