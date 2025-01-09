@@ -47,14 +47,15 @@ class BuildvuTokenScreen extends ConsumerWidget {
               children: [
                 StyledTitleBuildVu(text: 'Token'),
 
-                StyledText(text: "*The token is at the end of your received trial link", color: AppColors.dimmedBlack,),
-                
                 // token text field
                 TokenTextField(
                   onChanged: (newVal) {
                     tokenNotifier.updateToken(newVal);
                   },
                 ),
+                
+                StyledText(text: "*The token is at the end of your received trial link", color: AppColors.dimmedBlack,),
+                Flexible(child: Image.asset('assets/images/token.png')),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
