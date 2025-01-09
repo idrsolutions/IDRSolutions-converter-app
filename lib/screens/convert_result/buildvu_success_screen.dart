@@ -1,7 +1,7 @@
 import 'package:converter/components/clickable_logo.dart';
 import 'package:converter/providers/file_formats_provider.dart';
 import 'package:converter/providers/file_details_provider.dart';
-import 'package:converter/themes/buttons.dart';
+import 'package:converter/components/buttons.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/converter_theme.dart';
 import 'package:converter/themes/texts.dart';

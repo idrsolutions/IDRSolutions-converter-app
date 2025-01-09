@@ -1,9 +1,9 @@
+import 'package:converter/components/buttons.dart';
 import 'package:converter/components/clickable_logo.dart';
 import 'package:converter/components/dropdowns.dart';
 import 'package:converter/models/conversion_formats.dart';
 import 'package:converter/providers/file_formats_provider.dart';
 import 'package:converter/screens/token/buildvu_token_screen.dart';
-import 'package:converter/themes/buttons.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/texts.dart';
 import 'package:flutter/material.dart';

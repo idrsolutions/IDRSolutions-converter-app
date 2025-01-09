@@ -12,7 +12,7 @@ import 'package:converter/providers/polldata_state_provider.dart';
 import 'package:converter/providers/response_provider.dart';
 import 'package:converter/screens/convert_result/buildvu_success_screen.dart';
 import 'package:converter/screens/others/why_buildvu_screen.dart';
-import 'package:converter/themes/buttons.dart';
+import 'package:converter/components/buttons.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/converter_theme.dart';
 import 'package:converter/themes/texts.dart';

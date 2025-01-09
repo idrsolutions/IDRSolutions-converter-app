@@ -1,6 +1,6 @@
 import 'dart:io';
+import 'package:converter/components/buttons.dart';
 import 'package:converter/providers/file_details_provider.dart';
-import 'package:converter/themes/buttons.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/texts.dart';
 import 'package:file_picker/file_picker.dart';

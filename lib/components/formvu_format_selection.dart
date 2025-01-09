@@ -1,6 +1,6 @@
+import 'package:converter/components/buttons.dart';
 import 'package:converter/components/clickable_logo.dart';
 import 'package:converter/models/conversion_formats.dart';
-import 'package:converter/themes/buttons.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/texts.dart';
 import 'package:flutter/material.dart';

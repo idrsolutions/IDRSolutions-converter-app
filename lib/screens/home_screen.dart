@@ -1,7 +1,7 @@
 import 'package:converter/components/JPedal_format_selection.dart';
 import 'package:converter/components/buildvu_format_selection.dart';
 import 'package:converter/components/formvu_format_selection.dart';
-import 'package:converter/themes/buttons.dart';
+import 'package:converter/components/buttons.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/converter_theme.dart';
 import 'package:converter/themes/texts.dart';
