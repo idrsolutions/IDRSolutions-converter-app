@@ -275,26 +275,29 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                           try{
                             await connectBuildVuCloud(ref, context);
                             final updatedResponse = ref.read(requestResponseProvider);
-                            if(updatedResponse.code != 200){
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(updatedResponse.content!),
-                                  duration: Duration(seconds: 2),
-                                ),
-                              );
-                              return;
-                            }else{
-                              if(pollDataNotifier.state == "error"){
+                            if(context.mounted){
+                              if(updatedResponse.code != 200){
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                    content: Text("Can't convert. Please check your settings."),
+                                    content: Text(updatedResponse.content!),
                                     duration: Duration(seconds: 2),
                                   ),
                                 );
                                 return;
+                              }else{
+                                if(pollDataNotifier.state == "error"){
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text("Can't convert. Please check your settings."),
+                                      duration: Duration(seconds: 2),
+                                    ),
+                                  );
+                                  return;
+                                }
+                                Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildvuSuccessScreen()));
                               }
-                              Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildvuSuccessScreen()));
                             }
+                            
                           }finally{
                             // clear animation
                             _overlayProgressCircle?.remove();
