@@ -42,7 +42,6 @@ class _BuildVuFormatSelectionState extends ConsumerState<BuildVuFormatSelection>
                 onChanged: (newValue){
                   if(newValue != null) {
                     ref.read(buildvuOriginalFileFormatProvider.notifier).state = newValue.name;
-                    print(ref.read(buildvuOriginalFileFormatProvider.notifier).state);
                   }
                 },
               ),

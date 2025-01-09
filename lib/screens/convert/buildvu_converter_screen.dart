@@ -42,7 +42,6 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
     final convertedFormat = ref.watch(buildvuConvertedFileFormatProvider);
     final originalFile = ref.watch(buildvuOriginalFileProvider);
     final originalFileNotifier = ref.watch(buildvuOriginalFileProvider.notifier);
-    final pollDataNotifier = ref.watch(pollDataStateProvider.notifier);
   
     return Theme(
       data: ConverterTheme(color: AppColors.buildvuPrimary).converterTheme, 
@@ -285,7 +284,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                                 );
                                 return;
                               }else{
-                                if(pollDataNotifier.state == "error"){
+                                if(ref.read(pollDataStateProvider) == "error"){
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text("Can't convert. Please check your settings."),
