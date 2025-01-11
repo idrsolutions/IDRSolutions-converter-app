@@ -35,6 +35,7 @@ class _BuildVuFormatSelectionState extends ConsumerState<BuildVuFormatSelection>
             // original format dropdown
             Flexible(
               child: StyledDropdown<BuildVuOriginalFormats>(
+                key: Key('originalFormatDropdown'), // for ui testing
                 label: const Text('Original Format'), 
                 initialSelection: BuildVuOriginalFormats.pdf, 
                 controller: buildvuOriginalFormatController, 
@@ -52,6 +53,7 @@ class _BuildVuFormatSelectionState extends ConsumerState<BuildVuFormatSelection>
             // converted format dropdown
             Flexible(
               child: StyledDropdown<BuildVuConvertedFormats>(
+                key: Key('convertedFormatDropdown'), // for ui testing
                 label: const Text('Converted Format'), 
                 initialSelection: BuildVuConvertedFormats.html, 
                 controller: buildvuConvertedFormatController, 
@@ -68,11 +70,15 @@ class _BuildVuFormatSelectionState extends ConsumerState<BuildVuFormatSelection>
 
         const SizedBox(height: 20,),
 
-        // GO btn
+        // logo and GO btn
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            ClickableLogo(logoPath: 'assets/images/poweredbybuildvu.png', myURL: 'https://www.idrsolutions.com/buildvu/'),
+            ClickableLogo(
+              key: Key('buildvuLogo'), // for ui testing
+              logoPath: 'assets/images/poweredbybuildvu.png', 
+              myURL: 'https://www.idrsolutions.com/buildvu/'
+            ),
             ColorfulBgBtn(
               color: AppColors.buildvuPrimary,
               onPressed: (){

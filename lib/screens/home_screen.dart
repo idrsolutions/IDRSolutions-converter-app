@@ -48,7 +48,8 @@ class HomeScreen extends StatelessWidget {
                   onPressed: (){
                     launchURL("https://www.idrsolutions.com/contact-us");
                   }, 
-                  child: StyledTitleWhite(text: 'CONTACT US'))
+                  child: StyledTitleWhite(text: 'CONTACT US')
+                )
               ],
             ),
           ),
