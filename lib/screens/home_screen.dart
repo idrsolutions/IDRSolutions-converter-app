@@ -45,6 +45,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 50,),
 
                 ColorfulBgBtn(
+                  key: Key('contactUsBtn'),
                   onPressed: (){
                     launchURL("https://www.idrsolutions.com/contact-us");
                   }, 
