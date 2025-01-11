@@ -31,4 +31,31 @@ void main() {
       expect(find.byKey(Key('contactUsBtn')), findsOneWidget);
     });
   });
+
+  group('BuildVu format selection widget test', (){
+    testWidgets('test if title shows up', (tester)async{
+      await tester.pumpWidget(createHomeScreen());
+      expect(find.text('PDF/ Word/ PowerPoint/ Excel to HTML/ SVG'), findsOneWidget);
+    });
+
+    testWidgets('test if 2 format dropdowns both show up and are clickable', (tester) async {
+      await tester.pumpWidget(createHomeScreen());
+
+      await tester.tap(find.byKey(Key('originalFormatDropdown')));
+      expect(find.text('Word (.doc)'), findsOneWidget);
+
+      await tester.tap(find.byKey(Key('convertedFormatDropdown')));
+      expect(find.text('SVG'), findsOneWidget);
+    });
+
+    testWidgets('test if BuildVu logo shows up', (tester)async{
+      await tester.pumpWidget(createHomeScreen());
+      expect(find.byKey(Key('buildvuLogo')), findsOneWidget);
+    });
+
+    testWidgets('test if BuildVu GO btn shows up', (tester)async{
+      await tester.pumpWidget(createHomeScreen());
+      expect(find.byKey(Key('buildvuGo')), findsOneWidget);
+    });
+  });
 }
