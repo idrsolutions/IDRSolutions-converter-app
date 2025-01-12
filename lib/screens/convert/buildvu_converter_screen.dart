@@ -125,6 +125,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                             children: [
                               const StyledTitleSmall(text: 'Image Scale'),
                               RectangleTextField(
+                                key: Key('imgScaleTextField'), // for testing
                                 keyboardType: TextInputType.number,
                                 controller: _imageScaleController,
                                 onChanged:(val){
@@ -171,6 +172,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                             children: [
                               const StyledTitleSmall(text: 'IDRViewer UI'),
                               StyledDropdown(
+                                key: Key('uiDropDown'), // for testing
                                 initialSelection: IDRViewerUIs.complete, 
                                 controller: _idrViewerUIController, 
                                 dropdownMenuEntries: IDRViewerUIs.entries, 
@@ -185,6 +187,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                             children: [
                               const StyledTitleSmall(text: 'Text Mode'),
                               StyledDropdown(
+                                key: Key('textModeDropDown'), // for testing
                                 initialSelection: TextModes.svgRealText, 
                                 controller: _textModeController, 
                                 dropdownMenuEntries: TextModes.entries, 
