@@ -85,7 +85,10 @@ class BuildvuSuccessScreen extends ConsumerWidget {
                       StyledText(text: 'This free mobile converter is powered by Buildvu. BuildVu is a document conversion SDK that allows developers to build HTML5 solutions that work with PDF files.'),
 
                       const SizedBox(height: 20,),
-                      StyledTitleBuildVu(text: 'Business requirement to display PDF in the web browser?'),
+                      StyledTitleBuildVu(
+                        key: Key('businessRequirement'), // for testing
+                        text: 'Business requirement to display PDF in the web browser?'
+                      ),
                     ],
                   ),
                   const SizedBox(height: 20,),
