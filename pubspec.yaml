@@ -72,7 +72,6 @@ flutter:
   assets:
     - assets/images/poweredbybuildvu.png
     - assets/images/poweredbyformvu.png
-    - assets/images/poweredbyjpedal.png
     - assets/images/token.png
 
   # An image asset can refer to one or more resolution-specific "variants", see

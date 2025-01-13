@@ -1,4 +1,3 @@
-import 'package:converter/components/JPedal_format_selection.dart';
 import 'package:converter/components/buildvu_format_selection.dart';
 import 'package:converter/components/formvu_format_selection.dart';
 import 'package:converter/components/buttons.dart';
@@ -33,10 +32,6 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               children: [
                 BuildVuFormatSelection(),
-            
-                const SizedBox(height: 50,),
-            
-                JPedalFormatSelection(),
             
                 const SizedBox(height: 50,),
             

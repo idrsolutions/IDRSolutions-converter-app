@@ -148,28 +148,6 @@ class StyledTitleFormVu extends StatelessWidget {
   }
 }
 
-class StyledTitleJPedal extends StatelessWidget {
-  const StyledTitleJPedal({
-    super.key,
-    required this.text,
-  });
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontFamily: 'Montserrat',
-        fontSize: 16,
-        fontWeight: FontWeight.w600,
-        color: AppColors.jpedalPrimary,
-      ),
-    );
-  }
-}
-
 class StyledText extends StatelessWidget {
   const StyledText({
     super.key,
