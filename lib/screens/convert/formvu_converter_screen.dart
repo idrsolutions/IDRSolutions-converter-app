@@ -11,8 +11,8 @@ import 'package:converter/providers/file_details_provider.dart';
 import 'package:converter/providers/polldata_state_provider.dart';
 import 'package:converter/providers/response_provider.dart';
 import 'package:converter/screens/convert_result/buildvu_success_screen.dart';
-import 'package:converter/screens/others/why_buildvu_screen.dart';
 import 'package:converter/components/buttons.dart';
+import 'package:converter/screens/others/why_formvu_screen.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/converter_theme.dart';
 import 'package:converter/themes/texts.dart';
@@ -44,7 +44,7 @@ class _BuildVuConverterScreenState extends ConsumerState<FormvuConverterScreen> 
     final originalFileNotifier = ref.watch(buildvuOriginalFileProvider.notifier);
   
     return Theme(
-      data: ConverterTheme(color: AppColors.buildvuPrimary).converterTheme, 
+      data: ConverterTheme(color: AppColors.formvuPrimary).converterTheme, 
       child: Scaffold(
         appBar: AppBar(
           title: Row(
@@ -57,7 +57,7 @@ class _BuildVuConverterScreenState extends ConsumerState<FormvuConverterScreen> 
           ),
           shape: Border(
             bottom: BorderSide(
-              color: AppColors.buildvuPrimary,
+              color: AppColors.formvuPrimary,
               width: 10
             )
           ),
@@ -69,20 +69,20 @@ class _BuildVuConverterScreenState extends ConsumerState<FormvuConverterScreen> 
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  // buildvu logo and btn
+                  // formvu logo and btn
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Flexible(
-                        child: ClickableLogo(logoPath: 'assets/images/poweredbybuildvu.png', myURL: 'https://www.idrsolutions.com/buildvu/'),
+                        child: ClickableLogo(logoPath: 'assets/images/poweredbyformvu.png', myURL: 'https://www.idrsolutions.com/formvu/'),
                       ),
                       
                       Flexible(
                         child: WhiteBgBtn(
                           onPressed: (){
-                            Navigator.push(context,MaterialPageRoute(builder: (context) => const WhyBuildVuScreen()),);
+                            Navigator.push(context,MaterialPageRoute(builder: (context) => const WhyFormvuScreen()),);
                           },
-                          child: const StyledTitle(text: 'Why BuildVu?'),
+                          child: const StyledTitle(text: 'Why FormVu?'),
                         ),
                       ),
                     ],
