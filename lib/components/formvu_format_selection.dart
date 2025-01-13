@@ -1,6 +1,6 @@
 import 'package:converter/components/buttons.dart';
 import 'package:converter/components/clickable_logo.dart';
-import 'package:converter/models/conversion_formats.dart';
+import 'package:converter/screens/token/formu_token_screen.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/texts.dart';
 import 'package:flutter/material.dart';
@@ -21,46 +21,23 @@ class _FormVuFormatSelectionState extends State<FormVuFormatSelection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        StyledTitle(text: 'Fillable PDF to HTML/ HTML5', color: AppColors.formvuPrimary,),
-        
-        const SizedBox(height: 20,),
-
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //   children: [
-        //     // original format dropdown
-        //     Flexible(
-        //       child: StyledDropdown<FormVuOriginalFormats>(
-        //         label: const Text('Original Format'), 
-        //         initialSelection: FormVuOriginalFormats.pdf, 
-        //         controller: formvuOriginalFormatController, 
-        //         dropdownMenuEntries: FormVuOriginalFormats.entries,
-        //       ),
-        //     ),
-
-        //     Flexible(child: StyledTitle(text: 'To', color: AppColors.formvuPrimary,)),
-
-        //     // converted format dropdown
-        //     Flexible(
-        //       child: StyledDropdown<FormVuConvertedFormats>(
-        //         label: const Text('Converted Format'), 
-        //         initialSelection: FormVuConvertedFormats.html, 
-        //         controller: formvuConvertedFormatController, 
-        //         dropdownMenuEntries: FormVuConvertedFormats.entries,
-        //       ),
-        //     ),
-        //   ],
-        // ),
+        StyledTitle(text: 'Fillable PDF to HTML', color: AppColors.formvuPrimary,),
 
         const SizedBox(height: 20,),
 
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            ClickableLogo(logoPath: 'assets/images/poweredbyformvu.png', myURL: 'https://www.idrsolutions.com/formvu/'),
+            ClickableLogo(
+              key: Key('formvuLogo'), // for testing
+              logoPath: 'assets/images/poweredbyformvu.png', 
+              myURL: 'https://www.idrsolutions.com/formvu/'
+            ),
             ColorfulBgBtn(
               color: AppColors.formvuPrimary,
-              onPressed: (){},
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (ctx) => const FormvuTokenScreen()));
+              },
               child: StyledTitleWhite(text: 'GO',),
             ),
           ],

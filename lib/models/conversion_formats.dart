@@ -60,10 +60,6 @@ enum BuildVuConvertedFormats {
     value: 'HTML',
     label: 'HTML',
   ),
-  html5(
-    value: 'HTML5',
-    label: 'HTML5',
-  ),
   svg(
     value: 'SVG',
     label: 'SVG',
