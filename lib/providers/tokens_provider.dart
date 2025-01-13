@@ -18,3 +18,8 @@ final buildvuTokenProvider = NotifierProvider<TokenNotifier, String>((){
   return TokenNotifier();
 });
 
+// default path
+final formvuTokenProvider = NotifierProvider<TokenNotifier, String>((){
+  return TokenNotifier();
+});
+

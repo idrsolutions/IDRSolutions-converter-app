@@ -15,10 +15,10 @@ class FormvuTokenScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final originalFormat = ref.watch(buildvuOriginalFileFormatProvider);
-    final convertedFormat = ref.watch(buildvuConvertedFileFormatProvider);
-    final tokenNotifier = ref.read(buildvuTokenProvider.notifier);
-    final tokenProvider = ref.watch(buildvuTokenProvider);
+    final originalFormat = ref.watch(formvuOriginalFileFormatProvider);
+    final convertedFormat = ref.watch(formvuConvertedFileFormatProvider);
+    final tokenNotifier = ref.read(formvuTokenProvider.notifier);
+    final tokenProvider = ref.watch(formvuTokenProvider);
     
     return Theme(
       data: ConverterTheme(color: AppColors.formvuPrimary).converterTheme, 

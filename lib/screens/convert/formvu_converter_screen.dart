@@ -4,7 +4,6 @@ import 'package:converter/components/dropdowns.dart';
 import 'package:converter/components/overlay_progress_circle.dart';
 import 'package:converter/components/single_file_picker.dart';
 import 'package:converter/components/text_fields.dart';
-import 'package:converter/models/idrviewer_ui_formats.dart';
 import 'package:converter/models/text_mode_formats.dart';
 import 'package:converter/providers/file_formats_provider.dart';
 import 'package:converter/providers/file_details_provider.dart';
@@ -31,17 +30,18 @@ class _BuildVuConverterScreenState extends ConsumerState<FormvuConverterScreen> 
   OverlayEntry? _overlayProgressCircle;
   final _pdfPasswordController = TextEditingController();
   final _imageScaleController = TextEditingController(text: "1.0");
-  final _idrViewerUIController = TextEditingController();
+  final _submitUrlController = TextEditingController();
   final _textModeController = TextEditingController();
-  bool isEmbedImgChecked = false;
-  bool isInlineSVGChecked = false;
+  bool isSingleFileFormChecked = false;
+  bool hasFieldBordersChecked = false;
+  bool hasFieldBackgroundsChecked = false;
 
   @override
   Widget build(BuildContext context) {
-    final originalFormat = ref.watch(buildvuOriginalFileFormatProvider);
-    final convertedFormat = ref.watch(buildvuConvertedFileFormatProvider);
-    final originalFile = ref.watch(buildvuOriginalFileProvider);
-    final originalFileNotifier = ref.watch(buildvuOriginalFileProvider.notifier);
+    final originalFormat = ref.watch(formvuOriginalFileFormatProvider);
+    final convertedFormat = ref.watch(formvuConvertedFileFormatProvider);
+    final originalFile = ref.watch(formvuOriginalFileProvider);
+    final originalFileNotifier = ref.watch(formvuOriginalFileProvider.notifier);
   
     return Theme(
       data: ConverterTheme(color: AppColors.formvuPrimary).converterTheme, 
@@ -69,7 +69,7 @@ class _BuildVuConverterScreenState extends ConsumerState<FormvuConverterScreen> 
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  // formvu logo and btn
+                  // formvu logo and why btn
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -163,23 +163,20 @@ class _BuildVuConverterScreenState extends ConsumerState<FormvuConverterScreen> 
                         ],
                       ),
 
-                      // ui & text mode
+                      // submit url & text mode
                       const SizedBox(height: 5,),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Column(
                             children: [
-                              const StyledTitleSmall(text: 'IDRViewer UI'),
-                              StyledDropdown(
-                                key: Key('uiDropDown'), // for testing
-                                initialSelection: IDRViewerUIs.complete, 
-                                controller: _idrViewerUIController, 
-                                dropdownMenuEntries: IDRViewerUIs.entries, 
-                                onChanged: (newVal){
-                                  originalFileNotifier.updateFile(ui: newVal.toString().split(".").last);
-                                }
-                              ),
+                              const StyledTitleSmall(text: 'Submit URL'),
+                              RectangleTextField(
+                                  controller: _submitUrlController,
+                                  onChanged: (_){
+                                    originalFileNotifier.updateFile(submitUrl: _submitUrlController.text);
+                                  },
+                                ),
                             ],
                           ),
                           Spacer(),
@@ -204,41 +201,56 @@ class _BuildVuConverterScreenState extends ConsumerState<FormvuConverterScreen> 
                         ],
                       ),
 
-                      // embed img
+                      // single file form
                       const SizedBox(height: 20,),
                       Row(
                         children: [
                           StyledCheckbox(
-                            isChecked: isEmbedImgChecked,
+                            isChecked: isSingleFileFormChecked,
                             onChanged: (newVal) {
                               setState(() {
-                                isEmbedImgChecked = newVal;
+                                isSingleFileFormChecked = newVal;
                               });
-                              originalFileNotifier.updateFile(isEmbedImage:newVal);
+                              originalFileNotifier.updateFile(isSingleFileForm:newVal);
                             },
                           ),
-                          const StyledTitleSmall(text: 'Embed Images as Base64'),
+                          const StyledTitleSmall(text: 'Single File Form'),
                         ],
                       ),
 
-                      // inline svg
-                      if(convertedFormat != 'svg')
-                        const SizedBox(height: 20,),
-                      if(convertedFormat != 'svg')
-                        Row(
-                          children: [
-                            StyledCheckbox(
-                              isChecked: isInlineSVGChecked,
-                              onChanged: (newVal) {
-                                setState(() {
-                                  isInlineSVGChecked = newVal;
-                                });
-                                originalFileNotifier.updateFile(isInlineSVG:newVal);
-                              },
-                            ),
-                            const StyledTitleSmall(text: 'Inline SVGs'),
-                          ],
-                        ),
+                      // field borders
+                      const SizedBox(height: 20,),
+                      Row(
+                        children: [
+                          StyledCheckbox(
+                            isChecked: hasFieldBordersChecked,
+                            onChanged: (newVal) {
+                              setState(() {
+                                hasFieldBordersChecked = newVal;
+                              });
+                              originalFileNotifier.updateFile(hasFieldBorders:newVal);
+                            },
+                          ),
+                          const StyledTitleSmall(text: 'Field Borders'),
+                        ],
+                      ),
+
+                      // field borders
+                      const SizedBox(height: 20,),
+                      Row(
+                        children: [
+                          StyledCheckbox(
+                            isChecked: hasFieldBackgroundsChecked,
+                            onChanged: (newVal) {
+                              setState(() {
+                                hasFieldBackgroundsChecked = newVal;
+                              });
+                              originalFileNotifier.updateFile(hasFieldBackgrounds:newVal);
+                            },
+                          ),
+                          const StyledTitleSmall(text: 'Field Backgrounds'),
+                        ],
+                      ),
                     ],
                   ),
                   
@@ -257,8 +269,8 @@ class _BuildVuConverterScreenState extends ConsumerState<FormvuConverterScreen> 
                         );
                       }else{
                         // if user has selected a file, check if the file is the desired format
-                        var appBarFormat = ref.read(buildvuOriginalFileFormatProvider.notifier).state;
-                        var selectedFormat = ref.read(buildvuOriginalFileProvider).format;
+                        var appBarFormat = ref.read(formvuOriginalFileFormatProvider.notifier).state;
+                        var selectedFormat = ref.read(formvuOriginalFileProvider).format;
 
                         if(appBarFormat != selectedFormat){
                           // if the file is NOT the desired format, warn user

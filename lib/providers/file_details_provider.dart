@@ -1,6 +1,7 @@
 import 'package:converter/models/file_details.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+// BuildVu original file
 class BuildVuOriginalFileNotifier extends Notifier<BuildVuOriginalFile>{
   @override
   BuildVuOriginalFile build() {
@@ -30,12 +31,50 @@ class BuildVuOriginalFileNotifier extends Notifier<BuildVuOriginalFile>{
     }
 }
 
-// default file
+// default
 final buildvuOriginalFileProvider = NotifierProvider<BuildVuOriginalFileNotifier, BuildVuOriginalFile>((){
   return BuildVuOriginalFileNotifier();
 });
 
+// FormVu original file
+class FormVuOriginalFileNotifier extends Notifier<FormVuOriginalFile>{
+  @override
+  FormVuOriginalFile build() {
+    return const FormVuOriginalFile(path: '');
+  }
 
+  void updateFile({
+    String? path, 
+    String? format, 
+    String? password, 
+    double? scale, 
+    bool? isSingleFileForm, 
+    bool? hasFieldBorders,
+    bool? hasFieldBackgrounds,
+    String? submitUrl,
+    String? textMode}){
+      // update the file
+      state = state.copyWith(
+        path: path ?? state.path,
+        format: format ?? state.format,
+        password: password ?? state.password,
+        scale: scale ?? state.scale,
+        isSingleFileForm: isSingleFileForm ?? state.isSingleFileForm,
+        hasFieldBorders: hasFieldBorders ?? state.hasFieldBorders,
+        hasFieldBackgrounds: hasFieldBackgrounds ?? state.hasFieldBackgrounds,
+        submitUrl: submitUrl ?? state.submitUrl,
+        textMode: textMode ?? state.textMode,
+      );
+    }
+}
+
+// default
+final formvuOriginalFileProvider = NotifierProvider<FormVuOriginalFileNotifier, FormVuOriginalFile>((){
+  return FormVuOriginalFileNotifier();
+});
+
+
+// converted file
 class ConvertedFileNotifier extends Notifier<ConvertedFile>{
   @override
   ConvertedFile build() {
@@ -53,7 +92,7 @@ class ConvertedFileNotifier extends Notifier<ConvertedFile>{
     }
 }
 
-// default file
+// default
 final convertedFileProvider = NotifierProvider<ConvertedFileNotifier, ConvertedFile>((){
   return ConvertedFileNotifier();
 });
