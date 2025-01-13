@@ -9,13 +9,13 @@ import 'package:converter/providers/file_formats_provider.dart';
 import 'package:converter/providers/file_details_provider.dart';
 import 'package:converter/providers/polldata_state_provider.dart';
 import 'package:converter/providers/response_provider.dart';
-import 'package:converter/screens/convert_result/buildvu_success_screen.dart';
 import 'package:converter/components/buttons.dart';
+import 'package:converter/screens/convert_result/formvu_success_screen.dart';
 import 'package:converter/screens/others/why_formvu_screen.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/converter_theme.dart';
 import 'package:converter/themes/texts.dart';
-import 'package:converter/utils/connect_buildvu_cloud.dart';
+import 'package:converter/utils/connect_formvu_cloud.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -23,10 +23,10 @@ class FormvuConverterScreen extends ConsumerStatefulWidget {
   const FormvuConverterScreen({super.key});
 
   @override
-  ConsumerState<FormvuConverterScreen> createState() => _BuildVuConverterScreenState();
+  ConsumerState<FormvuConverterScreen> createState() => _FormvuConverterScreenState();
 }
 
-class _BuildVuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
+class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
   OverlayEntry? _overlayProgressCircle;
   final _pdfPasswordController = TextEditingController();
   final _imageScaleController = TextEditingController(text: "1.0");
@@ -287,7 +287,7 @@ class _BuildVuConverterScreenState extends ConsumerState<FormvuConverterScreen> 
                           
                           // convert
                           try{
-                            await connectBuildVuCloud(ref, context);
+                            await connectFormVuCloud(ref, context);
                             final updatedResponse = ref.read(requestResponseProvider);
                             if(context.mounted){
                               if(updatedResponse.code != 200){
@@ -308,7 +308,7 @@ class _BuildVuConverterScreenState extends ConsumerState<FormvuConverterScreen> 
                                   );
                                   return;
                                 }
-                                Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildvuSuccessScreen()));
+                                Navigator.push(context, MaterialPageRoute(builder: (ctx) => const FormvuSuccessScreen()));
                               }
                             }
                             
