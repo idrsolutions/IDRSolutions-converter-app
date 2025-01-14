@@ -38,6 +38,8 @@ class _SingleFilePickerState extends ConsumerState<SingleFilePicker> {
           });
           ref.read(buildvuOriginalFileProvider.notifier).updateFile(path: file.path,);
           ref.read(buildvuOriginalFileProvider.notifier).updateFile(format: fileFormat,);
+          ref.read(formvuOriginalFileProvider.notifier).updateFile(path: file.path,);
+          ref.read(formvuOriginalFileProvider.notifier).updateFile(format: fileFormat,);
         } else { 
           // if user-picked file format is NOT the selected original file format
           // warn user & update provider file path to empty
@@ -48,6 +50,7 @@ class _SingleFilePickerState extends ConsumerState<SingleFilePicker> {
             ),
           );
           ref.read(buildvuOriginalFileProvider.notifier).updateFile(path: null,);
+          ref.read(formvuOriginalFileProvider.notifier).updateFile(path: null,);
         }
       } else { // if user did NOT pick a file, ask user to pick a file
         if (_filePath.isEmpty) {

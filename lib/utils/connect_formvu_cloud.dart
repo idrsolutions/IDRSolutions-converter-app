@@ -12,22 +12,23 @@ import 'dart:convert' as convert;
 
 Future<void> connectFormVuCloud(WidgetRef ref, BuildContext context) async {
   final requestResponse = ref.read(requestResponseProvider.notifier);
-  final apiUrl = 'https://cloud.idrsolutions.com/cloud/buildvu';
-  final filePath = ref.read(buildvuOriginalFileProvider).path;
+  final apiUrl = 'https://cloud.idrsolutions.com/cloud/formvu';
+  final filePath = ref.read(formvuOriginalFileProvider).path;
   final file = File(filePath);
   final settings = {
-    "org.jpedal.pdf2html.password": ref.watch(buildvuOriginalFileProvider).password,
-    "org.jpedal.pdf2html.imageScale": ref.watch(buildvuOriginalFileProvider).scale,
-    "org.jpedal.pdf2html.viewerUI": ref.watch(buildvuOriginalFileProvider).ui,
-    "org.jpedal.pdf2html.textMode": ref.watch(buildvuOriginalFileProvider).textMode,
-    "org.jpedal.pdf2html.embedImagesAsBase64Stream": ref.watch(buildvuOriginalFileProvider).isEmbedImage,
-    "org.jpedal.pdf2html.inlineSVG": ref.watch(buildvuOriginalFileProvider).isInlineSVG,
+    "org.jpedal.pdf2html.password": ref.watch(formvuOriginalFileProvider).password,
+    "org.jpedal.pdf2html.imageScale": ref.watch(formvuOriginalFileProvider).scale,
+    "org.jpedal.pdf2html.submitUrl": ref.watch(formvuOriginalFileProvider).submitUrl,
+    "org.jpedal.pdf2html.textMode": ref.watch(formvuOriginalFileProvider).textMode,
+    // TODO: single file, fileborder, fieldbg
+    // "org.jpedal.pdf2html.formFieldBorderHighlight": ref.watch(formvuOriginalFileProvider).hasFieldBorders,
+    // "org.jpedal.pdf2html.formFieldBackgroundHighlight": ref.watch(formvuOriginalFileProvider).hasFieldBackgrounds,
   };
 
   // Prepare the request headers and form data
   final settingsJson = convert.jsonEncode(settings);
   final request = http.MultipartRequest('POST', Uri.parse(apiUrl));
-  request.fields['token'] = ref.read(buildvuTokenProvider);
+  request.fields['token'] = ref.read(formvuTokenProvider);
   request.fields['input'] = 'upload';
   request.fields['settings'] = settingsJson;
 

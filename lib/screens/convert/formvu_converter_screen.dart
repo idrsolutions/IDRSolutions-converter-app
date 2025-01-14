@@ -302,7 +302,7 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                                 if(ref.read(pollDataStateProvider) == "error"){
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
-                                      content: Text("Can't convert. Please check your settings."),
+                                      content: Text("Can't convert. Is your original PDF file fillable?"),
                                       duration: Duration(seconds: 2),
                                     ),
                                   );
