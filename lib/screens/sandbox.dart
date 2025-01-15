@@ -1,10 +1,22 @@
+import 'package:converter/components/color_picker.dart';
 import 'package:flutter/material.dart';
 
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
+class Sandbox extends StatefulWidget {
+  const Sandbox({super.key});
+
+  @override
+  State<Sandbox> createState() => _SandboxState();
+}
+
+class _SandboxState extends State<Sandbox> {
+  Color currentColor = Colors.red;
+  void changeColor(Color color) => setState(() => currentColor = color);
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return ColorPicker(
+      pickerColor: currentColor,
+      onColorChanged: changeColor,
+    );
   }
 }
