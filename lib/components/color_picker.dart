@@ -1,4 +1,5 @@
-import 'package:converter/components/buttons.dart';
+import 'package:converter/themes/colors.dart';
+import 'package:converter/themes/texts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
@@ -22,20 +23,6 @@ class _ColorPickerState extends State<ColorPicker> {
   final textController = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-    textController.text = _colorToHex(widget.pickerColor);
-  }
-
-  String _colorToHex(Color color){
-    final red = (color.r * 255).toInt().toRadixString(16).padLeft(2, '0');
-    final green = (color.g * 255).toInt().toRadixString(16).padLeft(2, '0');
-    final blue = (color.b * 255).toInt().toRadixString(16).padLeft(2, '0');
-
-    return '#$red$green$blue';
-  }
-
-  @override
   void dispose() {
     textController.dispose();
     super.dispose();
@@ -47,8 +34,7 @@ class _ColorPickerState extends State<ColorPicker> {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        ColorfulBgBtn(
-          color: widget.pickerColor,
+        TextButton(
           onPressed: () {
             showDialog(
               context: context,
@@ -58,8 +44,6 @@ class _ColorPickerState extends State<ColorPicker> {
                     child: HueRingPicker(
                       pickerColor: widget.pickerColor,
                       onColorChanged: (color){
-                        textController.text = _colorToHex(color);
-                        print(textController.text);
                         widget.onColorChanged(color);
                       },
                       enableAlpha: _enableAlpha2,
@@ -70,9 +54,19 @@ class _ColorPickerState extends State<ColorPicker> {
               },
             );
           },
-          child: Text(
-            'Color Picker',
-            style: TextStyle(color: useWhiteForeground(widget.pickerColor) ? Colors.white : Colors.black),
+          style: TextButton.styleFrom(
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+            backgroundColor: widget.pickerColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+            ),
+            side: BorderSide(
+              color: AppColors.dimmedBlack,
+            ),
+          ),
+          child: StyledTitleSmall(
+            text: 'Color Picker',
+            color: AppColors.dimmedBlack,
           ),
         ),
       ],

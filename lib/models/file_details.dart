@@ -49,7 +49,7 @@ class FormVuOriginalFile{
     this.password,
     this.scale,
     this.isSingleFileForm,
-    this.hasFieldBorders,
+    this.fieldBorderHex,
     this.hasFieldBackgrounds,
     this.submitUrl,
     this.textMode,
@@ -60,7 +60,7 @@ class FormVuOriginalFile{
   final String? password;
   final double? scale;
   final bool? isSingleFileForm;
-  final bool? hasFieldBorders;
+  final String? fieldBorderHex;
   final bool? hasFieldBackgrounds;
   final String? submitUrl;
   final String? textMode; 
@@ -72,7 +72,7 @@ class FormVuOriginalFile{
     String? password, 
     double? scale, 
     bool? isSingleFileForm, 
-    bool? hasFieldBorders,
+    String? fieldBorderHex,
     bool? hasFieldBackgrounds,
     String? submitUrl,
     String? textMode}){
@@ -82,7 +82,7 @@ class FormVuOriginalFile{
         password: password ?? this.password,
         scale: scale ?? this.scale,
         isSingleFileForm: isSingleFileForm ?? this.isSingleFileForm,
-        hasFieldBorders: hasFieldBorders ?? this.hasFieldBorders,
+        fieldBorderHex: fieldBorderHex ?? this.fieldBorderHex,
         hasFieldBackgrounds: hasFieldBackgrounds ?? this.hasFieldBackgrounds,
         submitUrl: submitUrl ?? this.submitUrl,
         textMode: textMode ?? this.textMode,

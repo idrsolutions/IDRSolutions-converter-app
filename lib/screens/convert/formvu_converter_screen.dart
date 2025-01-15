@@ -1,5 +1,6 @@
 import 'package:converter/components/checkbox.dart';
 import 'package:converter/components/clickable_logo.dart';
+import 'package:converter/components/color_picker.dart';
 import 'package:converter/components/dropdowns.dart';
 import 'package:converter/components/overlay_progress_circle.dart';
 import 'package:converter/components/single_file_picker.dart';
@@ -35,6 +36,15 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
   bool isSingleFileFormChecked = false;
   bool hasFieldBordersChecked = false;
   bool hasFieldBackgroundsChecked = false;
+  Color defaultFieldBorderColor = Colors.white;
+
+  String colorToHex(Color color){
+    final red = (color.r * 255).toInt().toRadixString(16).padLeft(2, '0');
+    final green = (color.g * 255).toInt().toRadixString(16).padLeft(2, '0');
+    final blue = (color.b * 255).toInt().toRadixString(16).padLeft(2, '0');
+
+    return '#$red$green$blue';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -222,16 +232,17 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                       const SizedBox(height: 20,),
                       Row(
                         children: [
-                          StyledCheckbox(
-                            isChecked: hasFieldBordersChecked,
-                            onChanged: (newVal) {
+                          ColorPicker(
+                            pickerColor: defaultFieldBorderColor, 
+                            onColorChanged: (Color color){
                               setState(() {
-                                hasFieldBordersChecked = newVal;
+                                defaultFieldBorderColor = color;
+                                originalFileNotifier.updateFile(fieldBorderHex: colorToHex(defaultFieldBorderColor));
                               });
-                              originalFileNotifier.updateFile(hasFieldBorders:newVal);
-                            },
+                            }
                           ),
-                          const StyledTitleSmall(text: 'Field Borders'),
+                          const SizedBox(width: 10,),
+                          const StyledTitleSmall(text: 'Field Border Color'),
                         ],
                       ),
 

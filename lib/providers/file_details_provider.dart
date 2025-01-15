@@ -49,7 +49,7 @@ class FormVuOriginalFileNotifier extends Notifier<FormVuOriginalFile>{
     String? password, 
     double? scale, 
     bool? isSingleFileForm, 
-    bool? hasFieldBorders,
+    String? fieldBorderHex,
     bool? hasFieldBackgrounds,
     String? submitUrl,
     String? textMode}){
@@ -60,7 +60,7 @@ class FormVuOriginalFileNotifier extends Notifier<FormVuOriginalFile>{
         password: password ?? state.password,
         scale: scale ?? state.scale,
         isSingleFileForm: isSingleFileForm ?? state.isSingleFileForm,
-        hasFieldBorders: hasFieldBorders ?? state.hasFieldBorders,
+        fieldBorderHex: fieldBorderHex ?? state.fieldBorderHex,
         hasFieldBackgrounds: hasFieldBackgrounds ?? state.hasFieldBackgrounds,
         submitUrl: submitUrl ?? state.submitUrl,
         textMode: textMode ?? state.textMode,
