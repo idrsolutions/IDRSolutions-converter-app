@@ -22,7 +22,7 @@ Future<void> connectFormVuCloud(WidgetRef ref, BuildContext context) async {
     "org.jpedal.pdf2html.textMode": ref.watch(formvuOriginalFileProvider).textMode,
     // TODO: single file, fileborder, fieldbg
     "org.jpedal.pdf2html.formFieldBorderHighlight": ref.watch(formvuOriginalFileProvider).fieldBorderHex,
-    // "org.jpedal.pdf2html.formFieldBackgroundHighlight": ref.watch(formvuOriginalFileProvider).hasFieldBackgrounds,
+    "org.jpedal.pdf2html.formFieldBackgroundHighlight": ref.watch(formvuOriginalFileProvider).fieldBackgroundHex,
   };
 
   // Prepare the request headers and form data

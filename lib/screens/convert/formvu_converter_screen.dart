@@ -37,6 +37,7 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
   bool hasFieldBordersChecked = false;
   bool hasFieldBackgroundsChecked = false;
   Color defaultFieldBorderColor = Colors.white;
+  Color defaultFieldBackgroundColor = Colors.white;
 
   String colorToHex(Color color){
     final red = (color.r * 255).toInt().toRadixString(16).padLeft(2, '0');
@@ -228,7 +229,7 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                         ],
                       ),
 
-                      // field borders
+                      // field border color
                       const SizedBox(height: 20,),
                       Row(
                         children: [
@@ -246,20 +247,21 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                         ],
                       ),
 
-                      // field borders
+                      // field background color
                       const SizedBox(height: 20,),
                       Row(
                         children: [
-                          StyledCheckbox(
-                            isChecked: hasFieldBackgroundsChecked,
-                            onChanged: (newVal) {
+                          ColorPicker(
+                            pickerColor: defaultFieldBackgroundColor, 
+                            onColorChanged: (Color color){
                               setState(() {
-                                hasFieldBackgroundsChecked = newVal;
+                                defaultFieldBackgroundColor = color;
+                                originalFileNotifier.updateFile(fieldBackgroundHex: colorToHex(defaultFieldBackgroundColor));
                               });
-                              originalFileNotifier.updateFile(hasFieldBackgrounds:newVal);
-                            },
+                            }
                           ),
-                          const StyledTitleSmall(text: 'Field Backgrounds'),
+                          const SizedBox(width: 10,),
+                          const StyledTitleSmall(text: 'Field Background Color'),
                         ],
                       ),
                     ],

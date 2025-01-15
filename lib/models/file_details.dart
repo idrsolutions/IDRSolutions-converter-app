@@ -50,7 +50,7 @@ class FormVuOriginalFile{
     this.scale,
     this.isSingleFileForm,
     this.fieldBorderHex,
-    this.hasFieldBackgrounds,
+    this.fieldBackgroundHex,
     this.submitUrl,
     this.textMode,
   });
@@ -61,7 +61,7 @@ class FormVuOriginalFile{
   final double? scale;
   final bool? isSingleFileForm;
   final String? fieldBorderHex;
-  final bool? hasFieldBackgrounds;
+  final String? fieldBackgroundHex;
   final String? submitUrl;
   final String? textMode; 
 
@@ -73,7 +73,7 @@ class FormVuOriginalFile{
     double? scale, 
     bool? isSingleFileForm, 
     String? fieldBorderHex,
-    bool? hasFieldBackgrounds,
+    String? fieldBackgroundHex,
     String? submitUrl,
     String? textMode}){
       return FormVuOriginalFile(
@@ -83,7 +83,7 @@ class FormVuOriginalFile{
         scale: scale ?? this.scale,
         isSingleFileForm: isSingleFileForm ?? this.isSingleFileForm,
         fieldBorderHex: fieldBorderHex ?? this.fieldBorderHex,
-        hasFieldBackgrounds: hasFieldBackgrounds ?? this.hasFieldBackgrounds,
+        fieldBackgroundHex: fieldBackgroundHex ?? this.fieldBackgroundHex,
         submitUrl: submitUrl ?? this.submitUrl,
         textMode: textMode ?? this.textMode,
       );

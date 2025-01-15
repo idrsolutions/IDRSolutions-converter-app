@@ -50,7 +50,7 @@ class FormVuOriginalFileNotifier extends Notifier<FormVuOriginalFile>{
     double? scale, 
     bool? isSingleFileForm, 
     String? fieldBorderHex,
-    bool? hasFieldBackgrounds,
+    String? fieldBackgroundHex,
     String? submitUrl,
     String? textMode}){
       // update the file
@@ -61,7 +61,7 @@ class FormVuOriginalFileNotifier extends Notifier<FormVuOriginalFile>{
         scale: scale ?? state.scale,
         isSingleFileForm: isSingleFileForm ?? state.isSingleFileForm,
         fieldBorderHex: fieldBorderHex ?? state.fieldBorderHex,
-        hasFieldBackgrounds: hasFieldBackgrounds ?? state.hasFieldBackgrounds,
+        fieldBackgroundHex: fieldBackgroundHex ?? state.fieldBackgroundHex,
         submitUrl: submitUrl ?? state.submitUrl,
         textMode: textMode ?? state.textMode,
       );
