@@ -15,15 +15,21 @@ Future<void> connectFormVuCloud(WidgetRef ref, BuildContext context) async {
   final apiUrl = 'https://cloud.idrsolutions.com/cloud/formvu';
   final filePath = ref.read(formvuOriginalFileProvider).path;
   final file = File(filePath);
-  final settings = {
+  var settings = {
     "org.jpedal.pdf2html.password": ref.watch(formvuOriginalFileProvider).password,
     "org.jpedal.pdf2html.imageScale": ref.watch(formvuOriginalFileProvider).scale,
     "org.jpedal.pdf2html.submitUrl": ref.watch(formvuOriginalFileProvider).submitUrl,
     "org.jpedal.pdf2html.textMode": ref.watch(formvuOriginalFileProvider).textMode,
-    // TODO: single file, fileborder, fieldbg
     "org.jpedal.pdf2html.formFieldBorderHighlight": ref.watch(formvuOriginalFileProvider).fieldBorderHex,
     "org.jpedal.pdf2html.formFieldBackgroundHighlight": ref.watch(formvuOriginalFileProvider).fieldBackgroundHex,
   };
+
+  if(ref.watch(formvuOriginalFileProvider).isSingleFileForm == true){
+    settings["org.jpedal.pdf2html.embedImagesAsBase64Stream"] = true;
+    settings["org.jpedal.pdf2html.includedFonts"] = "woff_base64";
+    settings["org.jpedal.pdf2html.inlineJavaScriptAndCSS"] = true;
+    settings["org.jpedal.pdf2html.inlineSVG"] = true;
+  }
 
   // Prepare the request headers and form data
   final settingsJson = convert.jsonEncode(settings);
