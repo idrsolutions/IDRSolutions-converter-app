@@ -1,3 +1,4 @@
+import 'package:converter/components/appbar.dart';
 import 'package:converter/components/checkbox.dart';
 import 'package:converter/components/clickable_logo.dart';
 import 'package:converter/components/color_picker.dart';
@@ -57,7 +58,7 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
     return Theme(
       data: ConverterTheme(color: AppColors.formvuPrimary).converterTheme, 
       child: Scaffold(
-        appBar: AppBar(
+        appBar: StyledAppbar(
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -66,12 +67,7 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
               Text(convertedFormat),
             ],
           ),
-          shape: Border(
-            bottom: BorderSide(
-              color: AppColors.formvuPrimary,
-              width: 10
-            )
-          ),
+          color: AppColors.formvuPrimary
         ),
 
         body: SingleChildScrollView(

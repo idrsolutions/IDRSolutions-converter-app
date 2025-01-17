@@ -1,3 +1,4 @@
+import 'package:converter/components/appbar.dart';
 import 'package:converter/components/buttons.dart';
 import 'package:converter/providers/file_formats_provider.dart';
 import 'package:converter/providers/tokens_provider.dart';
@@ -25,7 +26,7 @@ class FormvuTokenScreen extends ConsumerWidget {
     return Theme(
       data: ConverterTheme(color: AppColors.formvuPrimary).converterTheme, 
       child: Scaffold(
-        appBar: AppBar(
+        appBar: StyledAppbar(
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -34,12 +35,7 @@ class FormvuTokenScreen extends ConsumerWidget {
               Text(convertedFormat),
             ],
           ),
-          shape: Border(
-            bottom: BorderSide(
-              color: AppColors.formvuPrimary,
-              width: 10
-            )
-          ),
+          color: AppColors.formvuPrimary
         ),
         
         body: Center(

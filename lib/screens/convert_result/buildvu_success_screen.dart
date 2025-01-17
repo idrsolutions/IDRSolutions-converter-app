@@ -1,3 +1,4 @@
+import 'package:converter/components/appbar.dart';
 import 'package:converter/components/clickable_logo.dart';
 import 'package:converter/providers/file_formats_provider.dart';
 import 'package:converter/providers/file_details_provider.dart';
@@ -22,7 +23,7 @@ class BuildvuSuccessScreen extends ConsumerWidget {
     return Theme(
       data: ConverterTheme(color: AppColors.buildvuPrimary).converterTheme, 
       child: Scaffold(
-        appBar: AppBar(
+        appBar: StyledAppbar(
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -31,12 +32,7 @@ class BuildvuSuccessScreen extends ConsumerWidget {
               Text(convertedFormat),
             ],
           ),
-          shape: Border(
-            bottom: BorderSide(
-              color: AppColors.buildvuPrimary,
-              width: 10
-            )
-          ),
+          color: AppColors.buildvuPrimary
         ),
         
         body: SingleChildScrollView(

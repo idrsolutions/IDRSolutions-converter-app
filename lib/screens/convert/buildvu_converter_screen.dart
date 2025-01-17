@@ -1,3 +1,4 @@
+import 'package:converter/components/appbar.dart';
 import 'package:converter/components/checkbox.dart';
 import 'package:converter/components/clickable_logo.dart';
 import 'package:converter/components/dropdowns.dart';
@@ -46,7 +47,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
     return Theme(
       data: ConverterTheme(color: AppColors.buildvuPrimary).converterTheme, 
       child: Scaffold(
-        appBar: AppBar(
+        appBar: StyledAppbar(
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -55,12 +56,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
               Text(convertedFormat),
             ],
           ),
-          shape: Border(
-            bottom: BorderSide(
-              color: AppColors.buildvuPrimary,
-              width: 10
-            )
-          ),
+          color: AppColors.buildvuPrimary
         ),
 
         body: SingleChildScrollView(

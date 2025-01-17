@@ -1,3 +1,4 @@
+import 'package:converter/components/appbar.dart';
 import 'package:converter/components/buildvu_format_selection.dart';
 import 'package:converter/components/formvu_format_selection.dart';
 import 'package:converter/components/buttons.dart';
@@ -15,16 +16,7 @@ class HomeScreen extends StatelessWidget {
     return Theme(
       data: ConverterTheme(color: AppColors.idrBlue).converterTheme,
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('IDRSolutions Converter'),
-          shape: Border(
-            bottom: BorderSide(
-              color: AppColors.idrBlue,
-              width: 10,
-            )
-          ),
-          elevation: 4,
-        ),
+        appBar: StyledAppbar(title: const Text('IDRSolutions Converter'), color: AppColors.idrBlue),
         
         body: Center(
           child: Column(
@@ -32,13 +24,13 @@ class HomeScreen extends StatelessWidget {
             children: [
               BuildVuFormatSelection(),
               FormVuFormatSelection(),
-              ColorfulBgBtn(
-                key: Key('contactUsBtn'),
-                onPressed: (){
-                  launchURL("https://www.idrsolutions.com/contact-us");
-                }, 
-                child: StyledTitleWhite(text: 'CONTACT US')
-              )
+               ColorfulBgBtn(
+                  key: Key('contactUsBtn'),
+                  onPressed: (){
+                    launchURL("https://www.idrsolutions.com/contact-us");
+                  }, 
+                  child: StyledTitleWhite(text: 'CONTACT US')
+                )
             ],
           ),
         ),

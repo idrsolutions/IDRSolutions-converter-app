@@ -1,3 +1,4 @@
+import 'package:converter/components/appbar.dart';
 import 'package:converter/themes/colors.dart';
 import 'package:converter/themes/converter_theme.dart';
 import 'package:converter/themes/texts.dart';
@@ -11,15 +12,9 @@ class WhyFormvuScreen extends StatelessWidget {
     return Theme(
       data: ConverterTheme(color: AppColors.formvuPrimary).converterTheme,
       child: Scaffold(
-        appBar: AppBar(
+        appBar: StyledAppbar(
           title: const Text('Why FormVu?'),
-          shape: Border(
-            bottom: BorderSide(
-              color: AppColors.formvuPrimary,
-              width: 10,
-            )
-          ),
-          elevation: 4,
+          color: AppColors.formvuPrimary
         ),
         
         body: Container(
