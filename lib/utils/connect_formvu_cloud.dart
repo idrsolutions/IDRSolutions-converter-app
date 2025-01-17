@@ -16,7 +16,6 @@ Future<void> connectFormVuCloud(WidgetRef ref, BuildContext context) async {
   final filePath = ref.read(formvuOriginalFileProvider).path;
   final file = File(filePath);
   var settings = {
-    "org.jpedal.pdf2html.password": ref.watch(formvuOriginalFileProvider).password,
     "org.jpedal.pdf2html.imageScale": ref.watch(formvuOriginalFileProvider).scale,
     "org.jpedal.pdf2html.submitUrl": ref.watch(formvuOriginalFileProvider).submitUrl,
     "org.jpedal.pdf2html.textMode": ref.watch(formvuOriginalFileProvider).textMode,

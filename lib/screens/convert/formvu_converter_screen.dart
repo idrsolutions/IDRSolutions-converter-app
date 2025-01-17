@@ -112,26 +112,11 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                       const SizedBox(height: 20,),
                       const StyledTitle(text: 'Advanced Options (Optional)'),
 
-                      // password & image scale
+                      // image scale & submit url
                       const SizedBox(height: 5,),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          if(originalFormat == 'pdf')
-                            Column(
-                              children: [
-                                const StyledTitleSmall(text: 'PDF Password'),
-                                RectangleTextField(
-                                  isObscureText: true,
-                                  controller: _pdfPasswordController,
-                                  onChanged: (_){
-                                    originalFileNotifier.updateFile(password: _pdfPasswordController.text);
-                                  },
-                                ),
-                              ],
-                            ),
-                          if (originalFormat == 'pdf') 
-                            Spacer(),
                           Column(
                             children: [
                               const StyledTitleSmall(text: 'Image Scale'),
@@ -171,14 +156,9 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                               ),
                             ],
                           ),
-                        ],
-                      ),
 
-                      // submit url & text mode
-                      const SizedBox(height: 5,),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+                          Spacer(),
+
                           Column(
                             children: [
                               const StyledTitleSmall(text: 'Submit URL'),
@@ -190,7 +170,14 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                                 ),
                             ],
                           ),
-                          Spacer(),
+                        ],
+                      ),
+
+                      // text mode
+                      const SizedBox(height: 5,),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
                           Column(
                             children: [
                               const StyledTitleSmall(text: 'Text Mode'),
@@ -331,7 +318,6 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                             _overlayProgressCircle = null;
                             // reset password
                             _pdfPasswordController.clear();
-                            originalFileNotifier.updateFile(password: "");
                           }
                         }
                       } 

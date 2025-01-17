@@ -46,7 +46,6 @@ class FormVuOriginalFile{
   const FormVuOriginalFile({
     required this.path,
     this.format,
-    this.password,
     this.scale,
     this.isSingleFileForm,
     this.fieldBorderHex,
@@ -57,7 +56,6 @@ class FormVuOriginalFile{
   
   final String path;
   final String? format;
-  final String? password;
   final double? scale;
   final bool? isSingleFileForm;
   final String? fieldBorderHex;
@@ -69,7 +67,6 @@ class FormVuOriginalFile{
   FormVuOriginalFile copyWith({
     String? path,
     String? format,
-    String? password, 
     double? scale, 
     bool? isSingleFileForm, 
     String? fieldBorderHex,
@@ -79,7 +76,6 @@ class FormVuOriginalFile{
       return FormVuOriginalFile(
         path: path ?? this.path,
         format: format ?? this.format,
-        password: password ?? this.password,
         scale: scale ?? this.scale,
         isSingleFileForm: isSingleFileForm ?? this.isSingleFileForm,
         fieldBorderHex: fieldBorderHex ?? this.fieldBorderHex,
