@@ -79,7 +79,7 @@ class _SingleFilePickerState extends ConsumerState<SingleFilePicker> {
           child: StyledTitle(text: 'Select Original File', color: AppColors.dimmedBlack),
         ),
         
-        StyledText(text: fileProvider.path.isEmpty ? "" : "${fileProvider.path}".split('/').last),
+        StyledText(text: fileProvider.path.isEmpty ? "" : fileProvider.path.split('/').last),
       ],
     );
   }
