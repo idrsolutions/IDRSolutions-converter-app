@@ -26,28 +26,20 @@ class HomeScreen extends StatelessWidget {
           elevation: 4,
         ),
         
-        body: Container(
-          padding: const EdgeInsets.only(left: 16, top: 20, right: 16, bottom: 20),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                BuildVuFormatSelection(),
-            
-                const SizedBox(height: 50,),
-            
-                FormVuFormatSelection(),
-
-                const SizedBox(height: 50,),
-
-                ColorfulBgBtn(
-                  key: Key('contactUsBtn'),
-                  onPressed: (){
-                    launchURL("https://www.idrsolutions.com/contact-us");
-                  }, 
-                  child: StyledTitleWhite(text: 'CONTACT US')
-                )
-              ],
-            ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              BuildVuFormatSelection(),
+              FormVuFormatSelection(),
+              ColorfulBgBtn(
+                key: Key('contactUsBtn'),
+                onPressed: (){
+                  launchURL("https://www.idrsolutions.com/contact-us");
+                }, 
+                child: StyledTitleWhite(text: 'CONTACT US')
+              )
+            ],
           ),
         ),
       ),

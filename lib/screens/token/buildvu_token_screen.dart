@@ -15,6 +15,8 @@ class BuildvuTokenScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
     final originalFormat = ref.watch(buildvuOriginalFileFormatProvider);
     final convertedFormat = ref.watch(buildvuConvertedFileFormatProvider);
     final tokenNotifier = ref.read(buildvuTokenProvider.notifier);
@@ -42,10 +44,10 @@ class BuildvuTokenScreen extends ConsumerWidget {
         
         body: Center(
           child: Container(
-            padding: const EdgeInsets.only(left: 16, top: 30, right: 16),
+            padding: EdgeInsets.fromLTRB(w*0.05, h*0.1, w*0.05, h*0.1),
             child: Column(
               children: [
-                StyledTitleBuildVu(text: 'Token'),
+                StyledHeading(text: 'Token'),
 
                 // token text field
                 TokenTextField(
@@ -53,9 +55,6 @@ class BuildvuTokenScreen extends ConsumerWidget {
                     tokenNotifier.updateToken(newVal);
                   },
                 ),
-                
-                StyledText(text: "*The token is at the end of your received trial link", color: AppColors.dimmedBlack,),
-                Flexible(child: Image.asset('assets/images/token.png')),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -71,6 +70,13 @@ class BuildvuTokenScreen extends ConsumerWidget {
                     ),
                   ],
                 ),
+                                
+                SizedBox(height: h*0.08,),
+
+                StyledText(text: "*The token is at the end of your received trial link", color: AppColors.dimmedBlack,),
+                Flexible(child: Image.asset('assets/images/token.png')),
+
+                SizedBox(height: h*0.08,),
 
                 // continue btn
                 ColorfulBgBtn(
