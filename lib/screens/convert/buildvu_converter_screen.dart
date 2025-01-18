@@ -39,6 +39,8 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
 
   @override
   Widget build(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
     final originalFormat = ref.watch(buildvuOriginalFileFormatProvider);
     final convertedFormat = ref.watch(buildvuConvertedFileFormatProvider);
     final originalFile = ref.watch(buildvuOriginalFileProvider);
@@ -61,7 +63,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
 
         body: SingleChildScrollView(
           child: Container(
-            padding: const EdgeInsets.only(left: 16, top: 30, right: 16),
+            padding: EdgeInsets.fromLTRB(w*0.05, h*0.07, w*0.05, h*0.07),
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -88,24 +90,29 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 20,),
+                      SizedBox(height: h*0.05,),
                       const StyledTitle(text: 'Select Original File'),
 
-                      const SizedBox(height: 5,),
+                      SizedBox(height: h*0.01,),
                       SingleFilePicker(originalFormat: originalFormat), 
 
-                      const SizedBox(height: 20,),
-                      const StyledTitle(text: 'Advanced Options (Optional)'),
-
+                      SizedBox(height: h*0.05,),
+                      Row(
+                        children: [
+                          StyledTitle(text: 'Advanced Options', color: AppColors.buildvuSecondary,),
+                          const StyledTitle(text: ' (OPTIONAL)', color: Colors.red,),
+                        ],
+                      ),
+                      
                       // password & image scale
-                      const SizedBox(height: 5,),
+                      SizedBox(height: h*0.01,),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           if(originalFormat == 'pdf')
                             Column(
                               children: [
-                                const StyledTitleSmall(text: 'PDF Password'),
+                                StyledTitleSmall(text: 'PDF Password', color: AppColors.buildvuSecondary),
                                 RectangleTextField(
                                   isObscureText: true,
                                   controller: _pdfPasswordController,
@@ -119,7 +126,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                             Spacer(),
                           Column(
                             children: [
-                              const StyledTitleSmall(text: 'Image Scale'),
+                              StyledTitleSmall(text: 'Image Scale', color: AppColors.buildvuSecondary),
                               RectangleTextField(
                                 key: Key('imgScaleTextField'), // for testing
                                 keyboardType: TextInputType.number,
@@ -160,13 +167,13 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                       ),
 
                       // ui & text mode
-                      const SizedBox(height: 5,),
+                      SizedBox(height: h*0.01,),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Column(
                             children: [
-                              const StyledTitleSmall(text: 'IDRViewer UI'),
+                              StyledTitleSmall(text: 'IDRViewer UI', color: AppColors.buildvuSecondary),
                               StyledDropdown(
                                 key: Key('uiDropDown'), // for testing
                                 initialSelection: IDRViewerUIs.complete, 
@@ -181,7 +188,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                           Spacer(),
                           Column(
                             children: [
-                              const StyledTitleSmall(text: 'Text Mode'),
+                              StyledTitleSmall(text: 'Text Mode', color: AppColors.buildvuSecondary),
                               StyledDropdown(
                                 key: Key('textModeDropDown'), // for testing
                                 initialSelection: TextModes.svgRealText, 
@@ -201,7 +208,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                       ),
 
                       // embed img
-                      const SizedBox(height: 20,),
+                      SizedBox(height: h*0.02,),
                       Row(
                         children: [
                           StyledCheckbox(
@@ -213,13 +220,13 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                               originalFileNotifier.updateFile(isEmbedImage:newVal);
                             },
                           ),
-                          const StyledTitleSmall(text: 'Embed Images as Base64'),
+                          StyledTitleSmall(text: 'Embed Images as Base64', color: AppColors.buildvuSecondary),
                         ],
                       ),
 
                       // inline svg
                       if(convertedFormat != 'svg')
-                        const SizedBox(height: 20,),
+                      SizedBox(height: h*0.01,),
                       if(convertedFormat != 'svg')
                         Row(
                           children: [
@@ -232,14 +239,14 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                                 originalFileNotifier.updateFile(isInlineSVG:newVal);
                               },
                             ),
-                            const StyledTitleSmall(text: 'Inline SVGs'),
+                            StyledTitleSmall(text: 'Inline SVGs', color: AppColors.buildvuSecondary),
                           ],
                         ),
                     ],
                   ),
                   
                   // CONVERT btn
-                  const SizedBox(height: 20,),
+                  SizedBox(height: h*0.05,),
                   ColorfulBgBtn(
                     onPressed: () async {
                       // check if no file

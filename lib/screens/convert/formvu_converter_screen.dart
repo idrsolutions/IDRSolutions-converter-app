@@ -50,6 +50,8 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
     final originalFormat = ref.watch(formvuOriginalFileFormatProvider);
     final convertedFormat = ref.watch(formvuConvertedFileFormatProvider);
     final originalFile = ref.watch(formvuOriginalFileProvider);
@@ -72,7 +74,7 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
 
         body: SingleChildScrollView(
           child: Container(
-            padding: const EdgeInsets.only(left: 16, top: 30, right: 16),
+            padding: EdgeInsets.fromLTRB(w*0.05, h*0.05, w*0.05, h*0.05),
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -99,23 +101,28 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 20,),
+                      SizedBox(height: h*0.05,),
                       const StyledTitle(text: 'Select Original File'),
 
-                      const SizedBox(height: 5,),
+                      SizedBox(height: h*0.01,),
                       SingleFilePicker(originalFormat: originalFormat), 
 
-                      const SizedBox(height: 20,),
-                      const StyledTitle(text: 'Advanced Options (Optional)'),
+                      SizedBox(height: h*0.05,),
+                      Row(
+                        children: [
+                          StyledTitle(text: 'Advanced Options', color: AppColors.formvuSecondary),
+                          const StyledTitle(text: ' (OPTIONAL)', color: Colors.red,),
+                        ],
+                      ),
 
                       // image scale & submit url
-                      const SizedBox(height: 5,),
+                      SizedBox(height: h*0.01,),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Column(
                             children: [
-                              const StyledTitleSmall(text: 'Image Scale'),
+                              StyledTitleSmall(text: 'Image Scale', color: AppColors.formvuSecondary),
                               RectangleTextField(
                                 key: Key('imgScaleTextField'), // for testing
                                 keyboardType: TextInputType.number,
@@ -157,7 +164,7 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
 
                           Column(
                             children: [
-                              const StyledTitleSmall(text: 'Submit URL'),
+                              StyledTitleSmall(text: 'Submit URL', color: AppColors.formvuSecondary),
                               RectangleTextField(
                                   controller: _submitUrlController,
                                   onChanged: (_){
@@ -170,13 +177,13 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                       ),
 
                       // text mode
-                      const SizedBox(height: 5,),
+                      SizedBox(height: h*0.01,),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Column(
                             children: [
-                              const StyledTitleSmall(text: 'Text Mode'),
+                              StyledTitleSmall(text: 'Text Mode', color: AppColors.formvuSecondary),
                               StyledDropdown(
                                 key: Key('textModeDropDown'), // for testing
                                 initialSelection: TextModes.svgRealText, 
@@ -196,7 +203,7 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                       ),
 
                       // single file form
-                      const SizedBox(height: 20,),
+                      SizedBox(height: h*0.02,),
                       Row(
                         children: [
                           StyledCheckbox(
@@ -208,12 +215,12 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                               originalFileNotifier.updateFile(isSingleFileForm:newVal);
                             },
                           ),
-                          const StyledTitleSmall(text: 'Single File Form'),
+                          StyledTitleSmall(text: 'Single File Form', color: AppColors.formvuSecondary),
                         ],
                       ),
 
                       // field border color
-                      const SizedBox(height: 20,),
+                      SizedBox(height: h*0.01,),
                       Row(
                         children: [
                           ColorPicker(
@@ -226,12 +233,12 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                             }
                           ),
                           const SizedBox(width: 10,),
-                          const StyledTitleSmall(text: 'Field Border Color'),
+                          StyledTitleSmall(text: 'Field Border Color', color: AppColors.formvuSecondary),
                         ],
                       ),
 
                       // field background color
-                      const SizedBox(height: 20,),
+                      SizedBox(height: h*0.02,),
                       Row(
                         children: [
                           ColorPicker(
@@ -244,14 +251,14 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                             }
                           ),
                           const SizedBox(width: 10,),
-                          const StyledTitleSmall(text: 'Field Background Color'),
+                          StyledTitleSmall(text: 'Field Background Color', color: AppColors.formvuSecondary),
                         ],
                       ),
                     ],
                   ),
                   
                   // CONVERT btn
-                  const SizedBox(height: 20,),
+                  SizedBox(height: h*0.04,),
                   ColorfulBgBtn(
                     onPressed: () async {
                       // check if no file
