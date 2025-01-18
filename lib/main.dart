@@ -1,4 +1,6 @@
 
+import 'package:converter/screens/convert_result/buildvu_success_screen.dart';
+import 'package:converter/screens/convert_result/formvu_success_screen.dart';
 import 'package:converter/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,8 +16,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const HomeScreen(), 
-      // home: FormvuSuccessScreen(),
+      // home: const HomeScreen(), 
+      home: BuildvuSuccessScreen(),
       // home: const Sandbox(),
     );
   }

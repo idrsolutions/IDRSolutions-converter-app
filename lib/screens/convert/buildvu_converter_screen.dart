@@ -63,7 +63,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
 
         body: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.fromLTRB(w*0.05, h*0.07, w*0.05, h*0.07),
+            padding: EdgeInsets.fromLTRB(w*0.05, h*0.05, w*0.05, h*0.05),
             child: SingleChildScrollView(
               child: Column(
                 children: [

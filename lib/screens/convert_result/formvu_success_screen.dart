@@ -15,6 +15,8 @@ class FormvuSuccessScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
     final originalFormat = ref.watch(formvuOriginalFileFormatProvider);
     final convertedFormat = ref.watch(formvuConvertedFileFormatProvider);
     final convertedFilePreviewURL = ref.watch(convertedFileProvider).previewURL;
@@ -37,7 +39,7 @@ class FormvuSuccessScreen extends ConsumerWidget {
         
         body: SingleChildScrollView(
           child: Container(
-            padding: const EdgeInsets.only(left: 16, top: 30, right: 16),
+            padding: EdgeInsets.fromLTRB(w*0.05, h*0.04, w*0.05, h*0.04),
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -46,10 +48,10 @@ class FormvuSuccessScreen extends ConsumerWidget {
                     children: [
                       ClickableLogo(logoPath: 'assets/images/poweredbyformvu.png', myURL: 'https://www.idrsolutions.com/formvu/'),
 
-                      const SizedBox(height: 20,),
+                      SizedBox(height: h*0.03),
                       StyledHeading(text: 'Your file is sucessfully converted!'),
                     
-                      const SizedBox(height: 5,),
+                      SizedBox(height: h*0.03),
                       Wrap(
                         children: [
                           WhiteBgBtn(
@@ -58,7 +60,7 @@ class FormvuSuccessScreen extends ConsumerWidget {
                             }, 
                             child: StyledTitleFormVu(text: 'Preview Online'),
                           ),
-                          const SizedBox(width: 10,),
+                          SizedBox(width: w*0.03),
 
                           WhiteBgBtn(
                             onPressed: (){
@@ -66,7 +68,7 @@ class FormvuSuccessScreen extends ConsumerWidget {
                             }, 
                             child: StyledTitleFormVu(text: 'Download Zip'),
                           ),
-                          const SizedBox(width: 10,),
+                          SizedBox(width: w*0.03),
 
                           WhiteBgBtn(
                             onPressed: (){
@@ -77,17 +79,17 @@ class FormvuSuccessScreen extends ConsumerWidget {
                         ],
                       ),
 
-                      const SizedBox(height: 20,),
+                      SizedBox(height: h*0.03),
                       StyledText(text: 'This free online converter is powered by FormVu. FormVu is a document conversion SDK that allows developers to build HTML solutions that work with PDF Form files.'),
 
-                      const SizedBox(height: 20,),
+                      SizedBox(height: h*0.03),
                       StyledTitleFormVu(
                         key: Key('businessRequirement'), // for testing
                         text: 'Business requirement to reuse PDF forms in the web browser?'
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20,),
+                  SizedBox(height: h*0.03),
                   ColorfulBgBtn(
                     onPressed: (){
                       launchURL('https://www.idrsolutions.com/formvu/');
