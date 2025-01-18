@@ -40,7 +40,7 @@ class FormvuTokenScreen extends ConsumerWidget {
         
         body: Center(
           child: Container(
-            padding: EdgeInsets.fromLTRB(w*0.05, h*0.1, w*0.05, h*0.1),
+            padding: EdgeInsets.fromLTRB(w*0.05, h*0.05, w*0.05, h*0.05),
             child: Column(
               children: [
                 StyledHeading(text: 'Token'),

@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // home: const HomeScreen(), 
-      home: BuildvuSuccessScreen(),
+      home: const HomeScreen(), 
+      // home: BuildvuSuccessScreen(),
       // home: const Sandbox(),
     );
   }

@@ -13,27 +13,35 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
+
     return Theme(
       data: ConverterTheme(color: AppColors.idrBlue).converterTheme,
       child: Scaffold(
         appBar: StyledAppbar(title: const Text('IDRSolutions Converter'), color: AppColors.idrBlue),
-        
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              BuildVuFormatSelection(),
-              FormVuFormatSelection(),
-               ColorfulBgBtn(
-                  key: Key('contactUsBtn'),
-                  onPressed: (){
-                    launchURL("https://www.idrsolutions.com/contact-us");
-                  }, 
-                  child: StyledTitleWhite(text: 'CONTACT US')
-                )
-            ],
+
+        body: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.fromLTRB(w*0.05, h*0.05, w*0.05, h*0.05),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                BuildVuFormatSelection(),
+                SizedBox(height: h*0.1,),
+                FormVuFormatSelection(),
+                SizedBox(height: h*0.1,),
+                ColorfulBgBtn(
+                    key: Key('contactUsBtn'),
+                    onPressed: (){
+                      launchURL("https://www.idrsolutions.com/contact-us");
+                    }, 
+                    child: StyledTitleWhite(text: 'CONTACT US')
+                  )
+              ],
+            )
           ),
-        ),
+        )
       ),
     );
   }
