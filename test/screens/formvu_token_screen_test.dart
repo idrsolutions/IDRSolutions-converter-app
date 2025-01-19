@@ -49,5 +49,14 @@ void main() {
       await tester.tap(find.byType(ColorfulBgBtn));
       expect(find.byType(ScaffoldMessenger), findsOneWidget);
     });
+
+    testWidgets('test if filling out token text field then clicking on continue btn will not trigger snackbar', (tester)async{
+      await tester.pumpWidget(createHomeScreen());
+      expect(find.byType(TokenTextField), findsOneWidget);
+      await tester.enterText(find.byType(TokenTextField), 'a');
+      await tester.pumpAndSettle();
+      await tester.tap(find.byType(ColorfulBgBtn));
+      expect(find.byType(SnackBar), findsNothing);
+    });
   });
 }
