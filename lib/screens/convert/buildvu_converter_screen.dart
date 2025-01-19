@@ -114,6 +114,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                               children: [
                                 StyledTitleSmall(text: 'PDF Password', color: AppColors.buildvuSecondary),
                                 RectangleTextField(
+                                  key: Key('passwordField'),
                                   isObscureText: true,
                                   controller: _pdfPasswordController,
                                   onChanged: (_){

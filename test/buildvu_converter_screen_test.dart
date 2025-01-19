@@ -51,13 +51,18 @@ void main() {
       expect(find.byType(ScaffoldMessenger), findsOneWidget);
     });
 
-    testWidgets('test if pdf password text field and img scale text field show up', (tester)async{
+    testWidgets('test if pdf password text field shows up and the input is obscure', (tester)async{
       await tester.pumpWidget(createHomeScreen());
-      expect(find.byType(RectangleTextField), findsExactly(2));
+      expect(find.byKey(Key('passwordField')), findsOneWidget);
+      await tester.enterText(find.byKey(Key('passwordField')), 'a');
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      final textFieldWidget = tester.widget<RectangleTextField>(find.byKey(Key('passwordField')));
+      expect(textFieldWidget.isObscureText, isTrue);
     });
 
-    testWidgets('test if type in non-number in img scale text field, snackbar shows up', (tester)async{
+    testWidgets('test if img scale text field shows up and typing in non-number triggers snackbar', (tester)async{
       await tester.pumpWidget(createHomeScreen());
+      expect(find.byKey(Key('imgScaleTextField')), findsOneWidget);
       await tester.enterText(find.byKey(Key('imgScaleTextField')), 'a');
       await tester.pumpAndSettle(const Duration(seconds: 1));
       expect(find.byType(ScaffoldMessenger), findsOneWidget);

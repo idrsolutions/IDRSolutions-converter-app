@@ -166,6 +166,7 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                             children: [
                               StyledTitleSmall(text: 'Submit URL', color: AppColors.formvuSecondary),
                               RectangleTextField(
+                                  key: Key('urlField'),
                                   controller: _submitUrlController,
                                   onChanged: (_){
                                     originalFileNotifier.updateFile(submitUrl: _submitUrlController.text);

@@ -52,9 +52,17 @@ void main() {
       expect(find.byType(ScaffoldMessenger), findsOneWidget);
     });
 
-    testWidgets('test if img scale text field and submit url text field show up', (tester)async{
+    testWidgets('test if img scale text field shows up and typing in non-number triggers snackbar', (tester)async{
       await tester.pumpWidget(createHomeScreen());
-      expect(find.byType(RectangleTextField), findsExactly(2));
+      expect(find.byKey(Key('imgScaleTextField')), findsOneWidget);
+      await tester.enterText(find.byKey(Key('imgScaleTextField')), 'a');
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      expect(find.byType(ScaffoldMessenger), findsOneWidget);
+    });
+
+    testWidgets('test if submit url text field show up', (tester)async{
+      await tester.pumpWidget(createHomeScreen());
+      expect(find.byKey(Key('urlField')), findsOneWidget);
     });
 
     testWidgets('test if type in non-number in img scale text field, snackbar shows up', (tester)async{
