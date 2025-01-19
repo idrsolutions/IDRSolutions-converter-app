@@ -91,7 +91,7 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                           onPressed: (){
                             Navigator.push(context,MaterialPageRoute(builder: (context) => const WhyFormvuScreen()),);
                           },
-                          child: const StyledTitle(text: 'Why FormVu?'),
+                          child: const StyledTitle(key: Key('whyBtn'), text: 'Why FormVu?'),
                         ),
                       ),
                     ],
@@ -102,7 +102,7 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: h*0.05,),
-                      const StyledTitle(text: 'Select Original File'),
+                      const StyledTitle(key: Key('selectBtn'),text: 'Select Original File'),
 
                       SizedBox(height: h*0.01,),
                       SingleFilePicker(originalFormat: originalFormat), 
@@ -224,6 +224,7 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                       Row(
                         children: [
                           ColorPicker(
+                            key: Key('borderColorPicker'),
                             pickerColor: defaultFieldBorderColor, 
                             onColorChanged: (Color color){
                               setState(() {
@@ -242,6 +243,7 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                       Row(
                         children: [
                           ColorPicker(
+                            key: Key('backgroundColorPicker'),
                             pickerColor: defaultFieldBackgroundColor, 
                             onColorChanged: (Color color){
                               setState(() {

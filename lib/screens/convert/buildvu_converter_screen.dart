@@ -80,7 +80,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                           onPressed: (){
                             Navigator.push(context,MaterialPageRoute(builder: (context) => const WhyBuildVuScreen()),);
                           },
-                          child: const StyledTitle(text: 'Why BuildVu?'),
+                          child: const StyledTitle(key: Key('whyBtn'), text: 'Why BuildVu?'),
                         ),
                       ),
                     ],
@@ -91,7 +91,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: h*0.05,),
-                      const StyledTitle(text: 'Select Original File'),
+                      const StyledTitle(key: Key('selectBtn'), text: 'Select Original File'),
 
                       SizedBox(height: h*0.01,),
                       SingleFilePicker(originalFormat: originalFormat), 
