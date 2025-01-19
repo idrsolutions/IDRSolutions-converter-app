@@ -1,3 +1,4 @@
+import 'package:converter/components/appbar.dart';
 import 'package:converter/components/buttons.dart';
 import 'package:converter/components/clickable_logo.dart';
 import 'package:converter/screens/convert_result/buildvu_success_screen.dart';
@@ -17,6 +18,11 @@ Widget createHomeScreen(){
 void main() {
 
   group('BuildVu success screen widget test', (){
+    testWidgets('test if appbar shows up', (tester)async{
+      await tester.pumpWidget(createHomeScreen());
+      expect(find.byType(StyledAppbar), findsOneWidget);
+    });
+    
     testWidgets('test if app bar shows up', (tester)async{
       await tester.pumpWidget(createHomeScreen());
       expect(find.byType(AppBar), findsOneWidget);

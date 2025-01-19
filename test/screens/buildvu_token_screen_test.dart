@@ -1,3 +1,4 @@
+import 'package:converter/components/appbar.dart';
 import 'package:converter/components/buttons.dart';
 import 'package:converter/components/text_fields.dart';
 import 'package:converter/screens/token/buildvu_token_screen.dart';
@@ -17,6 +18,11 @@ Widget createHomeScreen(){
 void main() {
 
   group('BuildVu token screen widget test', (){
+    testWidgets('test if appbar shows up', (tester)async{
+      await tester.pumpWidget(createHomeScreen());
+      expect(find.byType(StyledAppbar), findsOneWidget);
+    });
+
     testWidgets('test if title shows up', (tester)async{
       await tester.pumpWidget(createHomeScreen());
       expect(find.text('Token'), findsOneWidget);

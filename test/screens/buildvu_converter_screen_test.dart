@@ -1,3 +1,4 @@
+import 'package:converter/components/appbar.dart';
 import 'package:converter/components/buttons.dart';
 import 'package:converter/components/checkbox.dart';
 import 'package:converter/components/clickable_logo.dart';
@@ -18,6 +19,11 @@ Widget createHomeScreen(){
 void main() {
 
   group('BuildVu converter screen widget test', (){
+    testWidgets('test if appbar shows up', (tester)async{
+      await tester.pumpWidget(createHomeScreen());
+      expect(find.byType(StyledAppbar), findsOneWidget);
+    });
+    
     testWidgets('test if logo shows up', (tester)async{
       await tester.pumpWidget(createHomeScreen());
       expect(find.byType(ClickableLogo), findsOneWidget);

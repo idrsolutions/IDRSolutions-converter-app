@@ -1,3 +1,4 @@
+import 'package:converter/components/appbar.dart';
 import 'package:converter/components/buildvu_format_selection.dart';
 import 'package:converter/components/formvu_format_selection.dart';
 import 'package:converter/screens/home_screen.dart';
@@ -18,7 +19,7 @@ void main() {
   group('home screen widget test', (){
     testWidgets('test if appbar shows up', (tester)async{
       await tester.pumpWidget(createHomeScreen());
-      expect(find.text('IDRSolutions Converter'), findsOneWidget);
+      expect(find.byType(StyledAppbar), findsOneWidget);
     });
 
     testWidgets('test if BuildVu format picker shows up', (tester)async{
