@@ -58,7 +58,7 @@ class BuildvuSuccessScreen extends ConsumerWidget {
                             onPressed: (){
                               launchURL(convertedFilePreviewURL);
                             }, 
-                            child: StyledTitleBuildVu(text: 'Preview Online'),
+                            child: StyledTitleBuildVu(key: Key('previewBtn'), text: 'Preview Online'),
                           ),
                           SizedBox(width: w*0.03),
 
@@ -66,7 +66,7 @@ class BuildvuSuccessScreen extends ConsumerWidget {
                             onPressed: (){
                               launchURL(convertedFileDownloadURL);
                             }, 
-                            child: StyledTitleBuildVu(text: 'Download Zip'),
+                            child: StyledTitleBuildVu(key: Key('downloadBtn'), text: 'Download Zip'),
                           ),
                           SizedBox(width: w*0.03),
 
@@ -74,7 +74,7 @@ class BuildvuSuccessScreen extends ConsumerWidget {
                             onPressed: (){
                               Navigator.pop(context);
                             }, 
-                            child: StyledTitleBuildVu(text: 'Convert Another File'),
+                            child: StyledTitleBuildVu(key: Key('convertAnotherBtn'), text: 'Convert Another File'),
                           ),
                         ],
                       ),

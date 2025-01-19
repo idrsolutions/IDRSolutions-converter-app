@@ -58,7 +58,7 @@ class FormvuSuccessScreen extends ConsumerWidget {
                             onPressed: (){
                               launchURL(convertedFilePreviewURL);
                             }, 
-                            child: StyledTitleFormVu(text: 'Preview Online'),
+                            child: StyledTitleFormVu(key: Key('previewBtn'), text: 'Preview Online'),
                           ),
                           SizedBox(width: w*0.03),
 
@@ -66,7 +66,7 @@ class FormvuSuccessScreen extends ConsumerWidget {
                             onPressed: (){
                               launchURL(convertedFileDownloadURL);
                             }, 
-                            child: StyledTitleFormVu(text: 'Download Zip'),
+                            child: StyledTitleFormVu(key: Key('downloadBtn'), text: 'Download Zip'),
                           ),
                           SizedBox(width: w*0.03),
 
@@ -74,7 +74,7 @@ class FormvuSuccessScreen extends ConsumerWidget {
                             onPressed: (){
                               Navigator.pop(context);
                             }, 
-                            child: StyledTitleFormVu(text: 'Convert Another File'),
+                            child: StyledTitleFormVu(key: Key('convertAnotherBtn'), text: 'Convert Another File'),
                           ),
                         ],
                       ),

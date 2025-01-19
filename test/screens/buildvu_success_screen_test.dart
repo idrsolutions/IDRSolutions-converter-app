@@ -27,10 +27,19 @@ void main() {
       expect(find.byType(ClickableLogo), findsOneWidget);
     });
 
-    testWidgets('test if preview, download, convert, learn more btns show up', (tester)async{
+    testWidgets('test if preview, download, learn more btns show up', (tester)async{
       await tester.pumpWidget(createHomeScreen());
-      expect(find.byType(WhiteBgBtn), findsExactly(3));
+      expect(find.byKey(Key('previewBtn')), findsOneWidget);
+      expect(find.byKey(Key('downloadBtn')), findsOneWidget);
       expect(find.byType(ColorfulBgBtn), findsOneWidget);
+    });
+
+    testWidgets('test if convert another file btn shows up and is clickable', (tester)async{
+      await tester.pumpWidget(createHomeScreen());
+      expect(find.byKey(Key('convertAnotherBtn')), findsOneWidget);
+      await tester.tap(find.byKey(Key('convertAnotherBtn')));
+      await tester.pumpAndSettle();
+      expect(find.byKey(Key('convertAnotherBtn')), findsNothing);
     });
 
     testWidgets('test if the words show up', (tester)async{
