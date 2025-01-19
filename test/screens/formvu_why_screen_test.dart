@@ -1,0 +1,40 @@
+import 'package:converter/components/appbar.dart';
+import 'package:converter/components/buttons.dart';
+import 'package:converter/screens/others/why_formvu_screen.dart';
+import 'package:converter/themes/texts.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+Widget createHomeScreen(){
+  return ProviderScope(
+    child: MaterialApp(
+      home: WhyFormvuScreen(),
+    )
+  );
+}
+
+void main() {
+
+  group('FormVu why screen widget test', (){
+    testWidgets('test if appbar shows up', (tester)async{
+      await tester.pumpWidget(createHomeScreen());
+      expect(find.byType(StyledAppbar), findsOneWidget);
+    });
+    
+    testWidgets('test if titles show up', (tester)async{
+      await tester.pumpWidget(createHomeScreen());
+      expect(find.byType(StyledTitleFormVu), findsExactly(4));
+    });
+
+    testWidgets('test if contents show up', (tester)async{
+      await tester.pumpWidget(createHomeScreen());
+      expect(find.byType(StyledText), findsExactly(4));
+    });
+
+    testWidgets('test if learn more btn shows up', (tester)async{
+      await tester.pumpWidget(createHomeScreen());
+      expect(find.byType(ColorfulBgBtn), findsOneWidget);
+    });
+  });
+}
