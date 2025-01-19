@@ -1,4 +1,5 @@
 import 'package:converter/components/buildvu_format_selection.dart';
+import 'package:converter/components/formvu_format_selection.dart';
 import 'package:converter/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,6 +24,11 @@ void main() {
     testWidgets('test if BuildVu format picker shows up', (tester)async{
       await tester.pumpWidget(createHomeScreen());
       expect(find.byType(BuildVuFormatSelection), findsOneWidget);
+    });
+
+    testWidgets('test if FormVu format picker shows up', (tester)async{
+      await tester.pumpWidget(createHomeScreen());
+      expect(find.byType(FormVuFormatSelection), findsOneWidget);
     });
 
     testWidgets('test if contact us btn shows up', (tester)async{
@@ -55,6 +61,23 @@ void main() {
     testWidgets('test if BuildVu GO btn shows up', (tester)async{
       await tester.pumpWidget(createHomeScreen());
       expect(find.byKey(Key('buildvuGo')), findsOneWidget);
+    });
+  });
+
+  group('FormVu format selection widget test', (){
+    testWidgets('test if title shows up', (tester)async{
+      await tester.pumpWidget(createHomeScreen());
+      expect(find.text('Fillable PDF to HTML'), findsOneWidget);
+    });
+
+    testWidgets('test if FormVu logo shows up', (tester)async{
+      await tester.pumpWidget(createHomeScreen());
+      expect(find.byKey(Key('formvuLogo')), findsOneWidget);
+    });
+
+    testWidgets('test if FormVu GO btn shows up', (tester)async{
+      await tester.pumpWidget(createHomeScreen());
+      expect(find.byKey(Key('formvuGo')), findsOneWidget);
     });
   });
 }

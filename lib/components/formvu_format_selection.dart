@@ -34,6 +34,7 @@ class _FormVuFormatSelectionState extends State<FormVuFormatSelection> {
               myURL: 'https://www.idrsolutions.com/formvu/'
             ),
             ColorfulBgBtn(
+              key: Key('formvuGo'),
               color: AppColors.formvuPrimary,
               onPressed: (){
                 Navigator.push(context, MaterialPageRoute(builder: (ctx) => const FormvuTokenScreen()));
