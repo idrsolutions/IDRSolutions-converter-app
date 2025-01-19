@@ -38,6 +38,14 @@ void main() {
       expect(find.byType(ColorfulBgBtn), findsOneWidget);
     });
 
+    testWidgets('test if clicking on convert btn without selecting a file, a snackbar shows up', (tester)async{
+      await tester.pumpWidget(createHomeScreen());
+      expect(find.byType(ColorfulBgBtn), findsOneWidget);
+      await tester.tap(find.byType(ColorfulBgBtn));
+      await tester.pumpAndSettle();
+      expect(find.byType(ScaffoldMessenger), findsOneWidget);
+    });
+
     testWidgets('test if img scale text field and submit url text field show up', (tester)async{
       await tester.pumpWidget(createHomeScreen());
       expect(find.byType(RectangleTextField), findsExactly(2));
