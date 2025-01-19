@@ -1,8 +1,5 @@
 import 'package:converter/components/appbar.dart';
 import 'package:converter/components/buttons.dart';
-import 'package:converter/components/checkbox.dart';
-import 'package:converter/components/clickable_logo.dart';
-import 'package:converter/components/text_fields.dart';
 import 'package:converter/screens/others/why_buildvu_screen.dart';
 import 'package:converter/themes/texts.dart';
 import 'package:flutter/material.dart';
