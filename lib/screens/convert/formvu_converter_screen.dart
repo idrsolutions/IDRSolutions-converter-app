@@ -3,8 +3,8 @@ import 'package:converter/components/checkbox.dart';
 import 'package:converter/components/clickable_logo.dart';
 import 'package:converter/components/color_picker.dart';
 import 'package:converter/components/dropdowns.dart';
+import 'package:converter/components/formvu_file_picker.dart';
 import 'package:converter/components/overlay_progress_circle.dart';
-import 'package:converter/components/single_file_picker.dart';
 import 'package:converter/components/text_fields.dart';
 import 'package:converter/models/text_mode_formats.dart';
 import 'package:converter/providers/file_formats_provider.dart';
@@ -57,280 +57,286 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
     final originalFile = ref.watch(formvuOriginalFileProvider);
     final originalFileNotifier = ref.watch(formvuOriginalFileProvider.notifier);
   
-    return Theme(
-      data: ConverterTheme(color: AppColors.formvuPrimary).converterTheme, 
-      child: Scaffold(
-        appBar: StyledAppbar(
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text(originalFormat),
-              const Text('to'),
-              Text(convertedFormat),
-            ],
+    return PopScope(
+      onPopInvokedWithResult: (popDisposition, result){
+        // Reset the file when the user navigates back
+        originalFileNotifier.updateFile(path: '',);
+      },
+      child: Theme(
+        data: ConverterTheme(color: AppColors.formvuPrimary).converterTheme, 
+        child: Scaffold(
+          appBar: StyledAppbar(
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(originalFormat),
+                const Text('to'),
+                Text(convertedFormat),
+              ],
+            ),
+            color: AppColors.formvuPrimary
           ),
-          color: AppColors.formvuPrimary
-        ),
-
-        body: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.fromLTRB(w*0.05, h*0.05, w*0.05, h*0.05),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  // formvu logo and why btn
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Flexible(
-                        child: ClickableLogo(logoPath: 'assets/images/poweredbyformvu.png', myURL: 'https://www.idrsolutions.com/formvu/'),
-                      ),
-                      
-                      Flexible(
-                        child: WhiteBgBtn(
-                          onPressed: (){
-                            Navigator.push(context,MaterialPageRoute(builder: (context) => const WhyFormvuScreen()),);
-                          },
-                          child: const StyledTitle(key: Key('whyBtn'), text: 'Why FormVu?'),
+      
+          body: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.fromLTRB(w*0.05, h*0.05, w*0.05, h*0.05),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    // formvu logo and why btn
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Flexible(
+                          child: ClickableLogo(logoPath: 'assets/images/poweredbyformvu.png', myURL: 'https://www.idrsolutions.com/formvu/'),
                         ),
-                      ),
-                    ],
-                  ),
-                  
-                  // select file and advanced options
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: h*0.05,),
-                      const StyledTitle(key: Key('selectBtn'),text: 'Select Original File'),
-
-                      SizedBox(height: h*0.01,),
-                      SingleFilePicker(originalFormat: originalFormat), 
-
-                      SizedBox(height: h*0.05,),
-                      Row(
-                        children: [
-                          StyledTitle(text: 'Advanced Options', color: AppColors.formvuSecondary),
-                          const StyledTitle(text: ' (OPTIONAL)', color: Colors.red,),
-                        ],
-                      ),
-
-                      // image scale & submit url
-                      SizedBox(height: h*0.01,),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            children: [
-                              StyledTitleSmall(text: 'Image Scale', color: AppColors.formvuSecondary),
-                              RectangleTextField(
-                                key: Key('imgScaleTextField'), // for testing
-                                keyboardType: TextInputType.number,
-                                controller: _imageScaleController,
-                                onChanged:(val){
-                                  if (val.isNotEmpty) {
-                                    try{
-                                      // attempt to parse the value to a double
-                                      double parsedVal = double.parse(val);
-
-                                      // limit user input range
-                                      if(parsedVal>10.0) {
-                                        _imageScaleController.text = "10.0";
-                                        parsedVal = 10.0;
-                                      }else if(parsedVal<1){
-                                        _imageScaleController.text = "1";
-                                        parsedVal = 1;
-                                      }
-
-                                      // update file detail
-                                      originalFileNotifier.updateFile(scale: parsedVal);
-                                    }catch(e){
-                                      // if parse failed, clear the text and warn user to put in double 
-                                      _imageScaleController.text = "";
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        const SnackBar(
-                                          content: Text('Invalid input. Please put in numbers between 1-10'),
-                                          duration: Duration(seconds: 2),
-                                        ),
-                                      );
-                                    }
-                                  }
-                                },
-                              ),
-                            ],
+                        
+                        Flexible(
+                          child: WhiteBgBtn(
+                            onPressed: (){
+                              Navigator.push(context,MaterialPageRoute(builder: (context) => const WhyFormvuScreen()),);
+                            },
+                            child: const StyledTitle(key: Key('whyBtn'), text: 'Why FormVu?'),
                           ),
-
-                          Spacer(),
-
-                          Column(
-                            children: [
-                              StyledTitleSmall(text: 'Submit URL', color: AppColors.formvuSecondary),
-                              RectangleTextField(
-                                  key: Key('urlField'),
-                                  controller: _submitUrlController,
-                                  onChanged: (_){
-                                    originalFileNotifier.updateFile(submitUrl: _submitUrlController.text);
+                        ),
+                      ],
+                    ),
+                    
+                    // select file and advanced options
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: h*0.05,),
+                        const StyledTitle(key: Key('selectBtn'),text: 'Select Original File'),
+      
+                        SizedBox(height: h*0.01,),
+                        FormVuFilePicker(originalFormat: originalFormat), 
+      
+                        SizedBox(height: h*0.05,),
+                        Row(
+                          children: [
+                            StyledTitle(text: 'Advanced Options', color: AppColors.formvuSecondary),
+                            const StyledTitle(text: ' (OPTIONAL)', color: Colors.red,),
+                          ],
+                        ),
+      
+                        // image scale & submit url
+                        SizedBox(height: h*0.01,),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Column(
+                              children: [
+                                StyledTitleSmall(text: 'Image Scale', color: AppColors.formvuSecondary),
+                                RectangleTextField(
+                                  key: Key('imgScaleTextField'), // for testing
+                                  keyboardType: TextInputType.number,
+                                  controller: _imageScaleController,
+                                  onChanged:(val){
+                                    if (val.isNotEmpty) {
+                                      try{
+                                        // attempt to parse the value to a double
+                                        double parsedVal = double.parse(val);
+      
+                                        // limit user input range
+                                        if(parsedVal>10.0) {
+                                          _imageScaleController.text = "10.0";
+                                          parsedVal = 10.0;
+                                        }else if(parsedVal<1){
+                                          _imageScaleController.text = "1";
+                                          parsedVal = 1;
+                                        }
+      
+                                        // update file detail
+                                        originalFileNotifier.updateFile(scale: parsedVal);
+                                      }catch(e){
+                                        // if parse failed, clear the text and warn user to put in double 
+                                        _imageScaleController.text = "";
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          const SnackBar(
+                                            content: Text('Invalid input. Please put in numbers between 1-10'),
+                                            duration: Duration(seconds: 2),
+                                          ),
+                                        );
+                                      }
+                                    }
                                   },
                                 ),
-                            ],
-                          ),
-                        ],
-                      ),
-
-                      // text mode
-                      SizedBox(height: h*0.01,),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            children: [
-                              StyledTitleSmall(text: 'Text Mode', color: AppColors.formvuSecondary),
-                              StyledDropdown(
-                                key: Key('textModeDropDown'), // for testing
-                                initialSelection: TextModes.svgRealText, 
-                                controller: _textModeController, 
-                                dropdownMenuEntries: TextModes.entries, 
-                                onChanged: (newVal){
-                                  if(newVal.toString().split(".").last == "svgRealText"){
-                                    originalFileNotifier.updateFile(textMode: "svg_realtext");
-                                  }else{
-                                    originalFileNotifier.updateFile(textMode: "svg_shapetext_selectable");
+                              ],
+                            ),
+      
+                            Spacer(),
+      
+                            Column(
+                              children: [
+                                StyledTitleSmall(text: 'Submit URL', color: AppColors.formvuSecondary),
+                                RectangleTextField(
+                                    key: Key('urlField'),
+                                    controller: _submitUrlController,
+                                    onChanged: (_){
+                                      originalFileNotifier.updateFile(submitUrl: _submitUrlController.text);
+                                    },
+                                  ),
+                              ],
+                            ),
+                          ],
+                        ),
+      
+                        // text mode
+                        SizedBox(height: h*0.01,),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Column(
+                              children: [
+                                StyledTitleSmall(text: 'Text Mode', color: AppColors.formvuSecondary),
+                                StyledDropdown(
+                                  key: Key('textModeDropDown'), // for testing
+                                  initialSelection: TextModes.svgRealText, 
+                                  controller: _textModeController, 
+                                  dropdownMenuEntries: TextModes.entries, 
+                                  onChanged: (newVal){
+                                    if(newVal.toString().split(".").last == "svgRealText"){
+                                      originalFileNotifier.updateFile(textMode: "svg_realtext");
+                                    }else{
+                                      originalFileNotifier.updateFile(textMode: "svg_shapetext_selectable");
+                                    }
                                   }
-                                }
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-
-                      // single file form
-                      SizedBox(height: h*0.02,),
-                      Row(
-                        children: [
-                          StyledCheckbox(
-                            isChecked: isSingleFileFormChecked,
-                            onChanged: (newVal) {
-                              setState(() {
-                                isSingleFileFormChecked = newVal;
-                              });
-                              originalFileNotifier.updateFile(isSingleFileForm:newVal);
-                            },
-                          ),
-                          StyledTitleSmall(text: 'Single File Form', color: AppColors.formvuSecondary),
-                        ],
-                      ),
-
-                      // field border color
-                      SizedBox(height: h*0.01,),
-                      Row(
-                        children: [
-                          ColorPicker(
-                            key: Key('borderColorPicker'),
-                            pickerColor: defaultFieldBorderColor, 
-                            onColorChanged: (Color color){
-                              setState(() {
-                                defaultFieldBorderColor = color;
-                                originalFileNotifier.updateFile(fieldBorderHex: colorToHex(defaultFieldBorderColor));
-                              });
-                            }
-                          ),
-                          const SizedBox(width: 10,),
-                          StyledTitleSmall(text: 'Field Border Color', color: AppColors.formvuSecondary),
-                        ],
-                      ),
-
-                      // field background color
-                      SizedBox(height: h*0.02,),
-                      Row(
-                        children: [
-                          ColorPicker(
-                            key: Key('backgroundColorPicker'),
-                            pickerColor: defaultFieldBackgroundColor, 
-                            onColorChanged: (Color color){
-                              setState(() {
-                                defaultFieldBackgroundColor = color;
-                                originalFileNotifier.updateFile(fieldBackgroundHex: colorToHex(defaultFieldBackgroundColor));
-                              });
-                            }
-                          ),
-                          const SizedBox(width: 10,),
-                          StyledTitleSmall(text: 'Field Background Color', color: AppColors.formvuSecondary),
-                        ],
-                      ),
-                    ],
-                  ),
-                  
-                  // CONVERT btn
-                  SizedBox(height: h*0.04,),
-                  ColorfulBgBtn(
-                    onPressed: () async {
-                      // check if no file
-                      if(originalFile.path.isEmpty){
-                        // if user has NOT selected a file, warn user
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Please select a file'),
-                            duration: Duration(seconds: 1),
-                          ),
-                        );
-                      }else{
-                        // if user has selected a file, check if the file is the desired format
-                        var appBarFormat = ref.read(formvuOriginalFileFormatProvider.notifier).state;
-                        var selectedFormat = ref.read(formvuOriginalFileProvider).format;
-
-                        if(appBarFormat != selectedFormat){
-                          // if the file is NOT the desired format, warn user
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+      
+                        // single file form
+                        SizedBox(height: h*0.02,),
+                        Row(
+                          children: [
+                            StyledCheckbox(
+                              isChecked: isSingleFileFormChecked,
+                              onChanged: (newVal) {
+                                setState(() {
+                                  isSingleFileFormChecked = newVal;
+                                });
+                                originalFileNotifier.updateFile(isSingleFileForm:newVal);
+                              },
+                            ),
+                            StyledTitleSmall(text: 'Single File Form', color: AppColors.formvuSecondary),
+                          ],
+                        ),
+      
+                        // field border color
+                        SizedBox(height: h*0.01,),
+                        Row(
+                          children: [
+                            ColorPicker(
+                              key: Key('borderColorPicker'),
+                              pickerColor: defaultFieldBorderColor, 
+                              onColorChanged: (Color color){
+                                setState(() {
+                                  defaultFieldBorderColor = color;
+                                  originalFileNotifier.updateFile(fieldBorderHex: colorToHex(defaultFieldBorderColor));
+                                });
+                              }
+                            ),
+                            const SizedBox(width: 10,),
+                            StyledTitleSmall(text: 'Field Border Color', color: AppColors.formvuSecondary),
+                          ],
+                        ),
+      
+                        // field background color
+                        SizedBox(height: h*0.02,),
+                        Row(
+                          children: [
+                            ColorPicker(
+                              key: Key('backgroundColorPicker'),
+                              pickerColor: defaultFieldBackgroundColor, 
+                              onColorChanged: (Color color){
+                                setState(() {
+                                  defaultFieldBackgroundColor = color;
+                                  originalFileNotifier.updateFile(fieldBackgroundHex: colorToHex(defaultFieldBackgroundColor));
+                                });
+                              }
+                            ),
+                            const SizedBox(width: 10,),
+                            StyledTitleSmall(text: 'Field Background Color', color: AppColors.formvuSecondary),
+                          ],
+                        ),
+                      ],
+                    ),
+                    
+                    // CONVERT btn
+                    SizedBox(height: h*0.04,),
+                    ColorfulBgBtn(
+                      onPressed: () async {
+                        // check if no file
+                        if(originalFile.path.isEmpty){
+                          // if user has NOT selected a file, warn user
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              content: Text('Wrong file type'),
+                              content: Text('Please select a file'),
                               duration: Duration(seconds: 1),
                             ),
                           );
                         }else{
-                          // if the file is the desired format, progress animation
-                          _overlayProgressCircle = OverlayProgressCircle.createOverlayProgressCircle();
-                          Overlay.of(context).insert(_overlayProgressCircle!);
-                          
-                          // convert
-                          try{
-                            await connectFormVuCloud(ref, context);
-                            final updatedResponse = ref.read(requestResponseProvider);
-                            if(context.mounted){
-                              if(updatedResponse.code != 200){
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(updatedResponse.content!),
-                                    duration: Duration(seconds: 2),
-                                  ),
-                                );
-                                return;
-                              }else{
-                                if(ref.read(pollDataStateProvider) == "error"){
+                          // if user has selected a file, check if the file is the desired format
+                          var appBarFormat = ref.read(formvuOriginalFileFormatProvider.notifier).state;
+                          var selectedFormat = ref.read(formvuOriginalFileProvider).format;
+      
+                          if(appBarFormat != selectedFormat){
+                            // if the file is NOT the desired format, warn user
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Wrong file type'),
+                                duration: Duration(seconds: 1),
+                              ),
+                            );
+                          }else{
+                            // if the file is the desired format, progress animation
+                            _overlayProgressCircle = OverlayProgressCircle.createOverlayProgressCircle();
+                            Overlay.of(context).insert(_overlayProgressCircle!);
+                            
+                            // convert
+                            try{
+                              await connectFormVuCloud(ref, context);
+                              final updatedResponse = ref.read(requestResponseProvider);
+                              if(context.mounted){
+                                if(updatedResponse.code != 200){
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
-                                      content: Text("Can't convert. Is your original PDF file fillable?"),
+                                      content: Text(updatedResponse.content!),
                                       duration: Duration(seconds: 2),
                                     ),
                                   );
                                   return;
+                                }else{
+                                  if(ref.read(pollDataStateProvider) == "error"){
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text("Can't convert. Is your original PDF file fillable?"),
+                                        duration: Duration(seconds: 2),
+                                      ),
+                                    );
+                                    return;
+                                  }
+                                  Navigator.push(context, MaterialPageRoute(builder: (ctx) => const FormvuSuccessScreen()));
                                 }
-                                Navigator.push(context, MaterialPageRoute(builder: (ctx) => const FormvuSuccessScreen()));
                               }
+                              
+                            }finally{
+                              // clear animation
+                              _overlayProgressCircle?.remove();
+                              _overlayProgressCircle = null;
+                              // reset password
+                              _pdfPasswordController.clear();
                             }
-                            
-                          }finally{
-                            // clear animation
-                            _overlayProgressCircle?.remove();
-                            _overlayProgressCircle = null;
-                            // reset password
-                            _pdfPasswordController.clear();
                           }
-                        }
-                      } 
-                    }, 
-                    child: StyledTitleWhite(text: 'CONVERT'),
-                  ),
-                ],
+                        } 
+                      }, 
+                      child: StyledTitleWhite(text: 'CONVERT'),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

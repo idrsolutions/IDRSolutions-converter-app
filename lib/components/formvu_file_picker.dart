@@ -7,8 +7,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SingleFilePicker extends ConsumerStatefulWidget {
-  const SingleFilePicker({
+class FormVuFilePicker extends ConsumerStatefulWidget {
+  const FormVuFilePicker({
     super.key,
     required this.originalFormat, 
   });
@@ -16,10 +16,10 @@ class SingleFilePicker extends ConsumerStatefulWidget {
   final String originalFormat;
 
   @override
-  ConsumerState<SingleFilePicker> createState() => _SingleFilePickerState();
+  ConsumerState<FormVuFilePicker> createState() => _FormVuFilePickerState();
 }
 
-class _SingleFilePickerState extends ConsumerState<SingleFilePicker> {
+class _FormVuFilePickerState extends ConsumerState<FormVuFilePicker> {
   late String _filePath = ""; 
   
   getFile() async {
@@ -36,8 +36,6 @@ class _SingleFilePickerState extends ConsumerState<SingleFilePicker> {
           setState(() {
             _filePath = file.path;
           });
-          ref.read(buildvuOriginalFileProvider.notifier).updateFile(path: file.path,);
-          ref.read(buildvuOriginalFileProvider.notifier).updateFile(format: fileFormat,);
           ref.read(formvuOriginalFileProvider.notifier).updateFile(path: file.path,);
           ref.read(formvuOriginalFileProvider.notifier).updateFile(format: fileFormat,);
         } else { 
@@ -49,7 +47,6 @@ class _SingleFilePickerState extends ConsumerState<SingleFilePicker> {
               duration: Duration(seconds: 1),
             ),
           );
-          ref.read(buildvuOriginalFileProvider.notifier).updateFile(path: null,);
           ref.read(formvuOriginalFileProvider.notifier).updateFile(path: null,);
         }
       } else { // if user did NOT pick a file, ask user to pick a file
@@ -67,7 +64,7 @@ class _SingleFilePickerState extends ConsumerState<SingleFilePicker> {
 
   @override
   Widget build(BuildContext context) {
-    final fileProvider = ref.watch(buildvuOriginalFileProvider);
+    final formvuFileProvider = ref.watch(formvuOriginalFileProvider);
 
     return Column(
       children: [
@@ -79,7 +76,7 @@ class _SingleFilePickerState extends ConsumerState<SingleFilePicker> {
           child: StyledTitle(text: 'Select Original File', color: AppColors.dimmedBlack),
         ),
         
-        StyledText(text: fileProvider.path.isEmpty ? "" : fileProvider.path.split('/').last),
+        StyledText(text: formvuFileProvider.path.isEmpty ? "" : formvuFileProvider.path.split('/').last),
       ],
     );
   }
