@@ -47,6 +47,7 @@ class BuildvuTokenScreen extends ConsumerWidget {
             child: Container(
               padding: EdgeInsets.fromLTRB(w*0.05, h*0.05, w*0.05, h*0.05),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   StyledHeading(text: 'Token'),
       
@@ -56,26 +57,35 @@ class BuildvuTokenScreen extends ConsumerWidget {
                       tokenNotifier.updateToken(newVal);
                     },
                   ),
-      
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      StyledText(
-                        text: "Don't have a token? Get it ", 
-                        color: AppColors.dimmedBlack,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          StyledText(
+                            text: "Don't have a token? Get it ", 
+                            color: AppColors.dimmedBlack,
+                          ),
+                          StyledTitle(
+                            text: "here", 
+                            color: AppColors.idrBlue, 
+                            onTap: (){launchURL('https://www.idrsolutions.com/buildvu/trial-download');},
+                          ),
+                        ],
                       ),
-                      StyledTitle(
-                        text: "here", 
-                        color: AppColors.idrBlue, 
-                        onTap: (){launchURL('https://www.idrsolutions.com/buildvu/trial-download');},
+
+                      StyledTitleBuildVu(
+                        text: "Please note that BuildVu-HTML and BuildVu-SVG requires different tokens", 
                       ),
                     ],
                   ),
-                                  
+
                   SizedBox(height: h*0.08,),
       
                   StyledText(text: "*The token is at the end of your received trial link", color: AppColors.dimmedBlack,),
-                  Flexible(child: Image.asset('assets/images/token.png')),
+                  Flexible(child: Image.asset('assets/images/buildvuToken.png')),
       
                   SizedBox(height: h*0.08,),
       

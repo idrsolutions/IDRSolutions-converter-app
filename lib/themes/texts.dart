@@ -153,10 +153,12 @@ class StyledText extends StatelessWidget {
     super.key,
     required this.text,
     this.color,
+    this.fontSize,
   });
 
   final String text;
   final Color? color;
+  final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -164,9 +166,9 @@ class StyledText extends StatelessWidget {
       text,
       style: TextStyle(
         fontFamily: 'Montserrat',
-        fontSize: 17,
+        fontSize: fontSize?? 17,
         fontWeight: FontWeight.w500,
-        color: AppColors.dimmedBlack,
+        color: color?? AppColors.dimmedBlack,
       ),
     );
   }
