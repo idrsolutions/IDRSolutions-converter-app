@@ -32,8 +32,9 @@ void main() {
       expect(find.byType(FormVuFormatSelection), findsOneWidget);
     });
 
-    testWidgets('test if contact us btn shows up', (tester)async{
+    testWidgets('test if which to choose btn and contact us btn show up', (tester)async{
       await tester.pumpWidget(createHomeScreen());
+      expect(find.byKey(Key('choiceBtn')), findsOneWidget);
       expect(find.byKey(Key('contactUsBtn')), findsOneWidget);
     });
   });
