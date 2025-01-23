@@ -77,7 +77,7 @@ class BuildvuTokenScreen extends ConsumerWidget {
                       ),
 
                       StyledTitleBuildVu(
-                        text: "Please note that BuildVu-HTML and BuildVu-SVG requires different tokens", 
+                        text: "Please note that BuildVu-HTML and BuildVu-SVG require different tokens", 
                       ),
                     ],
                   ),

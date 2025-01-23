@@ -36,7 +36,7 @@ class _BuildVuFormatSelectionState extends ConsumerState<BuildVuFormatSelection>
             Flexible(
               child: StyledDropdown<BuildVuOriginalFormats>(
                 key: Key('originalFormatDropdown'), // for testing
-                label: const Text('Original Format'), 
+                label: const Text('Original'), 
                 initialSelection: BuildVuOriginalFormats.pdf, 
                 controller: buildvuOriginalFormatController, 
                 dropdownMenuEntries: BuildVuOriginalFormats.entries,
@@ -54,7 +54,7 @@ class _BuildVuFormatSelectionState extends ConsumerState<BuildVuFormatSelection>
             Flexible(
               child: StyledDropdown<BuildVuConvertedFormats>(
                 key: Key('convertedFormatDropdown'), // for testing
-                label: const Text('Converted Format'), 
+                label: const Text('Converted'), 
                 initialSelection: BuildVuConvertedFormats.html, 
                 controller: buildvuConvertedFormatController, 
                 dropdownMenuEntries: BuildVuConvertedFormats.entries,
