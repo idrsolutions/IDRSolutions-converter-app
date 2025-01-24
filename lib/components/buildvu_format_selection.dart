@@ -25,45 +25,25 @@ class _BuildVuFormatSelectionState extends ConsumerState<BuildVuFormatSelection>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        StyledTitle(text: 'PDF/ Word/ PowerPoint/ Excel to HTML/ SVG', color: AppColors.buildvuPrimary,),
+        StyledTitle(text: 'PDF to HTML/ SVG', color: AppColors.buildvuPrimary,),
         
         const SizedBox(height: 20,),
 
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            // original format dropdown
-            Flexible(
-              child: StyledDropdown<BuildVuOriginalFormats>(
-                key: Key('originalFormatDropdown'), // for testing
-                label: const Text('Original'), 
-                initialSelection: BuildVuOriginalFormats.pdf, 
-                controller: buildvuOriginalFormatController, 
-                dropdownMenuEntries: BuildVuOriginalFormats.entries,
-                onChanged: (newValue){
-                  if(newValue != null) {
-                    ref.read(buildvuOriginalFileFormatProvider.notifier).state = newValue.name;
-                  }
-                },
-              ),
-            ),
+            // original format
+            StyledTitleBuildVu(text: "PDF"),
 
             Flexible(child: StyledTitle(text: 'To', color: AppColors.buildvuPrimary,)),
 
             // converted format dropdown
-            Flexible(
-              child: StyledDropdown<BuildVuConvertedFormats>(
-                key: Key('convertedFormatDropdown'), // for testing
-                label: const Text('Converted'), 
-                initialSelection: BuildVuConvertedFormats.html, 
-                controller: buildvuConvertedFormatController, 
-                dropdownMenuEntries: BuildVuConvertedFormats.entries,
-                onChanged: (newValue){
-                  if(newValue != null) {
-                    ref.read(buildvuConvertedFileFormatProvider.notifier).state = newValue.name;
-                  }
-                },
-              ),
+            StyledDropdownBtn(
+              key: Key('originalFormatDropdown'),
+              dropdownList: buildvuConvertedFormats, 
+              onChanged: (newValue){
+                ref.read(buildvuConvertedFileFormatProvider.notifier).state = newValue;
+              },
             ),
           ],
         ),

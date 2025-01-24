@@ -33,7 +33,6 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
   final _pdfPasswordController = TextEditingController();
   final _imageScaleController = TextEditingController(text: "1.0");
   final _submitUrlController = TextEditingController();
-  final _textModeController = TextEditingController();
   bool isSingleFileFormChecked = false;
   bool hasFieldBordersChecked = false;
   bool hasFieldBackgroundsChecked = false;
@@ -119,54 +118,76 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                             const StyledTitle(text: ' (OPTIONAL)', color: Colors.red,),
                           ],
                         ),
-      
-                        // image scale & submit url
+
                         SizedBox(height: h*0.01,),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            // scale & text mode
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                StyledTitleSmall(text: 'Image Scale', color: AppColors.formvuSecondary),
-                                RectangleTextField(
-                                  key: Key('imgScaleTextField'), // for testing
-                                  keyboardType: TextInputType.number,
-                                  controller: _imageScaleController,
-                                  onChanged:(val){
-                                    if (val.isNotEmpty) {
-                                      try{
-                                        // attempt to parse the value to a double
-                                        double parsedVal = double.parse(val);
-      
-                                        // limit user input range
-                                        if(parsedVal>10.0) {
-                                          _imageScaleController.text = "10.0";
-                                          parsedVal = 10.0;
-                                        }else if(parsedVal<1){
-                                          _imageScaleController.text = "1";
-                                          parsedVal = 1;
+                                Column(
+                                  children: [
+                                    StyledTitleSmall(text: 'Image Scale', color: AppColors.formvuSecondary),
+                                    RectangleTextField(
+                                      key: Key('imgScaleTextField'), // for testing
+                                      keyboardType: TextInputType.number,
+                                      controller: _imageScaleController,
+                                      onChanged:(val){
+                                        if (val.isNotEmpty) {
+                                          try{
+                                            // attempt to parse the value to a double
+                                            double parsedVal = double.parse(val);
+          
+                                            // limit user input range
+                                            if(parsedVal>10.0) {
+                                              _imageScaleController.text = "10.0";
+                                              parsedVal = 10.0;
+                                            }else if(parsedVal<1){
+                                              _imageScaleController.text = "1";
+                                              parsedVal = 1;
+                                            }
+          
+                                            // update file detail
+                                            originalFileNotifier.updateFile(scale: parsedVal);
+                                          }catch(e){
+                                            // if parse failed, clear the text and warn user to put in double 
+                                            _imageScaleController.text = "";
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                              const SnackBar(
+                                                content: Text('Invalid input. Please put in numbers between 1-10'),
+                                                duration: Duration(seconds: 2),
+                                              ),
+                                            );
+                                          }
                                         }
-      
-                                        // update file detail
-                                        originalFileNotifier.updateFile(scale: parsedVal);
-                                      }catch(e){
-                                        // if parse failed, clear the text and warn user to put in double 
-                                        _imageScaleController.text = "";
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          const SnackBar(
-                                            content: Text('Invalid input. Please put in numbers between 1-10'),
-                                            duration: Duration(seconds: 2),
-                                          ),
-                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: h*0.01,),
+                                Column(
+                                  children: [
+                                    StyledTitleSmall(text: 'Text Mode', color: AppColors.formvuSecondary),
+                                    StyledDropdownBtn(
+                                      key: Key('textModeDropDown'),
+                                      dropdownList: textModes, 
+                                      onChanged: (newVal){
+                                        if(newVal == "Real Text"){
+                                          originalFileNotifier.updateFile(textMode: "svg_realtext");
+                                        }else{
+                                          originalFileNotifier.updateFile(textMode: "svg_shapetext_selectable");
+                                        }
                                       }
-                                    }
-                                  },
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-      
+
                             Spacer(),
-      
+
                             Column(
                               children: [
                                 StyledTitleSmall(text: 'Submit URL', color: AppColors.formvuSecondary),
@@ -181,33 +202,6 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                             ),
                           ],
                         ),
-      
-                        // text mode
-                        SizedBox(height: h*0.01,),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Column(
-                              children: [
-                                StyledTitleSmall(text: 'Text Mode', color: AppColors.formvuSecondary),
-                                StyledDropdown(
-                                  key: Key('textModeDropDown'), // for testing
-                                  initialSelection: TextModes.svgRealText, 
-                                  controller: _textModeController, 
-                                  dropdownMenuEntries: TextModes.entries, 
-                                  onChanged: (newVal){
-                                    if(newVal.toString().split(".").last == "svgRealText"){
-                                      originalFileNotifier.updateFile(textMode: "svg_realtext");
-                                    }else{
-                                      originalFileNotifier.updateFile(textMode: "svg_shapetext_selectable");
-                                    }
-                                  }
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-      
                         // single file form
                         SizedBox(height: h*0.02,),
                         Row(

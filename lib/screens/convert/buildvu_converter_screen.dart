@@ -32,8 +32,6 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
   OverlayEntry? _overlayProgressCircle;
   final _pdfPasswordController = TextEditingController();
   final _imageScaleController = TextEditingController(text: "1.0");
-  final _idrViewerUIController = TextEditingController();
-  final _textModeController = TextEditingController();
   bool isEmbedImgChecked = false;
   bool isInlineSVGChecked = false;
 
@@ -108,29 +106,48 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                             const StyledTitle(text: ' (OPTIONAL)', color: Colors.red,),
                           ],
                         ),
-                        
-                        // password & image scale
+
                         SizedBox(height: h*0.01,),
                         Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            if(originalFormat == 'pdf')
-                              Column(
-                                children: [
-                                  StyledTitleSmall(text: 'PDF Password', color: AppColors.buildvuSecondary),
-                                  RectangleTextField(
-                                    key: Key('passwordField'),
-                                    isObscureText: true,
-                                    controller: _pdfPasswordController,
-                                    onChanged: (_){
-                                      originalFileNotifier.updateFile(password: _pdfPasswordController.text);
-                                    },
-                                  ),
-                                ],
-                              ),
-                            if (originalFormat == 'pdf') 
-                              Spacer(),
+                            // password & ui
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Column(
+                                  children: [
+                                    StyledTitleSmall(text: 'PDF Password', color: AppColors.buildvuSecondary),
+                                    RectangleTextField(
+                                      key: Key('passwordField'),
+                                      isObscureText: true,
+                                      controller: _pdfPasswordController,
+                                      onChanged: (_){
+                                        originalFileNotifier.updateFile(password: _pdfPasswordController.text);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: h*0.01,),
+                                Column(
+                                  children: [
+                                    StyledTitleSmall(text: 'IDRViewer UI', color: AppColors.buildvuSecondary),
+                                    StyledDropdownBtn(
+                                      key: Key('uiDropDown'),
+                                      dropdownList: idrViewerUIs, 
+                                      onChanged: (newVal){
+                                        originalFileNotifier.updateFile(ui: newVal);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+
+                            Spacer(),
+
+                            // scale & text mode
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 StyledTitleSmall(text: 'Image Scale', color: AppColors.buildvuSecondary),
                                 RectangleTextField(
@@ -167,41 +184,13 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                                     }
                                   },
                                 ),
-                              ],
-                            ),
-                          ],
-                        ),
-      
-                        // ui & text mode
-                        SizedBox(height: h*0.01,),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Column(
-                              children: [
-                                StyledTitleSmall(text: 'IDRViewer UI', color: AppColors.buildvuSecondary),
-                                StyledDropdown(
-                                  key: Key('uiDropDown'), // for testing
-                                  initialSelection: IDRViewerUIs.complete, 
-                                  controller: _idrViewerUIController, 
-                                  dropdownMenuEntries: IDRViewerUIs.entries, 
-                                  onChanged: (newVal){
-                                    originalFileNotifier.updateFile(ui: newVal.toString().split(".").last);
-                                  }
-                                ),
-                              ],
-                            ),
-                            Spacer(),
-                            Column(
-                              children: [
+                                SizedBox(height: h*0.01,),
                                 StyledTitleSmall(text: 'Text Mode', color: AppColors.buildvuSecondary),
-                                StyledDropdown(
-                                  key: Key('textModeDropDown'), // for testing
-                                  initialSelection: TextModes.svgRealText, 
-                                  controller: _textModeController, 
-                                  dropdownMenuEntries: TextModes.entries, 
+                                StyledDropdownBtn(
+                                  key: Key('textModeDropDown'),
+                                  dropdownList: textModes, 
                                   onChanged: (newVal){
-                                    if(newVal.toString().split(".").last == "svgRealText"){
+                                    if(newVal == "Real Text"){
                                       originalFileNotifier.updateFile(textMode: "svg_realtext");
                                     }else{
                                       originalFileNotifier.updateFile(textMode: "svg_shapetext_selectable");
@@ -212,7 +201,7 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                             ),
                           ],
                         ),
-      
+                        
                         // embed img
                         SizedBox(height: h*0.02,),
                         Row(
