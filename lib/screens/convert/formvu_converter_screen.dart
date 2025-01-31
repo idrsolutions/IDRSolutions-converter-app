@@ -119,6 +119,21 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                           ],
                         ),
 
+                        Column(
+                          children: [
+                            StyledTitleSmall(text: 'PDF Password', color: AppColors.formvuSecondary),
+                            RectangleTextField(
+                              key: Key('passwordField'),
+                              isObscureText: true,
+                              controller: _pdfPasswordController,
+                              onChanged: (_){
+                                originalFileNotifier.updateFile(password: _pdfPasswordController.text);
+                                print(ref.watch(formvuOriginalFileProvider).password);
+                              },
+                            ),
+                          ],
+                        ),
+
                         SizedBox(height: h*0.01,),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -304,10 +319,12 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                                   );
                                   return;
                                 }else{
+                                  // print("password upon clicking convert btn:");
+                                  // print(ref.watch(formvuOriginalFileProvider).password);
                                   if(ref.read(pollDataStateProvider) == "error"){
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                        content: Text("Can't convert. Is your original PDF file fillable?"),
+                                        content: Text("Can't convert. Please check your settings and if the file is fillable."),
                                         duration: Duration(seconds: 2),
                                       ),
                                     );

@@ -46,6 +46,7 @@ class FormVuOriginalFileNotifier extends Notifier<FormVuOriginalFile>{
   void updateFile({
     String? path, 
     String? format, 
+    String? password, 
     double? scale, 
     bool? isSingleFileForm, 
     String? fieldBorderHex,
@@ -56,6 +57,7 @@ class FormVuOriginalFileNotifier extends Notifier<FormVuOriginalFile>{
       state = state.copyWith(
         path: path ?? state.path,
         format: format ?? state.format,
+        password: password ?? state.password,
         scale: scale ?? state.scale,
         isSingleFileForm: isSingleFileForm ?? state.isSingleFileForm,
         fieldBorderHex: fieldBorderHex ?? state.fieldBorderHex,
