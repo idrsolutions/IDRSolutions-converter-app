@@ -32,13 +32,16 @@ class FormvuTokenScreen extends ConsumerWidget {
         data: ConverterTheme(color: AppColors.formvuPrimary).converterTheme, 
         child: Scaffold(
           appBar: StyledAppbar(
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(originalFormat),
-                const Text('to'),
-                Text(convertedFormat),
-              ],
+            title: Flexible(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text('fillable'),
+                  Text(originalFormat),
+                  const Text('to'),
+                  Text(convertedFormat),
+                ],
+              ),
             ),
             color: AppColors.formvuPrimary
           ),
