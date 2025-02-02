@@ -59,7 +59,6 @@ class BuildvuTokenScreen extends ConsumerWidget {
                   ),
 
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -75,16 +74,16 @@ class BuildvuTokenScreen extends ConsumerWidget {
                           ),
                         ],
                       ),
-
-                      StyledTitleBuildVu(
-                        text: "Please note that BuildVu-HTML and BuildVu-SVG require different tokens", 
-                      ),
+                      StyledTitleBuildVu(text: "BuildVu-HTML and BuildVu-SVG require different tokens", align: TextAlign.center,),
                     ],
                   ),
 
                   SizedBox(height: h*0.08,),
       
-                  StyledText(text: "*The token is at the end of your received trial link", color: AppColors.dimmedBlack,),
+                  StyledText(
+                    text: "*The token is at the end of your received trial link", 
+                    align: TextAlign.center,
+                  ),
                   Flexible(child: Image.asset('assets/images/buildvuToken.png')),
       
                   SizedBox(height: h*0.08,),

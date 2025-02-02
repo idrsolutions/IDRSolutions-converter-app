@@ -108,14 +108,17 @@ class StyledTitleBuildVu extends StatelessWidget {
   const StyledTitleBuildVu({
     super.key,
     required this.text,
+    this.align,
   });
 
   final String text;
+  final TextAlign? align;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
+      textAlign: align?? TextAlign.start,
       style: TextStyle(
         fontFamily: 'Montserrat',
         fontSize: 16,
@@ -154,16 +157,19 @@ class StyledText extends StatelessWidget {
     required this.text,
     this.color,
     this.fontSize,
+    this.align,
   });
 
   final String text;
   final Color? color;
   final double? fontSize;
+  final TextAlign? align;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
+      textAlign: align?? TextAlign.start,
       style: TextStyle(
         fontFamily: 'Montserrat',
         fontSize: fontSize?? 17,

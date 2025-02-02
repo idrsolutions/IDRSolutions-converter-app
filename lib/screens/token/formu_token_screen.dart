@@ -74,7 +74,10 @@ class FormvuTokenScreen extends ConsumerWidget {
                   
                   SizedBox(height: h*0.08,),
       
-                  StyledText(text: "*The token is at the end of your received trial link", color: AppColors.dimmedBlack,),
+                  StyledText(
+                    text: "*The token is at the end of your received trial link", 
+                    align: TextAlign.center,
+                  ),
                   Flexible(child: Image.asset('assets/images/formvuToken.png')),
       
                   SizedBox(height: h*0.08,),
