@@ -60,8 +60,6 @@ Future<void> connectFormVuCloud(WidgetRef ref, BuildContext context) async {
     requestResponse.updateRequestResponse(code: response.statusCode);
     final responseBody = await response.stream.bytesToString();
     requestResponse.updateRequestResponse(content: responseBody);
-    print("password when requesting to upload");
-    print(ref.watch(formvuOriginalFileProvider).password);
 
     if (response.statusCode != 200) {
       // Check if context is still valid

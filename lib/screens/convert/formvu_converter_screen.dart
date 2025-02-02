@@ -119,25 +119,45 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                           ],
                         ),
 
-                        Column(
-                          children: [
-                            StyledTitleSmall(text: 'PDF Password', color: AppColors.formvuSecondary),
-                            RectangleTextField(
-                              key: Key('passwordField'),
-                              isObscureText: true,
-                              controller: _pdfPasswordController,
-                              onChanged: (_){
-                                originalFileNotifier.updateFile(password: _pdfPasswordController.text);
-                                print(ref.watch(formvuOriginalFileProvider).password);
-                              },
-                            ),
-                          ],
-                        ),
-
                         SizedBox(height: h*0.01,),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            // password & subimt url
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Column(
+                                  children: [
+                                    StyledTitleSmall(text: 'PDF Password', color: AppColors.formvuSecondary),
+                                    RectangleTextField(
+                                      key: Key('passwordField'),
+                                      isObscureText: true,
+                                      controller: _pdfPasswordController,
+                                      onChanged: (_){
+                                        originalFileNotifier.updateFile(password: _pdfPasswordController.text);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: h*0.02,),
+                                Column(
+                                  children: [
+                                    StyledTitleSmall(text: 'Submit URL', color: AppColors.formvuSecondary),
+                                    RectangleTextField(
+                                      key: Key('urlField'),
+                                      controller: _submitUrlController,
+                                      onChanged: (_){
+                                        originalFileNotifier.updateFile(submitUrl: _submitUrlController.text);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+
+                            Spacer(),
+
                             // scale & text mode
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -198,21 +218,6 @@ class _FormvuConverterScreenState extends ConsumerState<FormvuConverterScreen> {
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
-
-                            Spacer(),
-
-                            Column(
-                              children: [
-                                StyledTitleSmall(text: 'Submit URL', color: AppColors.formvuSecondary),
-                                RectangleTextField(
-                                    key: Key('urlField'),
-                                    controller: _submitUrlController,
-                                    onChanged: (_){
-                                      originalFileNotifier.updateFile(submitUrl: _submitUrlController.text);
-                                    },
-                                  ),
                               ],
                             ),
                           ],
