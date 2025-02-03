@@ -18,7 +18,7 @@ class WhichToChooseScreen extends StatelessWidget {
       data: ConverterTheme(color: AppColors.idrBlue).converterTheme,
       child: Scaffold(
         appBar: StyledAppbar(
-            title: const Text("What's the Difference?"),
+            title: const Text("Differences"),
             color: AppColors.idrBlue),
         body: Container(
           padding: EdgeInsets.fromLTRB(w * 0.05, h * 0.02, w * 0.05, h * 0.02),
