@@ -1,7 +1,7 @@
 import 'package:converter/components/appbar.dart';
 import 'package:converter/components/buttons.dart';
 import 'package:converter/components/text_fields.dart';
-import 'package:converter/screens/token/formu_token_screen.dart';
+import 'package:converter/screens/token/formvu_token_screen.dart';
 import 'package:converter/themes/texts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
