@@ -120,7 +120,7 @@ class StyledTitleBuildVu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      textAlign: align?? TextAlign.start,
+      textAlign: align ?? TextAlign.start,
       style: TextStyle(
         fontFamily: 'Montserrat',
         fontSize: 16,
@@ -171,12 +171,12 @@ class StyledText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      textAlign: align?? TextAlign.start,
+      textAlign: align ?? TextAlign.start,
       style: TextStyle(
         fontFamily: 'Montserrat',
-        fontSize: fontSize?? 17,
+        fontSize: fontSize ?? 17,
         fontWeight: FontWeight.w500,
-        color: color?? AppColors.dimmedBlack,
+        color: color ?? AppColors.dimmedBlack,
       ),
     );
   }

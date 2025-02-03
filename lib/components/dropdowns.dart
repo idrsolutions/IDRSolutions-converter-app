@@ -30,7 +30,7 @@ class _StyledDropdownBtnState extends State<StyledDropdownBtn> {
       value: dropdownValue,
       icon: const Icon(Icons.arrow_drop_down_outlined),
       elevation: 16,
-      style:  TextStyle(color: AppColors.dimmedBlack),
+      style: TextStyle(color: AppColors.dimmedBlack),
       dropdownColor: Colors.white,
       underline: Container(
         height: 2,

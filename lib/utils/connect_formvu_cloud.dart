@@ -16,15 +16,21 @@ Future<void> connectFormVuCloud(WidgetRef ref, BuildContext context) async {
   final filePath = ref.read(formvuOriginalFileProvider).path;
   final file = File(filePath);
   var settings = {
-    "org.jpedal.pdf2html.password": ref.watch(formvuOriginalFileProvider).password,
-    "org.jpedal.pdf2html.imageScale": ref.watch(formvuOriginalFileProvider).scale,
-    "org.jpedal.pdf2html.submitUrl": ref.watch(formvuOriginalFileProvider).submitUrl,
-    "org.jpedal.pdf2html.textMode": ref.watch(formvuOriginalFileProvider).textMode,
-    "org.jpedal.pdf2html.formFieldBorderHighlight": ref.watch(formvuOriginalFileProvider).fieldBorderHex,
-    "org.jpedal.pdf2html.formFieldBackgroundHighlight": ref.watch(formvuOriginalFileProvider).fieldBackgroundHex,
+    "org.jpedal.pdf2html.password":
+        ref.watch(formvuOriginalFileProvider).password,
+    "org.jpedal.pdf2html.imageScale":
+        ref.watch(formvuOriginalFileProvider).scale,
+    "org.jpedal.pdf2html.submitUrl":
+        ref.watch(formvuOriginalFileProvider).submitUrl,
+    "org.jpedal.pdf2html.textMode":
+        ref.watch(formvuOriginalFileProvider).textMode,
+    "org.jpedal.pdf2html.formFieldBorderHighlight":
+        ref.watch(formvuOriginalFileProvider).fieldBorderHex,
+    "org.jpedal.pdf2html.formFieldBackgroundHighlight":
+        ref.watch(formvuOriginalFileProvider).fieldBackgroundHex,
   };
 
-  if(ref.watch(formvuOriginalFileProvider).isSingleFileForm == true){
+  if (ref.watch(formvuOriginalFileProvider).isSingleFileForm == true) {
     settings["org.jpedal.pdf2html.embedImagesAsBase64Stream"] = true;
     settings["org.jpedal.pdf2html.includedFonts"] = "woff_base64";
     settings["org.jpedal.pdf2html.inlineJavaScriptAndCSS"] = true;
@@ -63,10 +69,11 @@ Future<void> connectFormVuCloud(WidgetRef ref, BuildContext context) async {
 
     if (response.statusCode != 200) {
       // Check if context is still valid
-      if(!context.mounted) return; 
+      if (!context.mounted) return;
 
-      if(response.statusCode == 403) {
-        requestResponse.updateRequestResponse(content: "Wrong token, please check again.");
+      if (response.statusCode == 403) {
+        requestResponse.updateRequestResponse(
+            content: "Wrong token, please check again.");
       }
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -75,14 +82,14 @@ Future<void> connectFormVuCloud(WidgetRef ref, BuildContext context) async {
           duration: Duration(seconds: 1),
         ),
       );
-      return; 
+      return;
     }
 
     final Map<String, dynamic> responseData = convert.jsonDecode(responseBody);
     uuid = responseData['uuid'];
   } catch (e) {
     // Check if context is still valid
-    if(!context.mounted) return;
+    if (!context.mounted) return;
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -98,10 +105,11 @@ Future<void> connectFormVuCloud(WidgetRef ref, BuildContext context) async {
     var pollDataNotifier = ref.read(pollDataStateProvider.notifier);
 
     while (true) {
-      final pollResponse = await http.Request('GET', Uri.parse('$apiUrl?uuid=$uuid')).send();
+      final pollResponse =
+          await http.Request('GET', Uri.parse('$apiUrl?uuid=$uuid')).send();
       if (pollResponse.statusCode != 200) {
         // Check if context is still valid
-        if(!context.mounted) return;
+        if (!context.mounted) return;
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -109,27 +117,32 @@ Future<void> connectFormVuCloud(WidgetRef ref, BuildContext context) async {
             duration: Duration(seconds: 1),
           ),
         );
-        return; 
+        return;
       }
-      final Map<String, dynamic> pollData = convert.jsonDecode(await pollResponse.stream.bytesToString());
-      
+      final Map<String, dynamic> pollData =
+          convert.jsonDecode(await pollResponse.stream.bytesToString());
+
       // update poll data state notifier
       pollDataNotifier.updatePollDataState(pollData['state']);
-      
+
       if (pollData['state'] == "processed") {
-        ref.read(convertedFileProvider.notifier).updateFile(previewURL: pollData['previewUrl'],);
-        ref.read(convertedFileProvider.notifier).updateFile(downloadURL: pollData['downloadUrl'],);
+        ref.read(convertedFileProvider.notifier).updateFile(
+              previewURL: pollData['previewUrl'],
+            );
+        ref.read(convertedFileProvider.notifier).updateFile(
+              downloadURL: pollData['downloadUrl'],
+            );
         break;
       } else if (pollData['state'] == "error") {
         return;
-      } 
+      }
 
       // Wait for next poll
       await Future.delayed(Duration(seconds: 1));
     }
   } catch (e) {
     // Check if context is still valid
-    if(!context.mounted) return;
+    if (!context.mounted) return;
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(

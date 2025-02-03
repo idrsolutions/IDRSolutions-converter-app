@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class StyledAppbar extends StatelessWidget implements PreferredSizeWidget{
+class StyledAppbar extends StatelessWidget implements PreferredSizeWidget {
   const StyledAppbar({
     super.key,
     required this.title,
@@ -15,11 +15,10 @@ class StyledAppbar extends StatelessWidget implements PreferredSizeWidget{
     return AppBar(
       title: title,
       shape: Border(
-        bottom: BorderSide(
-          color: color,
-          width: 10,
-        )
-      ),
+          bottom: BorderSide(
+        color: color,
+        width: 10,
+      )),
       elevation: 4,
     );
   }

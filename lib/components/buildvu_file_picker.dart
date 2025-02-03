@@ -10,7 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class BuildVuFilePicker extends ConsumerStatefulWidget {
   const BuildVuFilePicker({
     super.key,
-    required this.originalFormat, 
+    required this.originalFormat,
   });
 
   final String originalFormat;
@@ -20,25 +20,30 @@ class BuildVuFilePicker extends ConsumerStatefulWidget {
 }
 
 class _BuildVuFilePickerState extends ConsumerState<BuildVuFilePicker> {
-  late String _filePath = ""; 
-  
+  late String _filePath = "";
+
   getFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
     if (mounted) {
-      if (result != null) { // if user picked a file
+      if (result != null) {
+        // if user picked a file
         final file = File(result.files.single.path!);
         final fileFormat = file.path.split("/").last.split(".").last;
-        
-        if (fileFormat == widget.originalFormat) {  
+
+        if (fileFormat == widget.originalFormat) {
           // if user-picked file format is the selected original file format
           // set file path & update provider
           setState(() {
             _filePath = file.path;
           });
-          ref.read(buildvuOriginalFileProvider.notifier).updateFile(path: file.path,);
-          ref.read(buildvuOriginalFileProvider.notifier).updateFile(format: fileFormat,);
-        } else { 
+          ref.read(buildvuOriginalFileProvider.notifier).updateFile(
+                path: file.path,
+              );
+          ref.read(buildvuOriginalFileProvider.notifier).updateFile(
+                format: fileFormat,
+              );
+        } else {
           // if user-picked file format is NOT the selected original file format
           // warn user & update provider file path to empty
           ScaffoldMessenger.of(context).showSnackBar(
@@ -47,9 +52,12 @@ class _BuildVuFilePickerState extends ConsumerState<BuildVuFilePicker> {
               duration: Duration(seconds: 1),
             ),
           );
-          ref.read(buildvuOriginalFileProvider.notifier).updateFile(path: null,);
+          ref.read(buildvuOriginalFileProvider.notifier).updateFile(
+                path: null,
+              );
         }
-      } else { // if user did NOT pick a file, ask user to pick a file
+      } else {
+        // if user did NOT pick a file, ask user to pick a file
         if (_filePath.isEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -69,14 +77,17 @@ class _BuildVuFilePickerState extends ConsumerState<BuildVuFilePicker> {
     return Column(
       children: [
         WhiteBgBtn(
-          onPressed: (){
+          onPressed: () {
             getFile();
           },
           color: AppColors.dimmedBlack,
-          child: StyledTitle(text: 'Select Original File', color: AppColors.dimmedBlack),
+          child: StyledTitle(
+              text: 'Select Original File', color: AppColors.dimmedBlack),
         ),
-        
-        StyledText(text: buildvuFileProvider.path.isEmpty ? "" : buildvuFileProvider.path.split('/').last),
+        StyledText(
+            text: buildvuFileProvider.path.isEmpty
+                ? ""
+                : buildvuFileProvider.path.split('/').last),
       ],
     );
   }

@@ -7,23 +7,20 @@ class ConverterTheme {
 
   final Color color;
 
-  ThemeData get converterTheme{
+  ThemeData get converterTheme {
     return ThemeData(
       primaryColor: color,
-
       scaffoldBackgroundColor: Colors.white,
-
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.white,
         foregroundColor: color,
         surfaceTintColor: Colors.transparent,
         centerTitle: true,
         titleTextStyle: TextStyle(
-          color: color, 
-          fontFamily: 'Montserrat',
-          fontSize: 23,
-          fontWeight: FontWeight.w700
-        ),
+            color: color,
+            fontFamily: 'Montserrat',
+            fontSize: 23,
+            fontWeight: FontWeight.w700),
       ),
     );
   }

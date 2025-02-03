@@ -7,40 +7,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-Widget createHomeScreen(){
+Widget createHomeScreen() {
   return ProviderScope(
-    child: MaterialApp(
-      home: BuildvuSuccessScreen(),
-    )
-  );
+      child: MaterialApp(
+    home: BuildvuSuccessScreen(),
+  ));
 }
 
 void main() {
-
-  group('BuildVu success screen widget test', (){
-    testWidgets('test if appbar shows up', (tester)async{
+  group('BuildVu success screen widget test', () {
+    testWidgets('test if appbar shows up', (tester) async {
       await tester.pumpWidget(createHomeScreen());
       expect(find.byType(StyledAppbar), findsOneWidget);
     });
-    
-    testWidgets('test if app bar shows up', (tester)async{
-      await tester.pumpWidget(createHomeScreen());
-      expect(find.byType(AppBar), findsOneWidget);
-    });
 
-    testWidgets('test if logo shows up', (tester)async{
+    testWidgets('test if logo shows up', (tester) async {
       await tester.pumpWidget(createHomeScreen());
       expect(find.byType(ClickableLogo), findsOneWidget);
     });
 
-    testWidgets('test if preview, download, learn more btns show up', (tester)async{
+    testWidgets('test if preview, download, learn more btns show up',
+        (tester) async {
       await tester.pumpWidget(createHomeScreen());
       expect(find.byKey(Key('previewBtn')), findsOneWidget);
       expect(find.byKey(Key('downloadBtn')), findsOneWidget);
       expect(find.byType(ColorfulBgBtn), findsOneWidget);
     });
 
-    testWidgets('test if convert another file btn shows up and is clickable', (tester)async{
+    testWidgets('test if convert another file btn shows up and is clickable',
+        (tester) async {
       await tester.pumpWidget(createHomeScreen());
       expect(find.byKey(Key('convertAnotherBtn')), findsOneWidget);
       await tester.tap(find.byKey(Key('convertAnotherBtn')));
@@ -48,7 +43,7 @@ void main() {
       expect(find.byKey(Key('convertAnotherBtn')), findsNothing);
     });
 
-    testWidgets('test if the words show up', (tester)async{
+    testWidgets('test if the words show up', (tester) async {
       await tester.pumpWidget(createHomeScreen());
       expect(find.byType(StyledHeading), findsOneWidget);
       expect(find.byType(StyledText), findsOneWidget);

@@ -25,10 +25,12 @@ class BuildVuConverterScreen extends ConsumerStatefulWidget {
   const BuildVuConverterScreen({super.key});
 
   @override
-  ConsumerState<BuildVuConverterScreen> createState() => _BuildVuConverterScreenState();
+  ConsumerState<BuildVuConverterScreen> createState() =>
+      _BuildVuConverterScreenState();
 }
 
-class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen> {
+class _BuildVuConverterScreenState
+    extends ConsumerState<BuildVuConverterScreen> {
   OverlayEntry? _overlayProgressCircle;
   final _pdfPasswordController = TextEditingController();
   final _imageScaleController = TextEditingController(text: "1.0");
@@ -42,31 +44,33 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
     final originalFormat = ref.watch(buildvuOriginalFileFormatProvider);
     final convertedFormat = ref.watch(buildvuConvertedFileFormatProvider);
     final originalFile = ref.watch(buildvuOriginalFileProvider);
-    final originalFileNotifier = ref.watch(buildvuOriginalFileProvider.notifier);
-  
+    final originalFileNotifier =
+        ref.watch(buildvuOriginalFileProvider.notifier);
+
     return PopScope(
-      onPopInvokedWithResult: (popDisposition, result){
+      onPopInvokedWithResult: (popDisposition, result) {
         // Reset the file when the user navigates back
-        originalFileNotifier.updateFile(path: '',);
+        originalFileNotifier.updateFile(
+          path: '',
+        );
       },
       child: Theme(
-        data: ConverterTheme(color: AppColors.buildvuPrimary).converterTheme, 
+        data: ConverterTheme(color: AppColors.buildvuPrimary).converterTheme,
         child: Scaffold(
           appBar: StyledAppbar(
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(originalFormat),
-                const Text('to'),
-                Text(convertedFormat),
-              ],
-            ),
-            color: AppColors.buildvuPrimary
-          ),
-      
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(originalFormat),
+                  const Text('to'),
+                  Text(convertedFormat),
+                ],
+              ),
+              color: AppColors.buildvuPrimary),
           body: SingleChildScrollView(
             child: Container(
-              padding: EdgeInsets.fromLTRB(w*0.05, h*0.05, w*0.05, h*0.05),
+              padding:
+                  EdgeInsets.fromLTRB(w * 0.05, h * 0.05, w * 0.05, h * 0.05),
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -75,39 +79,62 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Flexible(
-                          child: ClickableLogo(logoPath: 'assets/images/poweredbybuildvu.png', myURL: 'https://www.idrsolutions.com/buildvu/'),
+                          child: ClickableLogo(
+                              logoPath: 'assets/images/poweredbybuildvu.png',
+                              myURL: 'https://www.idrsolutions.com/buildvu/'),
                         ),
-                        
                         Flexible(
                           child: WhiteBgBtn(
-                            onPressed: (){
-                              Navigator.push(context,MaterialPageRoute(builder: (context) => const WhyBuildVuScreen()),);
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const WhyBuildVuScreen()),
+                              );
                             },
-                            child: const StyledTitle(key: Key('whyBtn'), text: 'Why BuildVu?'),
+                            child: const StyledTitle(
+                                key: Key('whyBtn'), text: 'Why BuildVu?'),
                           ),
                         ),
                       ],
                     ),
-                    
+
                     // select file and advanced options
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(height: h*0.05,),
-                        const StyledTitle(key: Key('selectBtn'), text: 'Select Original File'),
-      
-                        SizedBox(height: h*0.01,),
-                        BuildVuFilePicker(originalFormat: originalFormat), 
-      
-                        SizedBox(height: h*0.05,),
+                        SizedBox(
+                          height: h * 0.05,
+                        ),
+                        const StyledTitle(
+                            key: Key('selectBtn'),
+                            text: 'Select Original File'),
+
+                        SizedBox(
+                          height: h * 0.01,
+                        ),
+                        BuildVuFilePicker(originalFormat: originalFormat),
+
+                        SizedBox(
+                          height: h * 0.05,
+                        ),
                         Row(
                           children: [
-                            StyledTitle(text: 'Advanced Options', color: AppColors.buildvuSecondary,),
-                            const StyledTitle(text: ' (OPTIONAL)', color: Colors.red,),
+                            StyledTitle(
+                              text: 'Advanced Options',
+                              color: AppColors.buildvuSecondary,
+                            ),
+                            const StyledTitle(
+                              text: ' (OPTIONAL)',
+                              color: Colors.red,
+                            ),
                           ],
                         ),
 
-                        SizedBox(height: h*0.01,),
+                        SizedBox(
+                          height: h * 0.01,
+                        ),
                         Row(
                           children: [
                             // password & ui
@@ -116,26 +143,35 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                               children: [
                                 Column(
                                   children: [
-                                    StyledTitleSmall(text: 'PDF Password', color: AppColors.buildvuSecondary),
+                                    StyledTitleSmall(
+                                        text: 'PDF Password',
+                                        color: AppColors.buildvuSecondary),
                                     RectangleTextField(
                                       key: Key('passwordField'),
                                       isObscureText: true,
                                       controller: _pdfPasswordController,
-                                      onChanged: (_){
-                                        originalFileNotifier.updateFile(password: _pdfPasswordController.text);
+                                      onChanged: (_) {
+                                        originalFileNotifier.updateFile(
+                                            password:
+                                                _pdfPasswordController.text);
                                       },
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: h*0.01,),
+                                SizedBox(
+                                  height: h * 0.01,
+                                ),
                                 Column(
                                   children: [
-                                    StyledTitleSmall(text: 'IDRViewer UI', color: AppColors.buildvuSecondary),
+                                    StyledTitleSmall(
+                                        text: 'IDRViewer UI',
+                                        color: AppColors.buildvuSecondary),
                                     StyledDropdownBtn(
                                       key: Key('uiDropDown'),
-                                      dropdownList: idrViewerUIs, 
-                                      onChanged: (newVal){
-                                        originalFileNotifier.updateFile(ui: newVal);
+                                      dropdownList: idrViewerUIs,
+                                      onChanged: (newVal) {
+                                        originalFileNotifier.updateFile(
+                                            ui: newVal);
                                       },
                                     ),
                                   ],
@@ -149,34 +185,39 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                StyledTitleSmall(text: 'Image Scale', color: AppColors.buildvuSecondary),
+                                StyledTitleSmall(
+                                    text: 'Image Scale',
+                                    color: AppColors.buildvuSecondary),
                                 RectangleTextField(
                                   key: Key('imgScaleTextField'), // for testing
                                   keyboardType: TextInputType.number,
                                   controller: _imageScaleController,
-                                  onChanged:(val){
+                                  onChanged: (val) {
                                     if (val.isNotEmpty) {
-                                      try{
+                                      try {
                                         // attempt to parse the value to a double
                                         double parsedVal = double.parse(val);
-      
+
                                         // limit user input range
-                                        if(parsedVal>10.0) {
+                                        if (parsedVal > 10.0) {
                                           _imageScaleController.text = "10.0";
                                           parsedVal = 10.0;
-                                        }else if(parsedVal<1){
+                                        } else if (parsedVal < 1) {
                                           _imageScaleController.text = "1";
                                           parsedVal = 1;
                                         }
-      
+
                                         // update file detail
-                                        originalFileNotifier.updateFile(scale: parsedVal);
-                                      }catch(e){
-                                        // if parse failed, clear the text and warn user to put in double 
+                                        originalFileNotifier.updateFile(
+                                            scale: parsedVal);
+                                      } catch (e) {
+                                        // if parse failed, clear the text and warn user to put in double
                                         _imageScaleController.text = "";
-                                        ScaffoldMessenger.of(context).showSnackBar(
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
                                           const SnackBar(
-                                            content: Text('Invalid input. Please put in numbers between 1-10'),
+                                            content: Text(
+                                                'Invalid input. Please put in numbers between 1-10'),
                                             duration: Duration(seconds: 2),
                                           ),
                                         );
@@ -184,26 +225,34 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                                     }
                                   },
                                 ),
-                                SizedBox(height: h*0.01,),
-                                StyledTitleSmall(text: 'Text Mode', color: AppColors.buildvuSecondary),
-                                StyledDropdownBtn(
-                                  key: Key('textModeDropDown'),
-                                  dropdownList: textModes, 
-                                  onChanged: (newVal){
-                                    if(newVal == "Real Text"){
-                                      originalFileNotifier.updateFile(textMode: "svg_realtext");
-                                    }else{
-                                      originalFileNotifier.updateFile(textMode: "svg_shapetext_selectable");
-                                    }
-                                  }
+                                SizedBox(
+                                  height: h * 0.01,
                                 ),
+                                StyledTitleSmall(
+                                    text: 'Text Mode',
+                                    color: AppColors.buildvuSecondary),
+                                StyledDropdownBtn(
+                                    key: Key('textModeDropDown'),
+                                    dropdownList: textModes,
+                                    onChanged: (newVal) {
+                                      if (newVal == "Real Text") {
+                                        originalFileNotifier.updateFile(
+                                            textMode: "svg_realtext");
+                                      } else {
+                                        originalFileNotifier.updateFile(
+                                            textMode:
+                                                "svg_shapetext_selectable");
+                                      }
+                                    }),
                               ],
                             ),
                           ],
                         ),
-                        
+
                         // embed img
-                        SizedBox(height: h*0.02,),
+                        SizedBox(
+                          height: h * 0.02,
+                        ),
                         Row(
                           children: [
                             StyledCheckbox(
@@ -212,17 +261,22 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                                 setState(() {
                                   isEmbedImgChecked = newVal;
                                 });
-                                originalFileNotifier.updateFile(isEmbedImage:newVal);
+                                originalFileNotifier.updateFile(
+                                    isEmbedImage: newVal);
                               },
                             ),
-                            StyledTitleSmall(text: 'Embed Images as Base64', color: AppColors.buildvuSecondary),
+                            StyledTitleSmall(
+                                text: 'Embed Images as Base64',
+                                color: AppColors.buildvuSecondary),
                           ],
                         ),
-      
+
                         // inline svg
-                        if(convertedFormat != 'svg')
-                        SizedBox(height: h*0.01,),
-                        if(convertedFormat != 'svg')
+                        if (convertedFormat != 'svg')
+                          SizedBox(
+                            height: h * 0.01,
+                          ),
+                        if (convertedFormat != 'svg')
                           Row(
                             children: [
                               StyledCheckbox(
@@ -231,21 +285,26 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                                   setState(() {
                                     isInlineSVGChecked = newVal;
                                   });
-                                  originalFileNotifier.updateFile(isInlineSVG:newVal);
+                                  originalFileNotifier.updateFile(
+                                      isInlineSVG: newVal);
                                 },
                               ),
-                              StyledTitleSmall(text: 'Inline SVGs', color: AppColors.buildvuSecondary),
+                              StyledTitleSmall(
+                                  text: 'Inline SVGs',
+                                  color: AppColors.buildvuSecondary),
                             ],
                           ),
                       ],
                     ),
-                    
+
                     // CONVERT btn
-                    SizedBox(height: h*0.05,),
+                    SizedBox(
+                      height: h * 0.05,
+                    ),
                     ColorfulBgBtn(
                       onPressed: () async {
                         // check if no file
-                        if(originalFile.path.isEmpty){
+                        if (originalFile.path.isEmpty) {
                           // if user has NOT selected a file, warn user
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
@@ -253,12 +312,15 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                               duration: Duration(seconds: 1),
                             ),
                           );
-                        }else{
+                        } else {
                           // if user has selected a file, check if the file is the desired format
-                          var appBarFormat = ref.read(buildvuOriginalFileFormatProvider.notifier).state;
-                          var selectedFormat = ref.read(buildvuOriginalFileProvider).format;
-      
-                          if(appBarFormat != selectedFormat){
+                          var appBarFormat = ref
+                              .read(buildvuOriginalFileFormatProvider.notifier)
+                              .state;
+                          var selectedFormat =
+                              ref.read(buildvuOriginalFileProvider).format;
+
+                          if (appBarFormat != selectedFormat) {
                             // if the file is NOT the desired format, warn user
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
@@ -266,17 +328,19 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                                 duration: Duration(seconds: 1),
                               ),
                             );
-                          }else{
+                          } else {
                             // if the file is the desired format, progress animation
-                            _overlayProgressCircle = OverlayProgressCircle.createOverlayProgressCircle();
+                            _overlayProgressCircle = OverlayProgressCircle
+                                .createOverlayProgressCircle();
                             Overlay.of(context).insert(_overlayProgressCircle!);
-                            
+
                             // convert
-                            try{
+                            try {
                               await connectBuildVuCloud(ref, context);
-                              final updatedResponse = ref.read(requestResponseProvider);
-                              if(context.mounted){
-                                if(updatedResponse.code != 200){
+                              final updatedResponse =
+                                  ref.read(requestResponseProvider);
+                              if (context.mounted) {
+                                if (updatedResponse.code != 200) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(updatedResponse.content!),
@@ -284,21 +348,26 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                                     ),
                                   );
                                   return;
-                                }else{
-                                  if(ref.read(pollDataStateProvider) == "error"){
+                                } else {
+                                  if (ref.read(pollDataStateProvider) ==
+                                      "error") {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                        content: Text("Can't convert. Please check your settings."),
+                                        content: Text(
+                                            "Can't convert. Please check your settings."),
                                         duration: Duration(seconds: 2),
                                       ),
                                     );
                                     return;
                                   }
-                                  Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildvuSuccessScreen()));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (ctx) =>
+                                              const BuildvuSuccessScreen()));
                                 }
                               }
-                              
-                            }finally{
+                            } finally {
                               // clear animation
                               _overlayProgressCircle?.remove();
                               _overlayProgressCircle = null;
@@ -307,8 +376,8 @@ class _BuildVuConverterScreenState extends ConsumerState<BuildVuConverterScreen>
                               originalFileNotifier.updateFile(password: "");
                             }
                           }
-                        } 
-                      }, 
+                        }
+                      },
                       child: StyledTitleWhite(text: 'CONVERT'),
                     ),
                   ],

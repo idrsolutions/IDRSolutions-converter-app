@@ -13,21 +13,30 @@ class BuildVuFormatSelection extends ConsumerStatefulWidget {
   const BuildVuFormatSelection({super.key});
 
   @override
-  ConsumerState<BuildVuFormatSelection> createState() => _BuildVuFormatSelectionState();
+  ConsumerState<BuildVuFormatSelection> createState() =>
+      _BuildVuFormatSelectionState();
 }
 
-class _BuildVuFormatSelectionState extends ConsumerState<BuildVuFormatSelection> {
-  final TextEditingController buildvuOriginalFormatController = TextEditingController();
-  final TextEditingController buildvuConvertedFormatController = TextEditingController();
+class _BuildVuFormatSelectionState
+    extends ConsumerState<BuildVuFormatSelection> {
+  final TextEditingController buildvuOriginalFormatController =
+      TextEditingController();
+  final TextEditingController buildvuConvertedFormatController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        StyledHeading(text: 'PDF to HTML/ SVG', color: AppColors.buildvuPrimary,),
-        
-        const SizedBox(height: 20,),
+        StyledHeading(
+          text: 'PDF to HTML/ SVG',
+          color: AppColors.buildvuPrimary,
+        ),
+
+        const SizedBox(
+          height: 20,
+        ),
 
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -35,37 +44,48 @@ class _BuildVuFormatSelectionState extends ConsumerState<BuildVuFormatSelection>
             // original format
             StyledTitleBuildVu(text: "PDF"),
 
-            Flexible(child: StyledTitle(text: 'To', color: AppColors.buildvuPrimary,)),
+            Flexible(
+                child: StyledTitle(
+              text: 'To',
+              color: AppColors.buildvuPrimary,
+            )),
 
             // converted format dropdown
             StyledDropdownBtn(
               key: Key('originalFormatDropdown'),
-              dropdownList: buildvuConvertedFormats, 
-              onChanged: (newValue){
-                ref.read(buildvuConvertedFileFormatProvider.notifier).state = newValue;
+              dropdownList: buildvuConvertedFormats,
+              onChanged: (newValue) {
+                ref.read(buildvuConvertedFileFormatProvider.notifier).state =
+                    newValue;
               },
             ),
           ],
         ),
 
-        const SizedBox(height: 20,),
+        const SizedBox(
+          height: 20,
+        ),
 
         // logo and GO btn
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             ClickableLogo(
-              key: Key('buildvuLogo'), // for testing
-              logoPath: 'assets/images/poweredbybuildvu.png', 
-              myURL: 'https://www.idrsolutions.com/buildvu/'
-            ),
+                key: Key('buildvuLogo'), // for testing
+                logoPath: 'assets/images/poweredbybuildvu.png',
+                myURL: 'https://www.idrsolutions.com/buildvu/'),
             ColorfulBgBtn(
               key: Key('buildvuGo'), // for testing
               color: AppColors.buildvuPrimary,
-              onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BuildvuTokenScreen()));
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (ctx) => const BuildvuTokenScreen()));
               },
-              child: StyledTitleWhite(text: 'GO',),
+              child: StyledTitleWhite(
+                text: 'GO',
+              ),
             ),
           ],
         ),

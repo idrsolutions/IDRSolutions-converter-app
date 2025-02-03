@@ -13,33 +13,42 @@ class FormVuFormatSelection extends StatefulWidget {
 }
 
 class _FormVuFormatSelectionState extends State<FormVuFormatSelection> {
-  final TextEditingController formvuOriginalFormatController = TextEditingController();
-  final TextEditingController formvuConvertedFormatController = TextEditingController();
+  final TextEditingController formvuOriginalFormatController =
+      TextEditingController();
+  final TextEditingController formvuConvertedFormatController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        StyledHeading(text: 'Fillable PDF to HTML', color: AppColors.formvuPrimary,),
-
-        const SizedBox(height: 20,),
-
+        StyledHeading(
+          text: 'Fillable PDF to HTML',
+          color: AppColors.formvuPrimary,
+        ),
+        const SizedBox(
+          height: 20,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             ClickableLogo(
-              key: Key('formvuLogo'), // for testing
-              logoPath: 'assets/images/poweredbyformvu.png', 
-              myURL: 'https://www.idrsolutions.com/formvu/'
-            ),
+                key: Key('formvuLogo'), // for testing
+                logoPath: 'assets/images/poweredbyformvu.png',
+                myURL: 'https://www.idrsolutions.com/formvu/'),
             ColorfulBgBtn(
               key: Key('formvuGo'),
               color: AppColors.formvuPrimary,
-              onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (ctx) => const FormvuTokenScreen()));
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (ctx) => const FormvuTokenScreen()));
               },
-              child: StyledTitleWhite(text: 'GO',),
+              child: StyledTitleWhite(
+                text: 'GO',
+              ),
             ),
           ],
         ),

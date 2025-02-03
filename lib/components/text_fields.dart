@@ -18,9 +18,10 @@ class TokenTextField extends StatelessWidget {
         onChanged: onChanged,
         cursorColor: AppColors.dimmedBlack,
         decoration: InputDecoration(
-          enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.dimmedBlack)),
-          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.dimmedBlack))
-        ),
+            enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: AppColors.dimmedBlack)),
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: AppColors.dimmedBlack))),
       ),
     );
   }
@@ -53,13 +54,11 @@ class RectangleTextField extends StatelessWidget {
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.dimmedBlack),
-            borderRadius: const BorderRadius.all(Radius.circular(10))
-          ),
+              borderSide: BorderSide(color: AppColors.dimmedBlack),
+              borderRadius: const BorderRadius.all(Radius.circular(10))),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.dimmedBlack),
-            borderRadius: const BorderRadius.all(Radius.circular(10))
-          ),
+              borderSide: BorderSide(color: AppColors.dimmedBlack),
+              borderRadius: const BorderRadius.all(Radius.circular(10))),
         ),
       ),
     );

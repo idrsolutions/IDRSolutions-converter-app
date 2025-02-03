@@ -6,33 +6,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-Widget createHomeScreen(){
+Widget createHomeScreen() {
   return ProviderScope(
-    child: MaterialApp(
-      home: WhyFormvuScreen(),
-    )
-  );
+      child: MaterialApp(
+    home: WhyFormvuScreen(),
+  ));
 }
 
 void main() {
-
-  group('FormVu why screen widget test', (){
-    testWidgets('test if appbar shows up', (tester)async{
+  group('FormVu why screen widget test', () {
+    testWidgets('test if appbar shows up', (tester) async {
       await tester.pumpWidget(createHomeScreen());
       expect(find.byType(StyledAppbar), findsOneWidget);
     });
-    
-    testWidgets('test if titles show up', (tester)async{
+
+    testWidgets('test if titles show up', (tester) async {
       await tester.pumpWidget(createHomeScreen());
       expect(find.byType(StyledTitleFormVu), findsExactly(4));
     });
 
-    testWidgets('test if contents show up', (tester)async{
+    testWidgets('test if contents show up', (tester) async {
       await tester.pumpWidget(createHomeScreen());
       expect(find.byType(StyledText), findsExactly(4));
     });
 
-    testWidgets('test if learn more btn shows up', (tester)async{
+    testWidgets('test if learn more btn shows up', (tester) async {
       await tester.pumpWidget(createHomeScreen());
       expect(find.byType(ColorfulBgBtn), findsOneWidget);
     });

@@ -26,19 +26,18 @@ class _StyledCheckboxState extends State<StyledCheckbox> {
   @override
   Widget build(BuildContext context) {
     return Checkbox(
-      shape: CircleBorder(),
-      splashRadius: 10,
-      checkColor: Theme.of(context).primaryColor,
-      activeColor: Colors.transparent,
-      value: _isChecked, 
-      onChanged: (newVal){
-        if (newVal != null) {
-          setState(() {
-            _isChecked = newVal;
-          });
-          widget.onChanged(newVal);
-        }
-      }
-    );
+        shape: CircleBorder(),
+        splashRadius: 10,
+        checkColor: Theme.of(context).primaryColor,
+        activeColor: Colors.transparent,
+        value: _isChecked,
+        onChanged: (newVal) {
+          if (newVal != null) {
+            setState(() {
+              _isChecked = newVal;
+            });
+            widget.onChanged(newVal);
+          }
+        });
   }
 }

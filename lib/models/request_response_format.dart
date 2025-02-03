@@ -11,7 +11,7 @@ class RequestResponse {
   RequestResponse copyWith({
     int? code,
     String? content,
-  }){
+  }) {
     return RequestResponse(
       code: code ?? this.code,
       content: content ?? this.content,

@@ -15,14 +15,13 @@ class ColorfulBgBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: onPressed, 
+      onPressed: onPressed,
       style: TextButton.styleFrom(
-        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-        backgroundColor: color?? Theme.of(context).primaryColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: const BorderRadius.all(Radius.circular(20)),
-        )
-      ),
+          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+          backgroundColor: color ?? Theme.of(context).primaryColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
+          )),
       child: child,
     );
   }
@@ -43,14 +42,14 @@ class WhiteBgBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: onPressed, 
+      onPressed: onPressed,
       style: TextButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
         side: BorderSide(
-          color: color?? Theme.of(context).primaryColor,
+          color: color ?? Theme.of(context).primaryColor,
         ),
         backgroundColor: Colors.white,
-        foregroundColor: color?? Theme.of(context).primaryColor,
+        foregroundColor: color ?? Theme.of(context).primaryColor,
         shape: RoundedRectangleBorder(
           borderRadius: const BorderRadius.all(Radius.circular(20)),
         ),

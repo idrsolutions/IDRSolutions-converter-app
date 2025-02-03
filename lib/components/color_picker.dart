@@ -43,7 +43,7 @@ class _ColorPickerState extends State<ColorPicker> {
                   content: SingleChildScrollView(
                     child: HueRingPicker(
                       pickerColor: widget.pickerColor,
-                      onColorChanged: (color){
+                      onColorChanged: (color) {
                         widget.onColorChanged(color);
                       },
                       enableAlpha: _enableAlpha2,
