@@ -1,16 +1,22 @@
-# converter
+# IDRSolutions Converter
 
-A new Flutter project.
+**IDRSolutions Converter** is an android file format conversion application (PDF/ fillable PDF to HTML/ SVG) that leverages the microservices of **BuildVu** and **FormVu**, products developed by IDRSolutions. This application allows users to trial our products on the phone.
 
-## Getting Started
+## Installation
+Download the APK file [here](https://github.com/XinyuZ0416/IDRSolutions-converter-app/tree/master/build/app/outputs/flutter-apk).
 
-This project is a starting point for a Flutter application.
+## Usage
+1. Select the file format you wish to convert.
+2. Type in your trial token (if you don't have a token, the app will direct you to our [BuildVu](https://www.idrsolutions.com/buildvu/trial-download) or [FormVu](https://www.idrsolutions.com/formvu/trial-download) trial page).
+3. Upload file.
+4. Convert and wait for processing.
+5. Preview online/ download the converted file/ convert a new one once the process is complete.
 
-A few resources to get you started if this is your first Flutter project:
+## Web Services
+IDRSolutions Converter utilizes the following web services for file format conversion:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **BuildVu**: [BuildVu Web Service Guide](https://support.idrsolutions.com/buildvu/host-a-web-service/)
+- **FormVu**: [FormVu Web Service Guide](https://support.idrsolutions.com/formvu/host-a-web-service/)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## License
+This project is licensed under the **Apache License 2.0**. See the `LICENSE` file for more details.
