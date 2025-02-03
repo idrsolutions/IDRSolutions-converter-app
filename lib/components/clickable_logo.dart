@@ -17,7 +17,22 @@ class ClickableLogo extends StatelessWidget {
       onTap: (){
         launchURL(myURL);
       },
-      child: Image.asset(logoPath),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withValues(alpha: 0.3),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Image.asset(
+          logoPath,
+        ),
+      ),
     );
   }
 }

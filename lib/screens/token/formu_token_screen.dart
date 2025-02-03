@@ -52,7 +52,7 @@ class FormvuTokenScreen extends ConsumerWidget {
               child: Column(
                 children: [
                   StyledHeading(text: 'Token'),
-      
+
                   // token text field
                   TokenTextField(
                     onChanged: (newVal) {

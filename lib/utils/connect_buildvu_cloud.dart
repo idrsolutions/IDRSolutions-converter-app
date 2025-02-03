@@ -58,6 +58,10 @@ Future<void> connectBuildVuCloud(WidgetRef ref, BuildContext context) async {
       // Check if context is still valid
       if(!context.mounted) return; 
 
+      if(response.statusCode == 403) {
+        requestResponse.updateRequestResponse(content: "Wrong token, please check again.");
+      }
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Error uploading file: ${response.statusCode}'),
