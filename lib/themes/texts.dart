@@ -5,9 +5,11 @@ class StyledHeading extends StatelessWidget {
   const StyledHeading({
     super.key,
     required this.text,
+    this.color,
   });
 
   final String text;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class StyledHeading extends StatelessWidget {
         fontFamily: 'Montserrat',
         fontSize: 20,
         fontWeight: FontWeight.w700,
-        color: Theme.of(context).primaryColor,
+        color: color ?? Theme.of(context).primaryColor,
       ),
     );
   }

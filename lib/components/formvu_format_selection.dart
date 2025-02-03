@@ -21,7 +21,7 @@ class _FormVuFormatSelectionState extends State<FormVuFormatSelection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        StyledTitle(text: 'Fillable PDF to HTML', color: AppColors.formvuPrimary,),
+        StyledHeading(text: 'Fillable PDF to HTML', color: AppColors.formvuPrimary,),
 
         const SizedBox(height: 20,),
 

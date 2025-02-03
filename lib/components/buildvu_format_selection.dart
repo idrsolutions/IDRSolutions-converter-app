@@ -25,7 +25,7 @@ class _BuildVuFormatSelectionState extends ConsumerState<BuildVuFormatSelection>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        StyledTitle(text: 'PDF to HTML/ SVG', color: AppColors.buildvuPrimary,),
+        StyledHeading(text: 'PDF to HTML/ SVG', color: AppColors.buildvuPrimary,),
         
         const SizedBox(height: 20,),
 
