@@ -7,7 +7,7 @@ IDRSolutions Converter started as a personal project by [one of our staffs](http
 
 ## Installation
 
-You can directly download the APK file [here](https://github.com/XinyuZ0416/IDRSolutions-converter-app/tree/master/build/app/outputs/flutter-apk).
+You can directly download the APK file in the [releases page](https://github.com/idrsolutions/IDRSolutions-converter-app/releases).
 
 Alternatively, ensure you have Flutter installed on your system. Follow the official Flutter installation guide [here](https://flutter.dev/docs/get-started/install).
 
