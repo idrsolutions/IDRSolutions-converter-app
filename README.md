@@ -37,6 +37,9 @@ Found a bug, or have a suggestion or improvement for the app? Let us know throug
 Got questions for the products, or want to buy a license? You can contact us [here](https://idrsolutions.my.site.com/s/request).
 
 ## License
+
+Copyright 2026 IDRsolutions
+
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
